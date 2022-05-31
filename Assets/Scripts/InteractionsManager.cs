@@ -16,7 +16,7 @@ public class InteractionsManager : MonoBehaviour
         "Juan", "Juan", "Juana"
     };
 
-    public int talkingTurn;
+    private int talkingTurn;
 
     private void Awake()
     {
