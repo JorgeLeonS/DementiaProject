@@ -89,7 +89,6 @@ GameObject:
   - component: {fileID: 2095998945463967101}
   - component: {fileID: 2095998945463967102}
   - component: {fileID: 2095998945463967103}
-  - component: {fileID: 2095998945463967091}
   m_Layer: 5
   m_Name: Canvas_DialogueBox
   m_TagString: Untagged
@@ -179,20 +178,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2095998945463967091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2095998945463967096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474f9f22836616848a1878743b2fe812, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animatedText: {fileID: 2095998945711759030}
-  characters: {fileID: 0}
 --- !u!1 &2095998945711759024
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,4 +322,3 @@ MonoBehaviour:
   onDialogueFinish:
     m_PersistentCalls:
       m_Calls: []
-  AudioTutorial1: {fileID: 0}

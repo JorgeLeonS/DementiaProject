@@ -18,13 +18,11 @@ namespace TMPro
         public TextRevealEvent onTextReveal;
         public DialogueEvent onDialogueFinish;
 
-        public void ReadText(string textToRead, AudioSource audioToPlay)
+        public void ReadText(string textToRead, AudioClip audioToPlay)
         {
-            float audioLength = audioToPlay.clip.length;
+            float audioLength = audioToPlay.length*0.8f;
             float readSpeed = audioLength / textToRead.Length;
             string[] subTexts = textToRead.Split("");
-
-            audioToPlay.Play();
 
             string displayText = "";
 

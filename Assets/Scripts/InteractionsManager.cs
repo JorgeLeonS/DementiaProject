@@ -9,7 +9,14 @@ public class InteractionsManager : MonoBehaviour
 
     public DialogueAnimator animatedText;
 
-    public CharacterData characters;
+    public List<CharacterController> characters;
+
+    public List<string> turningNames = new List<string>
+    {
+        "Juan", "Juan", "Juana"
+    };
+
+    public int talkingTurn;
 
     private void Awake()
     {
@@ -18,7 +25,7 @@ public class InteractionsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        characters.canvas.GetComponent<Canvas>().enabled = false;
+
     }
 
     // Update is called once per frame
@@ -26,9 +33,22 @@ public class InteractionsManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            characters.canvas.GetComponent<Canvas>().enabled = true;
-            characters.GetComponent<Animator>().SetTrigger("StartWaving");
-            animatedText.ReadText(characters.dialogueText[0], characters.dialogueAudios[0]);
+            characters[GetNextTurn(turningNames[talkingTurn])].PerformAction();
+            talkingTurn++;
         }
+    }
+
+    int GetNextTurn(string personTurn)
+    {
+        switch (personTurn)
+        {
+            case "Juan":
+                return 0;
+            case "Juana":
+                return 1;
+            default:
+                break;
+        }
+        return 0;
     }
 }
