@@ -13,7 +13,7 @@ public class InteractionsManager : MonoBehaviour
 
     public List<string> turningNames = new List<string>
     {
-        "Juan", "Juan", "Juana"
+        "TBot", "James", "Juana", "James"
     };
 
     private int talkingTurn;
@@ -42,10 +42,12 @@ public class InteractionsManager : MonoBehaviour
     {
         switch (personTurn)
         {
-            case "Juan":
+            case "James":
                 return 0;
-            case "Juana":
+            case "Rachel":
                 return 1;
+            case "TBot":
+                return 2;
             default:
                 break;
         }

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae289f9142e87bc49a0973ea933ed5f6, type: 3}
+  m_Name: Rachel
+  m_EditorClassIdentifier: 
+  Name: 
+  dialogueText:
+  - This is a new test audio for the second voice
+  dialogueAudios:
+  - {fileID: 8300000, guid: 63e027aeefeb8344b8216ce66c1d4cff, type: 3}
+  animation:
+  - 
+  moveLocations: []
