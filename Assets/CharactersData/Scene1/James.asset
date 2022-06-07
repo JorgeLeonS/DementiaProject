@@ -22,4 +22,4 @@ MonoBehaviour:
   animation:
   - Wave
   - 
-  moveToNextLocation: 010001
+  moveToNextLocation: 010101

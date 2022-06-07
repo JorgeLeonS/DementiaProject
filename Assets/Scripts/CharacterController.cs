@@ -6,34 +6,36 @@ using UnityEngine.AI;
 
 public class CharacterController : MonoBehaviour
 {
-    //[SerializeField] public string Name;
-    //public List<string> dialogueText;
-    //public List<AudioClip> dialogueAudios;
-
     [SerializeField] private SO_CharactersInteractions characterInteraction;
 
-    public AudioSource audioSource;
-
-    public DialogueAnimator animatedText;
-    public GameObject Canvas;
+    // Necessary components
+    private Animator animator;
+    private NavMeshAgent navMeshAgent;
+    private GameObject Canvas;
+    private DialogueAnimator animatedText;
+    private AudioSource audioSource;
 
     int interactionCounter;
-
-    private Animator animator;
 
     // Does not work if it does not have the serializeField??? or being public??
     //[SerializeField] 
     [HideInInspector]
     public List<Transform> moveLocations;
-    private NavMeshAgent navMeshAgent;
-
-
-    //private DialogueTest animatedText;
 
     void Awake()
     {
+        // Directly assign Animator component
         animator = GetComponent<Animator>();
+        // Directly assign navMeshAgent component
         navMeshAgent = GetComponent<NavMeshAgent>();
+
+        // Directly assign Canvas component
+        Canvas = transform.Find("Canvas_DialogueBox").gameObject;
+        // Directly assign AnimatedText component First access the image, then the text
+        animatedText = Canvas.transform.GetChild(0).Find("AnimatedText").GetComponent<DialogueAnimator>();
+
+        // Directly assign AudioSource component
+        audioSource = transform.Find("AudioSource").GetComponent<AudioSource>();
 
         // Get all waypoints on a list
         Transform CharacterWaypoints = GameObject.FindGameObjectWithTag("Waypoints").transform.Find(characterInteraction.Name);
@@ -43,33 +45,43 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    IEnumerator Cor_PerformAction()
+    IEnumerator Cor_MoveToNextLocation()
     {
-        if (characterInteraction.moveToNextLocation[interactionCounter])
-        {
-            animator.SetBool("Walk", true);
-            navMeshAgent.destination = moveLocations[interactionCounter].position;
+        animator.SetBool("Walk", true);
+        navMeshAgent.destination = moveLocations[interactionCounter].position;
 
-            yield return new WaitUntil(() => HasCharacterReachedDestination());
+        yield return new WaitUntil(() => HasCharacterReachedDestination());
 
-            animator.SetBool("Walk", false);
-        }
+        animator.SetBool("Walk", false);
+    }
 
-        // To change depending on the animation
+    IEnumerator Cor_NextDialogue()
+    {
         animator.SetBool(characterInteraction.animation[interactionCounter], true);
         Canvas.GetComponent<Canvas>().enabled = true;
 
-        var currentClip = audioSource.clip = characterInteraction.dialogueAudios[interactionCounter]; 
+        var currentClip = audioSource.clip = characterInteraction.dialogueAudios[interactionCounter];
 
         animatedText.ReadText(characterInteraction.dialogueText[interactionCounter], currentClip);
 
         audioSource.Play();
-        yield return new WaitForSeconds(currentClip.length+1.0f);
+        yield return new WaitForSeconds(currentClip.length + 1.0f);
 
 
         GetComponent<Animator>().SetBool(characterInteraction.animation[interactionCounter], false);
         Canvas.GetComponent<Canvas>().enabled = false;
+    }
 
+    IEnumerator Cor_PerformAction()
+    {
+        // If the character has MoveToNextLocation set to true 
+        if (characterInteraction.moveToNextLocation[interactionCounter])
+        {
+            yield return Cor_MoveToNextLocation();
+        }
+
+        yield return Cor_NextDialogue();
+        
         interactionCounter++;
 
     }

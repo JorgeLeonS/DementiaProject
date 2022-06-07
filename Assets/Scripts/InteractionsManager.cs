@@ -7,8 +7,6 @@ public class InteractionsManager : MonoBehaviour
 {
     public static InteractionsManager instance;
 
-    public DialogueAnimator animatedText;
-
     public List<CharacterController> characters;
 
     public List<string> turningNames = new List<string>
@@ -16,6 +14,7 @@ public class InteractionsManager : MonoBehaviour
         "TBot", "James", "Juana", "James"
     };
 
+    [SerializeField]
     private int talkingTurn;
 
     private void Awake()

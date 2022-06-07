@@ -18,5 +18,5 @@ MonoBehaviour:
   dialogueAudios:
   - {fileID: 8300000, guid: 63e027aeefeb8344b8216ce66c1d4cff, type: 3}
   animation:
-  - 
-  moveLocations: []
+  - Wave
+  moveToNextLocation: 
