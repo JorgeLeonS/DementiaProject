@@ -5,26 +5,23 @@ using TMPro;
 
 public class InteractionsManager : MonoBehaviour
 {
-    public static InteractionsManager instance;
+
+    public PlayerActions playerActions;
 
     public List<CharacterController> characters;
 
     public List<string> turningNames = new List<string>
     {
-        "TBot", "James", "Juana", "James"
+        "TBot", "Diana", "James", "Juana", "James"
     };
 
     [SerializeField]
     private int talkingTurn;
 
-    private void Awake()
-    {
-        instance = this;
-    }
     // Start is called before the first frame update
     void Start()
     {
-
+        playerActions.PlayerCompletedAction.AddListener(NextTurn);
     }
 
     // Update is called once per frame
@@ -32,15 +29,33 @@ public class InteractionsManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            characters[GetNextTurn(turningNames[talkingTurn])].PerformAction();
-            talkingTurn++;
+            var characterTurnId = GetNextTurn(turningNames[talkingTurn]);
+            if (characterTurnId == 9999)
+            {
+                // Wait for player action
+                playerActions.PlayerInteraction.Invoke();
+            }
+            else
+            {
+                characters[characterTurnId].PerformAction();
+                NextTurn();
+            }
+            
         }
+    }
+
+    void NextTurn()
+    {
+        Debug.Log("NextTurn");
+        talkingTurn++;
     }
 
     int GetNextTurn(string personTurn)
     {
         switch (personTurn)
         {
+            case "Diana":
+                return 9999;
             case "James":
                 return 0;
             case "Rachel":
@@ -50,6 +65,8 @@ public class InteractionsManager : MonoBehaviour
             default:
                 break;
         }
-        return 0;
+        // Bad return
+        Debug.Log("The character was not found on list");
+        return 666;
     }
 }

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae289f9142e87bc49a0973ea933ed5f6, type: 3}
   m_Name: Rachel
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Rachel
   dialogueText:
   - This is a new test audio for the second voice
   dialogueAudios:
   - {fileID: 8300000, guid: 63e027aeefeb8344b8216ce66c1d4cff, type: 3}
   animation:
   - Wave
-  moveToNextLocation: 
+  moveToNextLocation: 01

@@ -74,16 +74,22 @@ public class CharacterController : MonoBehaviour
 
     IEnumerator Cor_PerformAction()
     {
-        // If the character has MoveToNextLocation set to true 
-        if (characterInteraction.moveToNextLocation[interactionCounter])
+        if(interactionCounter >= characterInteraction.dialogueText.Count)
         {
-            yield return Cor_MoveToNextLocation();
+            Debug.Log($"Bad action, the character, {characterInteraction.Name} has no more actions!");
         }
+        else
+        {
+            // If the character has MoveToNextLocation set to true 
+            if (characterInteraction.moveToNextLocation[interactionCounter])
+            {
+                yield return Cor_MoveToNextLocation();
+            }
 
-        yield return Cor_NextDialogue();
-        
-        interactionCounter++;
+            yield return Cor_NextDialogue();
 
+            interactionCounter++;
+        }
     }
 
     // Function from: https://gist.github.com/DataGreed/df0c008be1f9269d5160af413e939843
