@@ -18,9 +18,13 @@ public class InteractionsManager : MonoBehaviour
     [SerializeField]
     private int talkingTurn;
 
+    public static bool hasCharacterCorFinished;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        hasCharacterCorFinished = true;
         playerActions.PlayerCompletedAction.AddListener(NextTurn);
     }
 
@@ -29,17 +33,25 @@ public class InteractionsManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            var characterTurnId = GetNextTurn(turningNames[talkingTurn]);
-            if (characterTurnId == 9999)
+            if (hasCharacterCorFinished)
             {
-                // Wait for player action
-                playerActions.PlayerInteraction.Invoke();
+                var characterTurnId = GetNextTurn(turningNames[talkingTurn]);
+                if (characterTurnId == 9999)
+                {
+                    // Wait for player action
+                    playerActions.PlayerInteraction.Invoke();
+                }
+                else
+                {
+                    characters[characterTurnId].PerformAction();
+                    NextTurn();
+                }
             }
             else
             {
-                characters[characterTurnId].PerformAction();
-                NextTurn();
+                Debug.Log("Character has not finished its action");
             }
+            
             
         }
     }

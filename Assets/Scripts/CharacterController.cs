@@ -74,20 +74,21 @@ public class CharacterController : MonoBehaviour
 
     IEnumerator Cor_PerformAction()
     {
-        if(interactionCounter >= characterInteraction.dialogueText.Count)
+        if (interactionCounter >= characterInteraction.dialogueText.Count)
         {
             Debug.Log($"Bad action, the character, {characterInteraction.Name} has no more actions!");
         }
         else
         {
             // If the character has MoveToNextLocation set to true 
+            InteractionsManager.hasCharacterCorFinished = false;
             if (characterInteraction.moveToNextLocation[interactionCounter])
             {
                 yield return Cor_MoveToNextLocation();
             }
 
             yield return Cor_NextDialogue();
-
+            InteractionsManager.hasCharacterCorFinished = true;
             interactionCounter++;
         }
     }
