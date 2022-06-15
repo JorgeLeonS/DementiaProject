@@ -6,9 +6,10 @@ using UnityEngine.AI;
 
 public class CharacterController : MonoBehaviour
 {
-    [SerializeField] private SO_CharactersInteractions characterInteraction;
+    //[SerializeField] private SO_CharactersInteractions characterInteraction;
 
     // Necessary components
+    private CharacterData characterInteraction;
     private Animator animator;
     private NavMeshAgent navMeshAgent;
     private GameObject Canvas;
@@ -16,6 +17,7 @@ public class CharacterController : MonoBehaviour
     private AudioSource audioSource;
 
     int interactionCounter;
+    int walkCounter;
 
     // Does not work if it does not have the serializeField??? or being public??
     //[SerializeField] 
@@ -24,11 +26,12 @@ public class CharacterController : MonoBehaviour
 
     void Awake()
     {
+        characterInteraction = GetComponent<CharacterData>();
         // Directly assign Animator component
         animator = GetComponent<Animator>();
         // Directly assign navMeshAgent component
         navMeshAgent = GetComponent<NavMeshAgent>();
-
+            
         // Directly assign Canvas component
         Canvas = transform.Find("Canvas_DialogueBox").gameObject;
         // Directly assign AnimatedText component First access the image, then the text
@@ -48,7 +51,8 @@ public class CharacterController : MonoBehaviour
     IEnumerator Cor_MoveToNextLocation()
     {
         animator.SetBool("Walk", true);
-        navMeshAgent.destination = moveLocations[interactionCounter].position;
+        navMeshAgent.destination = moveLocations[walkCounter].position;
+        walkCounter++;
 
         yield return new WaitUntil(() => HasCharacterReachedDestination());
 
@@ -57,24 +61,23 @@ public class CharacterController : MonoBehaviour
 
     IEnumerator Cor_NextDialogue()
     {
-        animator.SetBool(characterInteraction.animation[interactionCounter], true);
+        animator.SetBool(characterInteraction.AnimationName[interactionCounter], true);
         Canvas.GetComponent<Canvas>().enabled = true;
 
-        var currentClip = audioSource.clip = characterInteraction.dialogueAudios[interactionCounter];
+        var currentClip = audioSource.clip = characterInteraction.DialogueAudios[interactionCounter];
 
-        animatedText.ReadText(characterInteraction.dialogueText[interactionCounter], currentClip);
+        animatedText.ReadText(characterInteraction.DialogueText[interactionCounter], currentClip);
 
         audioSource.Play();
         yield return new WaitForSeconds(currentClip.length + 1.0f);
 
-
-        GetComponent<Animator>().SetBool(characterInteraction.animation[interactionCounter], false);
+        GetComponent<Animator>().SetBool(characterInteraction.AnimationName[interactionCounter], false);
         Canvas.GetComponent<Canvas>().enabled = false;
     }
 
     IEnumerator Cor_PerformAction()
     {
-        if (interactionCounter >= characterInteraction.dialogueText.Count)
+        if (interactionCounter >= characterInteraction.DialogueText.Count)
         {
             Debug.Log($"Bad action, the character, {characterInteraction.Name} has no more actions!");
         }
@@ -82,7 +85,7 @@ public class CharacterController : MonoBehaviour
         {
             // If the character has MoveToNextLocation set to true 
             InteractionsManager.hasCharacterCorFinished = false;
-            if (characterInteraction.moveToNextLocation[interactionCounter])
+            if (characterInteraction.MoveToNextLocation[interactionCounter])
             {
                 yield return Cor_MoveToNextLocation();
             }

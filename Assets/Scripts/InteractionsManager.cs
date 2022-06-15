@@ -72,8 +72,6 @@ public class InteractionsManager : MonoBehaviour
                 return 0;
             case "Rachel":
                 return 1;
-            case "TBot":
-                return 2;
             default:
                 break;
         }
