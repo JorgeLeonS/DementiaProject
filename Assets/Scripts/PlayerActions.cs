@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Events;
@@ -21,22 +22,42 @@ public class PlayerActions : MonoBehaviour
 
     public List<GameObject> itemsToInteract;
 
+    // TODO Move onto a parent class
+    public List<string> DialogueText;
+    public List<AudioClip> DialogueAudios;
+    public List<float> DialogueDurations;
+
+    private GameObject Canvas;
+    private DialogueAnimator animatedText;
+
+    private int interactionCounter;
+
+
     private void Awake()
     {
         LeftXRRayInteractor = MyXROrigin.transform.GetChild(0).Find("LeftHandController").GetComponent<XRRayInteractor>();
         RightXRRayInteractor = MyXROrigin.transform.GetChild(0).Find("RightHandController").GetComponent<XRRayInteractor>();
+
+        // Directly assign Canvas component
+        Canvas = MyXROrigin.transform.Find("FollowingCanvas_DialogueBox").gameObject;
+        // Directly assign AnimatedText component First access the image, then the text
+        animatedText = Canvas.transform.GetChild(0).Find("AnimatedText").GetComponent<DialogueAnimator>();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        PlayerInteraction.AddListener(PerformAction);
+
+        // Go to laying down position
+        MyXROrigin.transform.position = new Vector3(0.4f, 0.5f, -1.07f);
+        MyXROrigin.transform.Rotate(new Vector3(0, 0, -70));
     }
 
     //void PlayerAction(bool hasCompletedAction)
     //{
     //    playerCompletion.Invoke(hasCompletedAction);
     //}
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        PlayerInteraction.AddListener(DoPlayerAction);
-    }
 
     //public void CheckSelectedInteractable(XRRayInteractor obj)
     //{
@@ -54,17 +75,71 @@ public class PlayerActions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Go to laying down position
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            MyXROrigin.transform.position = new Vector3(0.6f, 0f, -1.07f);
+            PerformAction();
+        }
+    }
+
+
+
+
+    // TODO Move onto a parent class
+    IEnumerator Cor_NextDialogue()
+    {
+        Canvas.GetComponent<Canvas>().enabled = true;
+
+        // TODO Add a condition for
+        // Could be DialogueDurations or AudioClip
+        //var currentClip = audioSource.clip = characterInteraction.DialogueAudios[interactionCounter];
+        animatedText.ReadText(DialogueText[interactionCounter], DialogueDurations[interactionCounter]);
+
+        //audioSource.Play();
+        yield return new WaitForSeconds(DialogueDurations[interactionCounter] + 1.0f);
+
+        //GetComponent<Animator>().SetBool(characterInteraction.AnimationName[interactionCounter], false);
+        Canvas.GetComponent<Canvas>().enabled = false;
+    }
+
+    // TODO Move onto a parent class
+    IEnumerator Cor_PerformAction()
+    {
+        if (interactionCounter >= DialogueText.Count)
+        {
+            Debug.Log($"Bad action, the player has no more actions!");
+        }
+        else
+        {
+            // If the character has MoveToNextLocation set to true 
+            InteractionsManager.hasCharacterCorFinished = false;
+
+            yield return Cor_NextDialogue();
+            InteractionsManager.hasCharacterCorFinished = true;
+            interactionCounter++;
+        }
+    }
+
+    public void PerformAction()
+    {
+        Debug.Log($"Diana action {interactionCounter}");
+        if (interactionCounter == 2)
+        {
+            MyXROrigin.transform.position = new Vector3(-0.5f, 0f, 1f);
             MyXROrigin.transform.Rotate(new Vector3(0, 0, 70));
+            PlayerCompletedAction.Invoke();
+            interactionCounter++;
         }
-        // Go to standing position
-        if (Input.GetKeyDown(KeyCode.N))
+        else if (interactionCounter == 3)
         {
-            MyXROrigin.transform.position = new Vector3(0.65f, 0f, 0.39f);
-            MyXROrigin.transform.Rotate(new Vector3(0, 0, -70));
+            AmbientManager.OpenBlinds();
+            PlayerCompletedAction.Invoke();
+            interactionCounter++;
         }
+        else
+        {
+            StartCoroutine(Cor_PerformAction());
+            PlayerCompletedAction.Invoke();
+        }
+        
     }
 }

@@ -10,10 +10,7 @@ public class InteractionsManager : MonoBehaviour
 
     public List<CharacterController> characters;
 
-    public List<string> turningNames = new List<string>
-    {
-        "TBot", "Diana", "James", "Juana", "James"
-    };
+    public List<string> turningNames;
 
     [SerializeField]
     private int talkingTurn;
@@ -35,31 +32,42 @@ public class InteractionsManager : MonoBehaviour
         {
             if (hasCharacterCorFinished)
             {
-                var characterTurnId = GetNextTurn(turningNames[talkingTurn]);
-                if (characterTurnId == 9999)
-                {
-                    // Wait for player action
-                    playerActions.PlayerInteraction.Invoke();
-                }
-                else
-                {
-                    characters[characterTurnId].PerformAction();
-                    NextTurn();
-                }
+                DoNextInteraction();
             }
             else
             {
                 Debug.Log("Character has not finished its action");
             }
-            
-            
+        }
+    }
+
+    void DoNextInteraction()
+    {
+        var characterTurnId = GetNextTurn(turningNames[talkingTurn]);
+        if (characterTurnId == 9999)
+        {
+            // Wait for player action
+            playerActions.PlayerInteraction.Invoke();
+        }
+        else
+        {
+            characters[characterTurnId].PerformAction();
+            NextTurn();
+
         }
     }
 
     void NextTurn()
     {
-        Debug.Log("NextTurn");
-        talkingTurn++;
+        if(talkingTurn < turningNames.Count-1)
+        {
+            Debug.Log($"Current turn: {talkingTurn}, {turningNames[talkingTurn]}");
+            talkingTurn++;
+        }
+        else
+        {
+            Debug.Log("No more actions!!");
+        }
     }
 
     int GetNextTurn(string personTurn)
