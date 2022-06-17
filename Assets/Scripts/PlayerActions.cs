@@ -50,7 +50,7 @@ public class PlayerActions : MonoBehaviour
         PlayerInteraction.AddListener(PerformAction);
 
         // Go to laying down position
-        MyXROrigin.transform.position = new Vector3(0.4f, 0.5f, -1.07f);
+        MyXROrigin.transform.position = new Vector3(0.4f, 0f, -1.07f);
         MyXROrigin.transform.Rotate(new Vector3(0, 0, -70));
     }
 
