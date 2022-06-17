@@ -18,10 +18,9 @@ namespace TMPro
         public TextRevealEvent onTextReveal;
         public DialogueEvent onDialogueFinish;
 
-        public void ReadText(string textToRead, AudioClip audioToPlay)
+        public void ReadText(string textToRead, float textDuration)
         {
-            float audioLength = audioToPlay.length*0.8f;
-            float readSpeed = audioLength / textToRead.Length;
+            float readSpeed = textDuration / textToRead.Length;
             string[] subTexts = textToRead.Split("");
 
             string displayText = "";
@@ -55,6 +54,12 @@ namespace TMPro
                     yield return null;
                 }
             }
+        }
+        
+        public void ReadText(string textToRead, AudioClip audioToPlay)
+        {
+            float audioLength = audioToPlay.length*0.8f;
+            ReadText(textToRead, audioLength);
         }
     }
 }
