@@ -1,32 +1,40 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] Canvas openCanvas;
+    //[SerializeField] Canvas openCanvas;
     [SerializeField] string nextLevel;
+    [SerializeField] Transform handle;
+    [SerializeField] Transform arrow;
     Animator animator;
     MenuControl menuControl;
 
+    [SerializeField] bool isTest = false;
+
     private void Start()
     {
-        StartInteraction(true);
+        StartInteraction(isTest);
         animator = GetComponent<Animator>();
         menuControl = FindObjectOfType<MenuControl>();
     }
 
     public void StartInteraction(bool makeInteractable)
     {
-        openCanvas.gameObject.SetActive(makeInteractable);
+        //openCanvas.gameObject.SetActive(makeInteractable);
+        handle.GetComponent<XRSimpleInteractable>().enabled = makeInteractable;
+        arrow.gameObject.SetActive(makeInteractable);
     }
 
     public void OpenDoor()
     {
-        // Called from Button.
+        // Called from Button or XR Interactable.
         animator.SetBool("Open", true);
-        openCanvas.gameObject.SetActive(false);
+        //openCanvas.gameObject.SetActive(false);
+        arrow.gameObject.SetActive(false);
         Debug.Log("Start fade out");
-        Invoke(nameof(ChangeScene), 1.02f);
+        Invoke(nameof(ChangeScene), 1.20f);
     }
 
     private void ChangeScene()
