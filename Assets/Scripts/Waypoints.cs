@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script used to visually display Gizmos on where the characters need to move.
+/// This was originally planned because of the initial thought of having multiple NPC characters having dialogue and actions.
+/// These should be automatically found on the <see cref="CharacterController.CharacterWaypoints"/> variable.
+/// </summary>
 public class Waypoints : MonoBehaviour
 {
     // Gizmos Color variables

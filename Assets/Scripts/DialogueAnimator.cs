@@ -7,17 +7,17 @@ using UnityEngine.Events;
 
 namespace TMPro
 {
-    [System.Serializable] public class ActionEvent : UnityEvent<string> { }
-
-    [System.Serializable] public class TextRevealEvent : UnityEvent<char> { }
-
-    [System.Serializable] public class DialogueEvent : UnityEvent { }
+    /// <summary>
+    /// Class used to spawn each character of a text depending on a duration.
+    /// Both the player and character have it assigned on their respective Canvas.
+    /// </summary>
     public class DialogueAnimator : TextMeshProUGUI
     {
-        public ActionEvent onAction;
-        public TextRevealEvent onTextReveal;
-        public DialogueEvent onDialogueFinish;
-
+        /// <summary>
+        /// Only method that is used for this implementation.
+        /// ReadText will calculate the spawning speed of the characters with the readSpeed variable.
+        /// It divides the textToRead into an array of Chars and then calls the DisplayText coroutine.
+        /// </summary>
         public void ReadText(string textToRead, float textDuration)
         {
             float readSpeed = textDuration / textToRead.Length;
@@ -36,6 +36,10 @@ namespace TMPro
 
             StartCoroutine(DisplayText());
 
+            /// <summary>
+            /// Coroutine used to display the text during the duration.
+            /// What allows the text to have this behviour is the maxVisibleCharacters variable, from TMPro.
+            /// </summary>
             IEnumerator DisplayText()
             {
                 int subCounter = 0;
@@ -44,7 +48,6 @@ namespace TMPro
                 {
                     while (visibleCounter < subTexts[subCounter].Length)
                     {
-                        onTextReveal.Invoke(subTexts[subCounter][visibleCounter]);
                         visibleCounter++;
                         maxVisibleCharacters++;
                         yield return new WaitForSeconds(readSpeed);
@@ -56,6 +59,10 @@ namespace TMPro
             }
         }
         
+        /// <summary>
+        /// The method can also be sent an AudioClip parameter, 
+        /// which length will replace the duration of the original method.
+        /// </summary>
         public void ReadText(string textToRead, AudioClip audioToPlay)
         {
             float audioLength = audioToPlay.length*0.8f;

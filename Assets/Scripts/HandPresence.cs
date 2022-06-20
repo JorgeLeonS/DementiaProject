@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
+/// <summary>
+/// Script adapted from: https://www.youtube.com/watch?v=KHWuTBmT1oI&t=1111s
+/// And XR Toolkit Hand Presence: https://drive.google.com/file/d/1xFBs6vA_p9EHLHcwjYIxGHcnHqatxJjz/edit
+/// This class is in charge of making the 3D models of the hands to behave accoding to certain button presses
+/// on the Quest Controllers.
+/// </summary>
 public class HandPresence : MonoBehaviour
 {
     public bool showController = false;

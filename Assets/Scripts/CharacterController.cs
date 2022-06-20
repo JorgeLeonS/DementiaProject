@@ -4,6 +4,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.AI;
 
+/// <summary>
+/// This class works with what the <see cref="CharacterData"/> class gives.
+/// </summary>
 public class CharacterController : MonoBehaviour
 {
     //[SerializeField] private SO_CharactersInteractions characterInteraction;
@@ -15,6 +18,8 @@ public class CharacterController : MonoBehaviour
     private GameObject Canvas;
     private DialogueAnimator animatedText;
     private AudioSource audioSource;
+
+    private Transform CharacterWaypoints;
 
     int interactionCounter;
     int walkCounter;
@@ -41,7 +46,7 @@ public class CharacterController : MonoBehaviour
         audioSource = transform.Find("AudioSource").GetComponent<AudioSource>();
 
         // Get all waypoints on a list
-        Transform CharacterWaypoints = GameObject.FindGameObjectWithTag("Waypoints").transform.Find(characterInteraction.Name);
+        CharacterWaypoints = GameObject.FindGameObjectWithTag("Waypoints").transform.Find(characterInteraction.Name);
         foreach (Transform wp in CharacterWaypoints)
         {
             moveLocations.Add(wp);

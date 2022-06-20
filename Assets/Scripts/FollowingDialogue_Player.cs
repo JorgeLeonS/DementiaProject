@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Script that makes the UI Subtitles textbox for the player to always follow them.
-public class PlayerDialogueUI : MonoBehaviour
+// Adapted from: https://forum.unity.com/threads/make-ui-or-image-following-facing-smoothly-to-camera-like-the-unity-vr-splashscreen.835957/
+public class FollowingDialogue_Player : MonoBehaviour
 {
     public Transform target;
     public float CameraZDistance = 3.0F;
     public float CameraYDistance = -1.0F;
     public float smoothTime = 0.3F;
     private Vector3 velocity = Vector3.zero;
+
     // Start is called before the first frame update
     void Start()
     {
