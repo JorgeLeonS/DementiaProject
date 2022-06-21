@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -138,13 +139,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void MovePlayerToStandingPosition()
+    {
+        MyXROrigin.transform.position = new Vector3(-0.5f, 0f, 1f);
+        MyXROrigin.transform.Rotate(new Vector3(0, 0, 70));
+    } 
+
     public void PerformAction()
     {
         Debug.Log($"Diana action {interactionCounter}");
         if (interactionCounter == 2)
         {
-            MyXROrigin.transform.position = new Vector3(-0.5f, 0f, 1f);
-            MyXROrigin.transform.Rotate(new Vector3(0, 0, 70));
+            FadeCanvas.FadeInOutWithAction(MovePlayerToStandingPosition);
             PlayerCompletedAction.Invoke();
             interactionCounter++;
         }
