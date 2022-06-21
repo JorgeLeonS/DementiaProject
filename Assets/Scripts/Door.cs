@@ -1,10 +1,10 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class Door : MonoBehaviour
 {
-    //[SerializeField] Canvas openCanvas;
     [SerializeField] string nextLevel;
     [SerializeField] Transform handle;
     [SerializeField] Transform arrow;
@@ -22,7 +22,6 @@ public class Door : MonoBehaviour
 
     public void StartInteraction(bool makeInteractable)
     {
-        //openCanvas.gameObject.SetActive(makeInteractable);
         handle.GetComponent<XRSimpleInteractable>().enabled = makeInteractable;
         arrow.gameObject.SetActive(makeInteractable);
     }
@@ -31,10 +30,8 @@ public class Door : MonoBehaviour
     {
         // Called from Button or XR Interactable.
         animator.SetBool("Open", true);
-        //openCanvas.gameObject.SetActive(false);
         arrow.gameObject.SetActive(false);
-        Debug.Log("Start fade out");
-        Invoke(nameof(ChangeScene), 1.20f);
+        FadeCanvas.FadeIn().OnComplete(() => Invoke(nameof(ChangeScene), 1.20f));
     }
 
     private void ChangeScene()
@@ -44,12 +41,4 @@ public class Door : MonoBehaviour
         else
             Debug.LogError("Add the MenuControl script to the scene");
     }
-
-    /*public void CloseDoor()
-    {
-        animator.SetBool("newScene", true);
-        animator.SetBool("Open", false);
-    }*/
-
-
 }

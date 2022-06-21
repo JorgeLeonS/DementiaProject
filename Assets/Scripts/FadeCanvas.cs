@@ -13,16 +13,16 @@ public class FadeCanvas : MonoBehaviour
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
     }
 
-    public static Tween FadeIn()
+    public static Tween FadeIn(float duration = 1f)
     {
-        return DOVirtual.Float(canvasGroup.alpha, 1f, 1f, newVal => {
+        return DOVirtual.Float(canvasGroup.alpha, 1f, duration, newVal => {
             canvasGroup.alpha = newVal;
         });
     }
 
-    public static Tween FadeOut()
+    public static Tween FadeOut(float duration = 1f)
     {
-        return DOVirtual.Float(canvasGroup.alpha, 0f, 1f, newVal => {
+        return DOVirtual.Float(canvasGroup.alpha, 0f, duration, newVal => {
             canvasGroup.alpha = newVal;
         });
     }
