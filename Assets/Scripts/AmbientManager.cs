@@ -54,6 +54,13 @@ public class AmbientManager : MonoBehaviour
     /// </summary>
     public static void OpenBlinds()
     {
+        //ChangeAmbientLightIntensity(1, 0.5f).OnComplete(() =>
+        //ChangeAE_MinEV(-9, 0.5f).OnComplete(() =>
+        //ChangeAE_MaxEV(-9, 0.5f).OnComplete(() =>
+        //// Missing 1 sec delay
+        //ChangeAE_MaxEV(0, 0.2f).OnComplete(() =>
+        //ChangeAE_MinEV(0, 1f)))));
+
         blindsOpenSequence = DOTween.Sequence();
         blindsOpenSequence.Append(ChangeAmbientLightIntensity(1, 0.5f));
         blindsOpenSequence.Append(ChangeAE_MinEV(-9, 0.5f));
