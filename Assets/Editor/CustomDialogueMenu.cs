@@ -23,11 +23,11 @@ public class EnemyStatsEditor : Editor
 
     // Reference to the actual EnemyStats instance this Inspector belongs to
     private ActionToHave ActionToHave;
-    DialogueElement.ActionType actionToDo;
+    //DialogueElement.ActionType actionToDo;
 
 
     // class field for storing available options
-    //private GUIContent[] availableOptions;
+    private GUIContent[] availableOptions;
 
     // Called when the Inspector is opened / ScriptableObject is selected
     private void OnEnable()
@@ -47,7 +47,7 @@ public class EnemyStatsEditor : Editor
             draggable = true, // for the EnemyStats items we can allow re-ordering
 
             // As the header we simply want to see the usual display name of the EnemyStatsItems
-            drawHeaderCallback = rect => EditorGUI.LabelField(rect, EnemyStatsItems.displayName),
+            //drawHeaderCallback = rect => EditorGUI.LabelField(rect, EnemyStatsItems.displayName),
 
             // How shall elements be displayed
             drawElementCallback = (rect, index, focused, active) =>
@@ -59,12 +59,12 @@ public class EnemyStatsEditor : Editor
                 /*
                 var character = element.FindPropertyRelative(nameof(DialogueElement.CharacterID));
                 */
-                
-                actionToDo = (DialogueElement.ActionType)EditorGUILayout.EnumPopup("Display", actionToDo);
-                    
+                var actionToDo = element.FindPropertyRelative(nameof(DialogueElement.actionToDo));
+                //actionToDo = (DialogueElement.ActionType)EditorGUILayout.EnumPopup("Display", actionToDo);
+
                 var text = element.FindPropertyRelative(nameof(DialogueElement.EnemyStatsText));
 
-                //var popUpHeight = EditorGUI.GetPropertyHeight(actionToHave);
+                var popUpHeight = EditorGUI.GetPropertyHeight(actionToDo);
 
                 // store the original GUI.color
                 var color = GUI.color;
@@ -72,22 +72,26 @@ public class EnemyStatsEditor : Editor
                 /*
                 // if the value is invalid tint the next field red
                 if (character.intValue < 0) GUI.color = Color.red;
-
-                // Draw the Popup so you can select from the existing character names
-                character.intValue = EditorGUI.Popup(new Rect(rect.x, rect.y, rect.width, popUpHeight), new GUIContent(character.displayName), character.intValue, availableOptions);
                 */
+                // Draw the Popup so you can select from the existing character names
+                //actionToDo.intValue = EditorGUI.Popup(new Rect(rect.x, rect.y, rect.width, popUpHeight), new GUIContent(actionToDo.displayName), actionToDo.intValue, availableOptions);
+               
 
 
                 // reset the GUI.color
                 GUI.color = color;
-                
-                //rect.y += popUpHeight;
-                
+
+                rect.y += popUpHeight;
+
 
                 // Draw the text field
                 // since we use a PropertyField it will automatically recognize that this field is tagged [TextArea]
                 // and will choose the correct drawer accordingly
+                var actionHeight = EditorGUI.GetPropertyHeight(actionToDo);
                 var textHeight = EditorGUI.GetPropertyHeight(text);
+
+                EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width, actionHeight), actionToDo);
+                EditorGUILayout.Space();
                 EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width, textHeight), text);
             },
 
@@ -98,10 +102,10 @@ public class EnemyStatsEditor : Editor
             {
                 var element = EnemyStatsItems.GetArrayElementAtIndex(index);
 
-                var character = element.FindPropertyRelative(nameof(DialogueElement.CharacterID));
+                var action = element.FindPropertyRelative(nameof(DialogueElement.actionToDo));
                 var text = element.FindPropertyRelative(nameof(DialogueElement.EnemyStatsText));
 
-                return EditorGUI.GetPropertyHeight(character) + EditorGUI.GetPropertyHeight(text) + EditorGUIUtility.singleLineHeight;
+                return EditorGUI.GetPropertyHeight(action) + EditorGUI.GetPropertyHeight(text) + EditorGUIUtility.singleLineHeight;
             },
 
             // Overwrite what shall be done when an element is added via the +
@@ -113,10 +117,10 @@ public class EnemyStatsEditor : Editor
                 list.serializedProperty.arraySize++;
 
                 var newElement = list.serializedProperty.GetArrayElementAtIndex(list.serializedProperty.arraySize - 1);
-                var character = newElement.FindPropertyRelative(nameof(DialogueElement.CharacterID));
+                var acttion = newElement.FindPropertyRelative(nameof(DialogueElement.actionToDo));
                 var text = newElement.FindPropertyRelative(nameof(DialogueElement.EnemyStatsText));
 
-                character.intValue = -1;
+                acttion.intValue = -1;
                 text.stringValue = "";
             }
         };
