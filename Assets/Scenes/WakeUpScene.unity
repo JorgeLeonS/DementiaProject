@@ -4199,10 +4199,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyXROrigin: {fileID: 8436811321640268554}
-  PlayerCompletedAction:
+  PlayerCompletedInteraction:
     m_PersistentCalls:
       m_Calls: []
-  PlayerInteraction:
+  PlayerDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+  PlayerAction:
     m_PersistentCalls:
       m_Calls: []
   itemsToInteract: []
@@ -6372,7 +6375,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62c65e7a41f71b54dbbc47efdaf7012f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DialogueItems: []
+  DialogueItems:
+  - CharacterID: -1
+    actionToDo: 0
+    EnemyStatsText: 
   health: 0
   defense: 0
   movementSpeed: 0
@@ -6834,9 +6840,9 @@ MonoBehaviour:
   - Diana
   - Diana
   - Diana
-  - Diana
+  - DianaAction
   - James
-  - Diana
+  - DianaAction
   characterTurn: 0
 --- !u!1 &1929085267
 GameObject:
