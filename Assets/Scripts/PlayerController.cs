@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         PlayerDialogue.AddListener(PerformDialogue);
-        PlayerAction.AddListener(PerformDialogue);
+        PlayerAction.AddListener(PerformAction);
         //StartCoroutine(HaveAFirsttext());
         MoveToLayingDownPosition();
     }
@@ -91,10 +91,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            PerformDialogue();
-        }
     }
 
     public void PerformAction()
@@ -105,13 +101,13 @@ public class PlayerController : MonoBehaviour
         {
             FadeCanvas.FadeInOutWithAction(MoveToStandingPosition);
             PlayerCompletedInteraction.Invoke();
-            dialogueCounter++;
+            interactionCounter++;
         }
         else if (interactionCounter == 1)
         {
             AmbientManager.OpenBlinds();
             PlayerCompletedInteraction.Invoke();
-            dialogueCounter++;
+            interactionCounter++;
         }
         #endregion
 
@@ -123,7 +119,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void PerformDialogue()
     {
-        Debug.Log($"Diana action {dialogueCounter}");
+        Debug.Log($"Diana dialogue {dialogueCounter}");
         StartCoroutine(Cor_PerformDialogue());
         PlayerCompletedInteraction.Invoke();
     }
