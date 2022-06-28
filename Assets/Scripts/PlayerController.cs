@@ -12,7 +12,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 /// This class is used to control what the player does.
 /// The player can either have a dialogue to say, or an action to perform.
 /// It is primarily referenced from the <see cref="InteractionsManager"/> class.
-/// Every time a player needs to say or do something, an internal counter <see cref="interactionCounter"/> 
+/// Every time a player needs to say or do something, an internal counter <see cref="dialogueCounter"/> 
 /// is incremented to keep track on that the player is doing.
 /// </summary>
 
@@ -25,8 +25,9 @@ public class PlayerController : MonoBehaviour
     private XRRayInteractor LeftXRInteractor;
     private XRRayInteractor RightXRInteractor;
 
-    public UnityEvent PlayerCompletedAction = new UnityEvent();
-    public UnityEvent PlayerInteraction = new UnityEvent();
+    public UnityEvent PlayerCompletedInteraction = new UnityEvent();
+    public UnityEvent PlayerDialogue = new UnityEvent();
+    public UnityEvent PlayerAction = new UnityEvent();
     public event Action InteractWithSomething;
 
     public List<GameObject> itemsToInteract;
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
     private TextRevealer TRAnimatedTextObject;
 
 
+    private int dialogueCounter;
     private int interactionCounter;
 
     /// <summary>
@@ -78,7 +80,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        PlayerInteraction.AddListener(PerformAction);
+        PlayerDialogue.AddListener(PerformDialogue);
+        PlayerAction.AddListener(PerformDialogue);
         //StartCoroutine(HaveAFirsttext());
         MoveToLayingDownPosition();
     }
@@ -90,37 +93,39 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            PerformAction();
+            PerformDialogue();
         }
+    }
+
+    public void PerformAction()
+    {
+        Debug.Log($"Diana action {interactionCounter}");
+        #region Testing purposes only (DELETE WHEN DONE)
+        if (interactionCounter == 0)
+        {
+            FadeCanvas.FadeInOutWithAction(MoveToStandingPosition);
+            PlayerCompletedInteraction.Invoke();
+            dialogueCounter++;
+        }
+        else if (interactionCounter == 1)
+        {
+            AmbientManager.OpenBlinds();
+            PlayerCompletedInteraction.Invoke();
+            dialogueCounter++;
+        }
+        #endregion
+
     }
 
     /// <summary>
     /// Mehtod that is called through the event listener.
     /// It's pretty much only used to call the coroutine of the same name.
     /// </summary>
-    public void PerformAction()
+    public void PerformDialogue()
     {
-        Debug.Log($"Diana action {interactionCounter}");
-        #region Testing purposes only (DELETE WHEN DONE)
-        if (interactionCounter == 3)
-        {
-            FadeCanvas.FadeInOutWithAction(MoveToStandingPosition);
-            PlayerCompletedAction.Invoke();
-            interactionCounter++;
-        }
-        else if (interactionCounter == 4)
-        {
-            AmbientManager.OpenBlinds();
-            PlayerCompletedAction.Invoke();
-            interactionCounter++;
-        }
-        #endregion
-        else
-        {
-            StartCoroutine(Cor_PerformAction());
-            PlayerCompletedAction.Invoke();
-        }
-
+        Debug.Log($"Diana action {dialogueCounter}");
+        StartCoroutine(Cor_PerformDialogue());
+        PlayerCompletedInteraction.Invoke();
     }
 
 
@@ -129,9 +134,9 @@ public class PlayerController : MonoBehaviour
     /// TODO IMPLEMENT WITH ACTION
     /// </summary>
     /// <returns></returns>
-    IEnumerator Cor_PerformAction()
+    IEnumerator Cor_PerformDialogue()
     {
-        if (interactionCounter >= DialogueText.Count)
+        if (dialogueCounter >= DialogueText.Count)
         {
             Debug.Log($"Bad action, the player has no more actions!");
         }
@@ -141,7 +146,7 @@ public class PlayerController : MonoBehaviour
 
             yield return Cor_NextDialogue();
             InteractionsManager.hasCharacterCorFinished = true;
-            interactionCounter++;
+            dialogueCounter++;
         }
     }
 
@@ -175,16 +180,16 @@ public class PlayerController : MonoBehaviour
         // TODO Add a condition for
         // Could be DialogueDurations or AudioClip
         //var currentClip = audioSource.clip = characterInteraction.DialogueAudios[interactionCounter];
-        AnimatedTextObject.text = DialogueText[interactionCounter];
-        TRAnimatedTextObject.RevealTime = DialogueDurations[interactionCounter]*0.5f;
+        AnimatedTextObject.text = DialogueText[dialogueCounter];
+        TRAnimatedTextObject.RevealTime = DialogueDurations[dialogueCounter] * 0.5f;
 
         //TextObject.SetActive(true);
         TRAnimatedTextObject.Reveal();
         //AnimatedText.ReadText(DialogueText[interactionCounter], DialogueDurations[interactionCounter]);
 
         //audioSource.Play();
-        yield return new WaitForSeconds(DialogueDurations[interactionCounter] + 1.0f);
-        
+        yield return new WaitForSeconds(DialogueDurations[dialogueCounter] + 1.0f);
+
         TRAnimatedTextObject.Unreveal();
 
         yield return new WaitForSeconds(TRAnimatedTextObject.UnrevealTime + 1.0f);
@@ -200,7 +205,7 @@ public class PlayerController : MonoBehaviour
     {
         MyXROrigin.transform.position = new Vector3(-0.5f, 0f, 1f);
         MyXROrigin.transform.localRotation = Quaternion.Euler(0, 150, 0);
-    } 
+    }
 
     private void MoveToLayingDownPosition()
     {
