@@ -36,11 +36,13 @@ public class PlayerController : MonoBehaviour
     public List<AudioClip> DialogueAudios;
     public List<float> DialogueDurations;
 
+    // Player subtitles
     private GameObject Canvas;
     //private DialogueAnimator AnimatedText;
     private GameObject TextObject;
     private DialogueAnimator AnimatedTextObject;
     private TextRevealer TRAnimatedTextObject;
+
 
     private int interactionCounter;
 
@@ -77,7 +79,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         PlayerInteraction.AddListener(PerformAction);
-        StartCoroutine(HaveAFirsttext());
+        //StartCoroutine(HaveAFirsttext());
         MoveToLayingDownPosition();
     }
 
@@ -151,12 +153,23 @@ public class PlayerController : MonoBehaviour
         TextObject.SetActive(false);
     }
 
+    private void DestroySlicedTextRevealer()
+    {
+        Transform sliced = Canvas.transform.Find(TextObject.name + "_sliced");
+        if (sliced != null)
+        {
+            GameObject.DestroyImmediate(sliced.gameObject);
+        }
+    }
+
     /// <summary>
     /// When a player has a dialogue, it should play the AudioClip of it,
     /// and display the text on the textbox.
     /// </summary>
     IEnumerator Cor_NextDialogue()
     {
+        DestroySlicedTextRevealer();
+
         //Canvas.GetComponent<Canvas>().enabled = true;
 
         // TODO Add a condition for
@@ -165,13 +178,18 @@ public class PlayerController : MonoBehaviour
         AnimatedTextObject.text = DialogueText[interactionCounter];
         TRAnimatedTextObject.RevealTime = DialogueDurations[interactionCounter]*0.5f;
 
-        TextObject.SetActive(true);
-
+        //TextObject.SetActive(true);
+        TRAnimatedTextObject.Reveal();
         //AnimatedText.ReadText(DialogueText[interactionCounter], DialogueDurations[interactionCounter]);
 
         //audioSource.Play();
         yield return new WaitForSeconds(DialogueDurations[interactionCounter] + 1.0f);
-        TextObject.SetActive(false);
+        
+        TRAnimatedTextObject.Unreveal();
+
+        yield return new WaitForSeconds(TRAnimatedTextObject.UnrevealTime + 1.0f);
+
+        //TextObject.SetActive(false);
         //yield return new WaitForSeconds(TRAnimatedTextObject.UnrevealTime * 1.3f);
 
         //GetComponent<Animator>().SetBool(characterInteraction.AnimationName[interactionCounter], false);
@@ -186,8 +204,8 @@ public class PlayerController : MonoBehaviour
 
     private void MoveToLayingDownPosition()
     {
-        MyXROrigin.transform.position = new Vector3(0.5f, 1f, -1.0f);
-        MyXROrigin.transform.localRotation = Quaternion.Euler(-50, 0, 90);
+        MyXROrigin.transform.position = new Vector3(-0.15f, 0.2f, -1.0f);
+        MyXROrigin.transform.localRotation = Quaternion.Euler(-50, 90, 0);
     }
 
     #region Player Events Testing section
