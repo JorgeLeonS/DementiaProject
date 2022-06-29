@@ -67,7 +67,6 @@ public class InteractionsManager : MonoBehaviour
                 break;
             case "James":
                 characters.Find(x => x.name.Contains("James")).PerformAction();
-                //characters[characterTurn].PerformAction();
                 /// TODO Change this to be called from the character event
                 /// Related to <see cref="hasCharacterCorFinished"/>
                 /// Find a similar implementation to <see cref="PlayerController.PlayerCompletedInteraction"/> action
