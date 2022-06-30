@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.XR.Interaction.Toolkit;
 
 /// <summary>
 /// Script used to transition between scenes.
@@ -11,6 +12,7 @@ using DG.Tweening;
 public class MenuControl : MonoBehaviour
 {
     public GameObject fadeCanvas;
+    [SerializeField]
     private void Awake()
     {
         try
@@ -41,6 +43,4 @@ public class MenuControl : MonoBehaviour
         //    RestartGame();
         //}
     }
-
-    
 }
