@@ -93,24 +93,36 @@ public class PlayerController : MonoBehaviour
     {
     }
 
-    public void PerformAction()
+    IEnumerator Cor_PerformAction()
     {
-        Debug.Log($"Diana action {interactionCounter}");
         #region Testing purposes only (DELETE WHEN DONE)
         if (interactionCounter == 0)
         {
-            FadeCanvas.FadeInOutWithAction(MoveToStandingPosition);
-            PlayerCompletedInteraction.Invoke();
+            InteractionsManager.hasCharacterCorFinished = false;
+            yield return StartCoroutine(FadeCanvas.FadeInOutWithAction(MoveToStandingPosition));
             interactionCounter++;
+            InteractionsManager.hasCharacterCorFinished = true;
         }
         else if (interactionCounter == 1)
         {
-            AmbientManager.OpenBlinds();
-            PlayerCompletedInteraction.Invoke();
+            InteractionsManager.hasCharacterCorFinished = false;
+            yield return StartCoroutine(AmbientManager.OpenBlinds());
             interactionCounter++;
+            InteractionsManager.hasCharacterCorFinished = true;
+        }
+        else
+        {
+            yield return new WaitForSeconds(3f);
+            Debug.Log("No more player actions!");
         }
         #endregion
+    }
 
+    public void PerformAction()
+    {
+        Debug.Log($"Diana action {interactionCounter}");
+        StartCoroutine(Cor_PerformAction());
+        PlayerCompletedInteraction.Invoke();
     }
 
     /// <summary>

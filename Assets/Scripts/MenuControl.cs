@@ -12,7 +12,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class MenuControl : MonoBehaviour
 {
     public GameObject fadeCanvas;
-    [SerializeField]
     private void Awake()
     {
         try

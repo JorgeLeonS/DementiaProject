@@ -13,7 +13,6 @@ using TMPro;
 /// </summary>
 public class InteractionsManager : MonoBehaviour
 {
-
     public PlayerController playerController;
 
     public List<CharacterController> characters;
@@ -26,10 +25,10 @@ public class InteractionsManager : MonoBehaviour
     // TODO change to an Event
     public static bool hasCharacterCorFinished;
 
-
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
+        yield return new WaitForSeconds(4f);
         hasCharacterCorFinished = true;
         playerController.PlayerCompletedInteraction.AddListener(NextTurn);
     }
@@ -39,8 +38,8 @@ public class InteractionsManager : MonoBehaviour
     {
         // TODO Remove, it's just for testing purposes.
         // The DoNextInteraction method needs to be called when an action has finished. (NextTurn) event call.
-        if (Input.GetKeyDown(KeyCode.R))
-        {
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
             if (hasCharacterCorFinished)
             {
                 DoNextInteraction();
@@ -49,7 +48,7 @@ public class InteractionsManager : MonoBehaviour
             {
                 Debug.Log("Character has not finished its action");
             }
-        }
+        //}
     }
 
     /// <summary>

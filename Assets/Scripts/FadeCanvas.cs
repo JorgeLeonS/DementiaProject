@@ -31,19 +31,17 @@ public class FadeCanvas : MonoBehaviour
     public static void FadeInOut()
     {
         FadeIn().OnComplete(() => FadeOut());
-        //OnComplete(FadeIn
-        //FadeInOutSequence = DOTween.Sequence();
-        //FadeInOutSequence.Append(FadeIn()).SetEase(Ease.);
-        //FadeInOutSequence.Append(FadeOut());
     }
 
-    public static void FadeInOutWithAction(Action action)
+    public static IEnumerator FadeInOutWithAction(Action action)
     {
         FadeIn().OnComplete(() =>
         {
             action();
             FadeOut();
         });
+        //TODO Change for a propoper Wait
+        yield return new WaitForSeconds(3f);
     }
 
     // Start is called before the first frame update

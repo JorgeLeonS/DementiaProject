@@ -54,8 +54,9 @@ public class AmbientManager : MonoBehaviour
     /// such as, ChangeAE_MinEV(-9f, 0.5f);
     /// Will assign the new MinEV value to -9 on 0.5 seconds.
     /// </summary>
-    public static void OpenBlinds()
+    public static IEnumerator OpenBlinds()
     {
+        var hasSequenceCompleted = false;
         blindsOpenSequence = DOTween.Sequence();
         ChangeAmbientLightIntensity(1, 0.5f);
         ChangeEvnironmentReflectionsIntensity(0.2f, 0.1f);
@@ -63,7 +64,11 @@ public class AmbientManager : MonoBehaviour
         bloomIntensityMemory = 50;
         blindsOpenSequence.AppendInterval(1f);
         blindsOpenSequence.Append(ChangeBloom_Intensity(0.1f, 6f));
-        blindsOpenSequence.OnComplete(() => bloomIntensityMemory=0);
+        blindsOpenSequence.OnComplete(() => {
+            bloomIntensityMemory = 0;
+            hasSequenceCompleted = true;
+        });
+        yield return new WaitUntil(() => hasSequenceCompleted);
     }
     #endregion
 

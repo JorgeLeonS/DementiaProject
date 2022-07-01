@@ -20,9 +20,11 @@ public class MainMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AmbientManager.ChangeAmbientLightIntensity(0.1f, 0.1f);
+        AmbientManager.ChangeEvnironmentReflectionsIntensity(0.2f, 0.1f);
         duration = defectiveLamp_Audio.clip.length / 2;
         StartCoroutine(FadeInAndOutRepeat(defectiveLamp_Light));
-        menuControl = gameObject.GetComponent<MenuControl>();
+        menuControl = FindObjectOfType<MenuControl>();
     }
 
     public void AssignUILayerToSlices()
@@ -66,6 +68,7 @@ public class MainMenuManager : MonoBehaviour
         defectiveLamp_Light.intensity = 0;
         defectiveLamp_Audio.clip = bulbPop_AudioClip;
         defectiveLamp_Audio.Play();
+        TextRevealerObject.GetComponent<TextRevealer>().Unreveal();
         yield return new WaitForSeconds(0.5f);
         ChangeScene();
     }
