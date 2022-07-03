@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class FadeCanvas : MonoBehaviour
 {
@@ -30,10 +31,17 @@ public class FadeCanvas : MonoBehaviour
     public static void FadeInOut()
     {
         FadeIn().OnComplete(() => FadeOut());
-        //OnComplete(FadeIn
-        //FadeInOutSequence = DOTween.Sequence();
-        //FadeInOutSequence.Append(FadeIn()).SetEase(Ease.);
-        //FadeInOutSequence.Append(FadeOut());
+    }
+
+    public static IEnumerator FadeInOutWithAction(Action action)
+    {
+        FadeIn().OnComplete(() =>
+        {
+            action();
+            FadeOut();
+        });
+        //TODO Change for a propoper Wait
+        yield return new WaitForSeconds(3f);
     }
 
     // Start is called before the first frame update

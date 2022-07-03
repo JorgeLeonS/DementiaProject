@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering.Universal;
 using DG.Tweening;
 
 /// <summary>
@@ -12,8 +12,9 @@ using DG.Tweening;
 /// </summary>
 public class AmbientManager : MonoBehaviour
 {
-    public static PostProcessVolume sceneVolume;
-    private static AutoExposure aE;
+    public static Volume sceneVolume;
+    private static Bloom bloom;
+    private static float bloomIntensityMemory;
 
     // Sequences variables
     public static Sequence blindsOpenSequence;
@@ -22,16 +23,17 @@ public class AmbientManager : MonoBehaviour
     void Start()
     {
         ChangeAmbientLightIntensity(0.1f, 0.1f);
+        ChangeEvnironmentReflectionsIntensity(0.2f, 0.1f);
         try
         {
-            sceneVolume = GameObject.Find("PostProcessVolume").GetComponent<PostProcessVolume>();
+            sceneVolume = GameObject.Find("PostProcessVolume").GetComponent<Volume>();
         }
         catch (System.Exception e)
         {
             Debug.LogError($"PostProcessVolume could not be found on the scene! \n" +
                 $"Is the naming correct?\n {e}");
         }
-        aE = sceneVolume.profile.GetSetting<AutoExposure>();
+        sceneVolume.profile.TryGet<Bloom>(out bloom);
     }
 
     // Update is called once per frame
@@ -52,15 +54,21 @@ public class AmbientManager : MonoBehaviour
     /// such as, ChangeAE_MinEV(-9f, 0.5f);
     /// Will assign the new MinEV value to -9 on 0.5 seconds.
     /// </summary>
-    public static void OpenBlinds()
+    public static IEnumerator OpenBlinds()
     {
+        var hasSequenceCompleted = false;
         blindsOpenSequence = DOTween.Sequence();
-        blindsOpenSequence.Append(ChangeAmbientLightIntensity(1, 0.5f));
-        blindsOpenSequence.Append(ChangeAE_MinEV(-9, 0.5f));
-        blindsOpenSequence.Append(ChangeAE_MaxEV(-9, 0.5f));
+        ChangeAmbientLightIntensity(1, 0.5f);
+        ChangeEvnironmentReflectionsIntensity(0.2f, 0.1f);
+        blindsOpenSequence.Append(ChangeBloom_Intensity(50, 3f));
+        bloomIntensityMemory = 50;
         blindsOpenSequence.AppendInterval(1f);
-        blindsOpenSequence.Append(ChangeAE_MaxEV(0, 0.2f));
-        blindsOpenSequence.Append(ChangeAE_MinEV(0, 1f));
+        blindsOpenSequence.Append(ChangeBloom_Intensity(0.1f, 6f));
+        blindsOpenSequence.OnComplete(() => {
+            bloomIntensityMemory = 0;
+            hasSequenceCompleted = true;
+        });
+        yield return new WaitUntil(() => hasSequenceCompleted);
     }
     #endregion
 
@@ -78,19 +86,17 @@ public class AmbientManager : MonoBehaviour
         });
     }
 
-    public static Tween ChangeAE_MinEV(float newValue, float duration = 3f)
+    public static Tween ChangeEvnironmentReflectionsIntensity(float newValue, float duration = 3f)
     {
-        var minEV = aE.minLuminance;
-        return DOVirtual.Float(minEV.value, newValue, duration, newVal => {
-            minEV.value = newVal;
+        return DOVirtual.Float(RenderSettings.reflectionIntensity, newValue, duration, newVal => {
+            RenderSettings.reflectionIntensity = newVal;
         });
     }
 
-    public static Tween ChangeAE_MaxEV(float newValue, float duration = 3f)
+    public static Tween ChangeBloom_Intensity(float newValue, float duration = 3f)
     {
-        var maxEV = aE.maxLuminance;
-        return DOVirtual.Float(maxEV.value, newValue, duration, newVal => {
-            maxEV.value = newVal;
+        return DOVirtual.Float(bloomIntensityMemory, newValue, duration, newVal => {
+            bloom.intensity.value = newVal;
         });
     }
     #endregion

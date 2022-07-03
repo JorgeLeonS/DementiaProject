@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.XR.Interaction.Toolkit;
 
 /// <summary>
 /// Script used to transition between scenes.
@@ -41,6 +42,4 @@ public class MenuControl : MonoBehaviour
         //    RestartGame();
         //}
     }
-
-    
 }

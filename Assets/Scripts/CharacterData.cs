@@ -6,6 +6,7 @@ using UnityEngine;
 /// A character can have the listed components.
 /// They are filled for each scene, and are referenced from <see cref="CharacterController"/>
 /// </summary>
+
 public class CharacterData : MonoBehaviour
 {
     public string Name;

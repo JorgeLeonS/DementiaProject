@@ -43,7 +43,7 @@ public class CharacterController : MonoBehaviour
         animatedText = Canvas.transform.GetChild(0).Find("AnimatedText").GetComponent<DialogueAnimator>();
 
         // Directly assign AudioSource component
-        audioSource = transform.Find("AudioSource").GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
         // Get all waypoints on a list
         CharacterWaypoints = GameObject.FindGameObjectWithTag("Waypoints").transform.Find(characterInteraction.Name);

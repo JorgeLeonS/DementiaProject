@@ -13,7 +13,6 @@ using TMPro;
 /// </summary>
 public class InteractionsManager : MonoBehaviour
 {
-
     public PlayerController playerController;
 
     public List<CharacterController> characters;
@@ -26,12 +25,12 @@ public class InteractionsManager : MonoBehaviour
     // TODO change to an Event
     public static bool hasCharacterCorFinished;
 
-
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
+        yield return new WaitForSeconds(4f);
         hasCharacterCorFinished = true;
-        playerController.PlayerCompletedAction.AddListener(NextTurn);
+        playerController.PlayerCompletedInteraction.AddListener(NextTurn);
     }
 
     // Update is called once per frame
@@ -39,8 +38,8 @@ public class InteractionsManager : MonoBehaviour
     {
         // TODO Remove, it's just for testing purposes.
         // The DoNextInteraction method needs to be called when an action has finished. (NextTurn) event call.
-        if (Input.GetKeyDown(KeyCode.R))
-        {
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
             if (hasCharacterCorFinished)
             {
                 DoNextInteraction();
@@ -49,7 +48,7 @@ public class InteractionsManager : MonoBehaviour
             {
                 Debug.Log("Character has not finished its action");
             }
-        }
+        //}
     }
 
     /// <summary>
@@ -57,20 +56,23 @@ public class InteractionsManager : MonoBehaviour
     /// </summary>
     void DoNextInteraction()
     {
-        var characterTurnId = GetNextTurn(turningNames[characterTurn]);
-        if (characterTurnId == 9999)
+        switch (turningNames[characterTurn])
         {
-            // Wait for player action
-            playerController.PlayerInteraction.Invoke();
-        }
-        else
-        {
-            characters[characterTurnId].PerformAction();
-            /// TODO Change this to be called from the character event
-            /// Related to <see cref="hasCharacterCorFinished"/>
-            /// Find a similar implementation to <see cref="PlayerController.PlayerCompletedAction"/> action
-            NextTurn();
-
+            case "Diana":
+                playerController.PlayerDialogue.Invoke();
+                break;
+            case "DianaAction":
+                playerController.PlayerAction.Invoke();
+                break;
+            case "James":
+                characters.Find(x => x.name.Contains("James")).PerformAction();
+                /// TODO Change this to be called from the character event
+                /// Related to <see cref="hasCharacterCorFinished"/>
+                /// Find a similar implementation to <see cref="PlayerController.PlayerCompletedInteraction"/> action
+                NextTurn();
+                break;
+            default:
+                break;
         }
     }
 
@@ -89,30 +91,5 @@ public class InteractionsManager : MonoBehaviour
         {
             Debug.Log("No more actions!!");
         }
-    }
-
-    /// <summary>
-    /// This is where the multiple character are called. Depending on whose name is assigned on the
-    /// <see cref="turningNames"/> list, it will return the index 
-    /// that needs to match the <see cref="characters"/> list.
-    /// </summary>
-    // TODO Find a better implementation for this!
-    // It's a very sensible method...
-    int GetNextTurn(string personTurn)
-    {
-        switch (personTurn)
-        {
-            case "Diana":
-                return 9999;
-            case "James":
-                return 0;
-            case "Rachel":
-                return 1;
-            default:
-                break;
-        }
-        // Bad return
-        Debug.Log("The character was not found on list");
-        return 666;
     }
 }
