@@ -25,7 +25,7 @@ public class MenuControl : MonoBehaviour
                 $"Make sure the object is on Scene and has the correct name! \n {e}");
         }
     }
-    public void LoadLevel(string Level)
+    public static void LoadLevel(string Level)
     {
         FadeCanvas.FadeIn().OnComplete(() => SceneManager.LoadScene(Level));
     }

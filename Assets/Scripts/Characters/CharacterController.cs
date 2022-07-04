@@ -127,7 +127,6 @@ public class CharacterController : MonoBehaviour
     {
         //animatedText = TextManager.instance.animatedText;
         Canvas.GetComponent<Canvas>().enabled = false;
-
     }
 
     // Update is called once per frame

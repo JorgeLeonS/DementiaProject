@@ -7,7 +7,6 @@ using System;
 public class FadeCanvas : MonoBehaviour
 {
     private static CanvasGroup canvasGroup;
-    public static Sequence FadeInOutSequence;
 
     private void Awake()
     {

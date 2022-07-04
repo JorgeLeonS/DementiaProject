@@ -186,17 +186,6 @@ Transform:
   m_Father: {fileID: 856333760}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &18997020 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8413797369528311637, guid: a603e8ea9c97a6149afa6f9c3194b4e0, type: 3}
-  m_PrefabInstance: {fileID: 1105303480}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6803edce0201f574f923fd9d10e5b30a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &28240491
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,23 +1789,6 @@ Transform:
   m_Father: {fileID: 1100770614}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &638508815 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6042987138581372148, guid: f62916ccfb55e9f4bbacfd6d6465a595, type: 3}
-  m_PrefabInstance: {fileID: 462173696}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &638508822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 638508815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa82750c49ce2f840a0d2a138667c569, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &646076112
 GameObject:
   m_ObjectHideFlags: 0
@@ -3986,15 +3958,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a70efe464051d314fb773709048d5c2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftXRRayInteractor: {fileID: 18997020}
-  xrOrigin: {fileID: 1529493276}
-  PlayerCompletedAction:
+  MyXROrigin: {fileID: 0}
+  PlayerCompletedInteraction:
     m_PersistentCalls:
       m_Calls: []
-  PlayerInteraction:
+  PlayerDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+  PlayerAction:
     m_PersistentCalls:
       m_Calls: []
   itemsToInteract: []
+  DialogueText: []
+  DialogueAudios: []
+  DialogueDurations: []
 --- !u!4 &1292231113
 Transform:
   m_ObjectHideFlags: 0
@@ -4728,17 +4705,6 @@ Transform:
   m_Father: {fileID: 1044396666}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1529493276 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8413797369163244177, guid: a603e8ea9c97a6149afa6f9c3194b4e0, type: 3}
-  m_PrefabInstance: {fileID: 1105303480}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0cb9aa70a22847b5925ee5f067c10a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1530981781
 GameObject:
   m_ObjectHideFlags: 0
@@ -5643,6 +5609,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1820979943}
   - component: {fileID: 1820979942}
+  - component: {fileID: 1820979944}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -5727,6 +5694,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1820979944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820979941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &1862578760
 GameObject:
   m_ObjectHideFlags: 0
@@ -5944,7 +5931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474f9f22836616848a1878743b2fe812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerActions: {fileID: 1292231112}
+  playerController: {fileID: 0}
   characters:
   - {fileID: 1353830608}
   - {fileID: 658805020}
@@ -5953,7 +5940,7 @@ MonoBehaviour:
   - James
   - Rachel
   - Diana
-  talkingTurn: 0
+  characterTurn: 0
 --- !u!1 &1921017441
 GameObject:
   m_ObjectHideFlags: 0

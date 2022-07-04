@@ -9,7 +9,6 @@ public class Door : MonoBehaviour
     [SerializeField] Transform handle;
     [SerializeField] Transform arrow;
     Animator animator;
-    MenuControl menuControl;
 
     [SerializeField] bool isTest = false;
 
@@ -17,7 +16,6 @@ public class Door : MonoBehaviour
     {
         StartInteraction(isTest);
         animator = GetComponent<Animator>();
-        menuControl = FindObjectOfType<MenuControl>();
     }
 
     public void StartInteraction(bool makeInteractable)
@@ -36,9 +34,6 @@ public class Door : MonoBehaviour
 
     private void ChangeScene()
     {
-        if (menuControl != null)
-            menuControl.LoadLevel(nextLevel);
-        else
-            Debug.LogError("Add the MenuControl script to the scene");
+        MenuControl.LoadLevel(nextLevel);
     }
 }

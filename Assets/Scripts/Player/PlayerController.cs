@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
         else if (interactionCounter == 1)
         {
             InteractionsManager.hasCharacterCorFinished = false;
-            yield return StartCoroutine(AmbientManager.OpenBlinds());
+            yield return StartCoroutine(WakeUpScene_Methods.OpenBlinds());
             interactionCounter++;
             InteractionsManager.hasCharacterCorFinished = true;
         }
