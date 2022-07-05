@@ -26,7 +26,7 @@ public class Footsteps : MonoBehaviour
 
     private AudioClip GetRandomClip()
     {
-        return clips[UnityEngine.Random.Range(0, clips.Length)];
+        return clips[Random.Range(0, clips.Length)];
     }
 
     // Start is called before the first frame update
