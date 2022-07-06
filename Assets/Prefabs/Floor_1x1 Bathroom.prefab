@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4017424516750200476
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3418200714636359468, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418200714636359468, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418200714636359468, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418200714636359468, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418200714636359468, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418200714636359468, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418200714636359468, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418200714636359468, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418200714636359468, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418200714636359468, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418200714636359468, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678342146911541648, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dff1cef96b9fd47e2865be91aefd9d21, type: 2}
+    - target: {fileID: 8697053701023270371, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
+      propertyPath: m_Name
+      value: Floor_1x1 Bathroom
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
