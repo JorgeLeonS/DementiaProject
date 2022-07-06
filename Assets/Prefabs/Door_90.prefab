@@ -342,14 +342,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7366583746267308138}
     m_Modifications:
-    - target: {fileID: 2311081848138465893, guid: 071b038fae7bd45d9be101c201c114f9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311081848138465893, guid: 071b038fae7bd45d9be101c201c114f9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2773053093328616964, guid: 071b038fae7bd45d9be101c201c114f9, type: 3}
       propertyPath: m_Name
       value: Arrow

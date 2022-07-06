@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class ToothbrushEffect : MonoBehaviour
 {
@@ -73,12 +74,16 @@ public class ToothbrushEffect : MonoBehaviour
         SetSequence();
         if (indexSequence < timers.Count)
         {
+            
             helpButton.gameObject.SetActive(false);
             textSign.GetComponentInChildren<TextMeshProUGUI>().text = prompts[indexSequence];
-            textSign.SetActive(true);
             timer = timers[indexSequence];
+            textSign.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(null);
         }
     }
+
+    
 
     private void SetSequence()
     {
