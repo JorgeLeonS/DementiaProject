@@ -128,67 +128,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8044693570769402225, guid: 4c0a4a5f5e246134f900672399fd303c, type: 3}
   m_PrefabInstance: {fileID: 2014920244}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &463319898
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 7f38eab4139095341acdbe0cc454321e, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7f38eab4139095341acdbe0cc454321e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.2683396
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7f38eab4139095341acdbe0cc454321e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0038189925
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7f38eab4139095341acdbe0cc454321e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.13488436
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7f38eab4139095341acdbe0cc454321e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7f38eab4139095341acdbe0cc454321e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7f38eab4139095341acdbe0cc454321e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7f38eab4139095341acdbe0cc454321e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7f38eab4139095341acdbe0cc454321e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7f38eab4139095341acdbe0cc454321e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7f38eab4139095341acdbe0cc454321e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: 7f38eab4139095341acdbe0cc454321e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 24adf78bcb5062d488efc6875f3611ab, type: 2}
-    - target: {fileID: 919132149155446097, guid: 7f38eab4139095341acdbe0cc454321e, type: 3}
-      propertyPath: m_Name
-      value: JamesModel
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7f38eab4139095341acdbe0cc454321e, type: 3}
 --- !u!1 &557691662
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 557691664}
   - component: {fileID: 557691663}
+  - component: {fileID: 557691665}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -283,6 +223,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &557691665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557691662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &636553766 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8144394004440419581, guid: 04d0e50f07e24b542956fdb19c65699e, type: 3}
@@ -310,7 +270,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 04d0e50f07e24b542956fdb19c65699e, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 04d0e50f07e24b542956fdb19c65699e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -376,7 +336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4699040568702429756, guid: 35538d14a083e3f439fc291591dc36cc, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4699040568702429756, guid: 35538d14a083e3f439fc291591dc36cc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -440,7 +400,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8384684659080479418, guid: 17c194b7b899e854ebf6739ae5ed6ed3, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8384684659080479418, guid: 17c194b7b899e854ebf6739ae5ed6ed3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -618,7 +578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8436811320303123270, guid: 7c2d427ad8c89674fb2c33ad6988e2b2, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8436811320303123270, guid: 7c2d427ad8c89674fb2c33ad6988e2b2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -679,7 +639,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6383518656400574030, guid: f62916ccfb55e9f4bbacfd6d6465a595, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6383518656400574030, guid: f62916ccfb55e9f4bbacfd6d6465a595, type: 3}
       propertyPath: m_LocalPosition.x

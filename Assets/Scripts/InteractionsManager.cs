@@ -38,8 +38,8 @@ public class InteractionsManager : MonoBehaviour
     {
         // TODO Remove, it's just for testing purposes.
         // The DoNextInteraction method needs to be called when an action has finished. (NextTurn) event call.
-        if (Input.GetKeyDown(KeyCode.R))
-        {
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
             if (hasCharacterCorFinished)
             {
                 DoNextInteraction();
@@ -48,7 +48,7 @@ public class InteractionsManager : MonoBehaviour
             {
                 Debug.Log("Character has not finished its action");
             }
-        }
+        //}
     }
 
     /// <summary>
