@@ -45,12 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timers:
-  - 5
-  - 5
-  - 5
+  - 15
+  - 15
+  - 15
   prompts:
-  - Find the toothbrush
-  - Help is coming. Keep finding the toothbrush
+  - Find the toothbrush.
+  - James is coming. Keep finding the toothbrush
   - James is here
   helpButton: {fileID: 0}
   textSign: {fileID: 0}
