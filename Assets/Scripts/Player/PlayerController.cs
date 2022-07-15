@@ -6,6 +6,7 @@ using TMPro;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit;
 
 /// <summary>
@@ -16,19 +17,15 @@ using UnityEngine.XR.Interaction.Toolkit;
 /// is incremented to keep track on that the player is doing.
 /// </summary>
 
-//[System.Serializable] public class PlayerCompletedAction : UnityEvent<bool> { }
-//[System.Serializable] public class PlayerInteraction : UnityEvent { }
-
 public class PlayerController : MonoBehaviour
 {
     public XROrigin MyXROrigin;
     private XRRayInteractor LeftXRInteractor;
     private XRRayInteractor RightXRInteractor;
 
-    public UnityEvent PlayerCompletedInteraction = new UnityEvent();
-    public UnityEvent PlayerDialogue = new UnityEvent();
-    public UnityEvent PlayerAction = new UnityEvent();
-    public event Action InteractWithSomething;
+    public static PlayerController playerEvents;
+
+    //public event Action InteractWithSomething;
 
     public List<GameObject> itemsToInteract;
 
@@ -55,6 +52,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        playerEvents = this;
         try
         {
             // Directly assign LeftXRInteractor and RightXRInteractor components.
@@ -76,66 +74,40 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Add the listerner for performing an actrion and move to laying down postion (In bed).
+    /// Add the listerner for performing an action and move to laying down postion (In bed).
+    /// When the script subscribes to the playerAction Event, the Coroutine is managed by a switch that depends on the counter.
+    /// It's very important that the Scene name on the switch matches exactly.
     /// </summary>
     void Start()
     {
-        PlayerDialogue.AddListener(PerformDialogue);
-        PlayerAction.AddListener(PerformAction);
+        SceneEvents.current.playerDialogue += Cor_PerformDialogue;
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "WakeUpScene":
+                SceneEvents.current.playerAction += Cor_PerformAction_WakeUpScene;
+                break;
+            default:
+                Debug.LogWarning("The scene name might not match!");
+                break;
+        }
+        //SceneEvents.current.playerAction += Cor_PerformAction;
         //StartCoroutine(HaveAFirsttext());
         MoveToLayingDownPosition();
     }
 
-    /// <summary>
-    /// For testing purposes.
-    /// </summary>
-    void Update()
+    private void OnDestroy()
     {
-    }
-
-    IEnumerator Cor_PerformAction()
-    {
-        #region Testing purposes only (DELETE WHEN DONE)
-        if (interactionCounter == 0)
+        SceneEvents.current.playerDialogue -= Cor_PerformDialogue;
+        switch (SceneManager.GetActiveScene().name)
         {
-            InteractionsManager.hasCharacterCorFinished = false;
-            yield return StartCoroutine(FadeCanvas.FadeInOutWithAction(MoveToStandingPosition));
-            interactionCounter++;
-            InteractionsManager.hasCharacterCorFinished = true;
+            case "WakeUpScene":
+                SceneEvents.current.playerAction -= Cor_PerformAction_WakeUpScene;
+                break;
+            default:
+                Debug.LogWarning("The scene name might not match!");
+                break;
         }
-        else if (interactionCounter == 1)
-        {
-            InteractionsManager.hasCharacterCorFinished = false;
-            yield return StartCoroutine(WakeUpScene_Methods.OpenBlinds());
-            interactionCounter++;
-            InteractionsManager.hasCharacterCorFinished = true;
-        }
-        else
-        {
-            yield return new WaitForSeconds(3f);
-            Debug.Log("No more player actions!");
-        }
-        #endregion
     }
-
-    public void PerformAction()
-    {
-        Debug.Log($"Diana action {interactionCounter}");
-        StartCoroutine(Cor_PerformAction());
-        PlayerCompletedInteraction.Invoke();
-    }
-
-    /// <summary>
-    /// Mehtod that is called through the event listener.
-    /// It's pretty much only used to call the coroutine of the same name.
-    /// </summary>
-    public void PerformDialogue()
-    {
-        Debug.Log($"Diana dialogue {dialogueCounter}");
-        StartCoroutine(Cor_PerformDialogue());
-        PlayerCompletedInteraction.Invoke();
-    }
-
 
     /// <summary>
     /// Coroutine that is used to call the next dialogue of the player.
@@ -146,26 +118,40 @@ public class PlayerController : MonoBehaviour
     {
         if (dialogueCounter >= DialogueText.Count)
         {
-            Debug.Log($"Bad action, the player has no more actions!");
+            Debug.Log($"Bad action, the player has no more dialogues!");
         }
         else
         {
-            InteractionsManager.hasCharacterCorFinished = false;
-
             yield return Cor_NextDialogue();
-            InteractionsManager.hasCharacterCorFinished = true;
             dialogueCounter++;
+            SceneEvents.current.PlayerCompletedInteraction();
         }
     }
 
-    IEnumerator HaveAFirsttext()
+    /// <summary>
+    /// When a player has a dialogue, it will display the subtitle text with the TextRevealerPro asset.
+    /// </summary>
+    IEnumerator Cor_NextDialogue()
     {
-        TextObject.SetActive(true);
-        AnimatedTextObject.text = "testtext";
-        yield return new WaitForSeconds(0.5f);
-        TextObject.SetActive(false);
+        DestroySlicedTextRevealer();
+
+        AnimatedTextObject.text = DialogueText[dialogueCounter];
+
+        TRAnimatedTextObject.RevealTime = DialogueDurations[dialogueCounter] * 0.5f;
+
+        TRAnimatedTextObject.Reveal();
+
+        yield return new WaitForSeconds(DialogueDurations[dialogueCounter] + 1.0f);
+
+        TRAnimatedTextObject.Unreveal();
+
+        yield return new WaitForSeconds(TRAnimatedTextObject.UnrevealTime + 1.0f);
     }
 
+    /// <summary>
+    /// Method used for th TextRevealerPro asset, 
+    /// needed to destroy the created 'slices' every time the text needs to change.
+    /// </summary>
     private void DestroySlicedTextRevealer()
     {
         Transform sliced = Canvas.transform.Find(TextObject.name + "_sliced");
@@ -175,40 +161,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    #region Actions section
+
     /// <summary>
-    /// When a player has a dialogue, it should play the AudioClip of it,
-    /// and display the text on the textbox.
+    /// Switch based method that is used to call the different actions the player needs to do on the Scene: WakeUpScene
     /// </summary>
-    IEnumerator Cor_NextDialogue()
+    IEnumerator Cor_PerformAction_WakeUpScene()
     {
-        DestroySlicedTextRevealer();
-
-        //Canvas.GetComponent<Canvas>().enabled = true;
-
-        // TODO Add a condition for
-        // Could be DialogueDurations or AudioClip
-        //var currentClip = audioSource.clip = characterInteraction.DialogueAudios[interactionCounter];
-        AnimatedTextObject.text = DialogueText[dialogueCounter];
-        TRAnimatedTextObject.RevealTime = DialogueDurations[dialogueCounter] * 0.5f;
-
-        //TextObject.SetActive(true);
-        TRAnimatedTextObject.Reveal();
-        //AnimatedText.ReadText(DialogueText[interactionCounter], DialogueDurations[interactionCounter]);
-
-        //audioSource.Play();
-        yield return new WaitForSeconds(DialogueDurations[dialogueCounter] + 1.0f);
-
-        TRAnimatedTextObject.Unreveal();
-
-        yield return new WaitForSeconds(TRAnimatedTextObject.UnrevealTime + 1.0f);
-
-        //TextObject.SetActive(false);
-        //yield return new WaitForSeconds(TRAnimatedTextObject.UnrevealTime * 1.3f);
-
-        //GetComponent<Animator>().SetBool(characterInteraction.AnimationName[interactionCounter], false);
-        //Canvas.GetComponent<Canvas>().enabled = false;
+        switch (interactionCounter)
+        {
+            case 0:
+                yield return StartCoroutine(FadeCanvas.FadeInOutWithAction(MoveToStandingPosition));
+                break;
+            case 1:
+                yield return StartCoroutine(WakeUpScene_Methods.OpenBlinds_VisualEffect());
+                break;
+            default:
+                yield return new WaitForSeconds(3f);
+                Debug.Log("No more player actions!");
+                break;
+        }
+        interactionCounter++;
+        SceneEvents.current.PlayerCompletedInteraction();
     }
+    #endregion
 
+    #region Other Player's methods
     private void MoveToStandingPosition()
     {
         MyXROrigin.transform.position = new Vector3(-0.5f, 0f, 1f);
@@ -220,6 +198,7 @@ public class PlayerController : MonoBehaviour
         MyXROrigin.transform.position = new Vector3(-0.15f, 0.2f, -1.0f);
         MyXROrigin.transform.localRotation = Quaternion.Euler(-50, 90, 0);
     }
+    #endregion
 
     #region Player Events Testing section
     //void PlayerAction(bool hasCompletedAction)

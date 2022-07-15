@@ -22,33 +22,27 @@ public class InteractionsManager : MonoBehaviour
     [SerializeField]
     private int characterTurn;
 
-    // TODO change to an Event
-    public static bool hasCharacterCorFinished;
-
     // Start is called before the first frame update
     IEnumerator Start()
     {
+        SceneEvents.current.playerCompletedInteraction += DoNextInteraction;
+        SceneEvents.current.characterCompletedInteraction += DoNextInteraction;
+
         yield return new WaitForSeconds(4f);
-        hasCharacterCorFinished = true;
-        playerController.PlayerCompletedInteraction.AddListener(NextTurn);
+
+        DoNextInteraction();
+    }
+
+    private void OnDestroy()
+    {
+        SceneEvents.current.playerCompletedInteraction -= DoNextInteraction;
+        SceneEvents.current.characterCompletedInteraction -= DoNextInteraction;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // TODO Remove, it's just for testing purposes.
-        // The DoNextInteraction method needs to be called when an action has finished. (NextTurn) event call.
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (hasCharacterCorFinished)
-            {
-                DoNextInteraction();
-            }
-            else
-            {
-                Debug.Log("Character has not finished its action");
-            }
-        }
+       
     }
 
     /// <summary>
@@ -58,22 +52,21 @@ public class InteractionsManager : MonoBehaviour
     {
         switch (turningNames[characterTurn])
         {
-            case "Diana":
-                playerController.PlayerDialogue.Invoke();
+            case "PlayerDialogue":
+                SceneEvents.current.PlayerDialogue();
                 break;
-            case "DianaAction":
-                playerController.PlayerAction.Invoke();
+            case "PlayerAction":
+                SceneEvents.current.PlayerAction();
                 break;
+            case "SceneAction":
+
             case "James":
-                characters.Find(x => x.name.Contains("James")).PerformAction();
-                /// TODO Change this to be called from the character event
-                /// Related to <see cref="hasCharacterCorFinished"/>
-                /// Find a similar implementation to <see cref="PlayerController.PlayerCompletedInteraction"/> action
-                NextTurn();
+                SceneEvents.current.CharacterDialogue("James");
                 break;
             default:
                 break;
         }
+        NextTurn();
     }
 
     /// <summary>
