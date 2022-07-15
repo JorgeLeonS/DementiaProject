@@ -6,7 +6,7 @@ public class InteractableToothbrush : MonoBehaviour
 {
     private void Awake()
     {
-        GetComponent<PlayerController>().InteractWithSomething += TriggerToothbrush_OnInteract;
+        //GetComponent<PlayerController>().InteractWithSomething += TriggerToothbrush_OnInteract;
     }
     public void TriggerToothbrush_OnInteract()
     {

@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 /// <summary>
 /// This class works with what the <see cref="CharacterData"/> class gives.
+/// This one, different to PlayerController (Singletons), should not be managed through events, 
+/// because of the possibility of adding multiple character on one scene.
 /// </summary>
 public class CharacterController : MonoBehaviour
 {
@@ -29,11 +31,18 @@ public class CharacterController : MonoBehaviour
     [HideInInspector]
     public List<Transform> moveLocations;
 
+    /// <summary>
+    /// Method where all the necessary components are added.
+    /// Most of them are added by type, but it is important to have an exact match on the names on those that depend on it.
+    /// </summary>
     void Awake()
     {
+        // Directly assign CharacterData script
         characterInteraction = GetComponent<CharacterData>();
+
         // Directly assign Animator component
         animator = GetComponent<Animator>();
+
         // Directly assign navMeshAgent component
         navMeshAgent = GetComponent<NavMeshAgent>();
             
@@ -53,6 +62,52 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        SceneEvents.current.characterDialogue += Cor_PerformAction;
+
+        //animatedText = TextManager.instance.animatedText;
+        Canvas.GetComponent<Canvas>().enabled = false;
+    }
+
+    private void OnDestroy()
+    {
+        SceneEvents.current.characterDialogue -= Cor_PerformAction;
+    }
+
+    /// <summary>
+    /// Main coroutine that calls the different actions to be done by a characte.
+    /// Managed mostly by interactionCounter.
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator Cor_PerformAction(string name)
+    {
+        if(name == characterInteraction.Name)
+        {
+            if (interactionCounter >= characterInteraction.DialogueText.Count)
+            {
+                Debug.Log($"Bad action, the character, {characterInteraction.Name} has no more actions!");
+                SceneEvents.current.CharacterCompletedInteraction();
+            }
+            else
+            {
+                // If the character has MoveToNextLocation set to true 
+                if (characterInteraction.MoveToNextLocation[interactionCounter])
+                {
+                    yield return Cor_MoveToNextLocation();
+                }
+
+                yield return Cor_NextDialogue();
+                interactionCounter++;
+                SceneEvents.current.CharacterCompletedInteraction();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Coroutine that makes the character walk to the next waypoint.
+    /// </summary>
     IEnumerator Cor_MoveToNextLocation()
     {
         animator.SetBool("Walk", true);
@@ -64,43 +119,9 @@ public class CharacterController : MonoBehaviour
         animator.SetBool("Walk", false);
     }
 
-    IEnumerator Cor_NextDialogue()
-    {
-        animator.SetBool(characterInteraction.AnimationName[interactionCounter], true);
-        Canvas.GetComponent<Canvas>().enabled = true;
-
-        var currentClip = audioSource.clip = characterInteraction.DialogueAudios[interactionCounter];
-
-        animatedText.ReadText(characterInteraction.DialogueText[interactionCounter], currentClip);
-
-        audioSource.Play();
-        yield return new WaitForSeconds(currentClip.length + 1.0f);
-
-        GetComponent<Animator>().SetBool(characterInteraction.AnimationName[interactionCounter], false);
-        Canvas.GetComponent<Canvas>().enabled = false;
-    }
-
-    IEnumerator Cor_PerformAction()
-    {
-        if (interactionCounter >= characterInteraction.DialogueText.Count)
-        {
-            Debug.Log($"Bad action, the character, {characterInteraction.Name} has no more actions!");
-        }
-        else
-        {
-            // If the character has MoveToNextLocation set to true 
-            InteractionsManager.hasCharacterCorFinished = false;
-            if (characterInteraction.MoveToNextLocation[interactionCounter])
-            {
-                yield return Cor_MoveToNextLocation();
-            }
-
-            yield return Cor_NextDialogue();
-            InteractionsManager.hasCharacterCorFinished = true;
-            interactionCounter++;
-        }
-    }
-
+    /// <summary>
+    /// Method to determine if the character has reached its navmesh destination.
+    /// </summary>
     // Function from: https://gist.github.com/DataGreed/df0c008be1f9269d5160af413e939843
     public bool HasCharacterReachedDestination()
     {
@@ -117,21 +138,23 @@ public class CharacterController : MonoBehaviour
         return false;
     }
 
-    public void PerformAction()
+    /// <summary>
+    /// Coroutine that makes the character have a dialogue.
+    /// Can also call an animation and an audio.
+    /// </summary>
+    IEnumerator Cor_NextDialogue()
     {
-        StartCoroutine(Cor_PerformAction());
-    }
+        animator.SetBool(characterInteraction.AnimationName[interactionCounter], true);
+        Canvas.GetComponent<Canvas>().enabled = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //animatedText = TextManager.instance.animatedText;
+        var currentClip = audioSource.clip = characterInteraction.DialogueAudios[interactionCounter];
+
+        animatedText.ReadText(characterInteraction.DialogueText[interactionCounter], currentClip);
+
+        audioSource.Play();
+        yield return new WaitForSeconds(currentClip.length + 1.0f);
+
+        GetComponent<Animator>().SetBool(characterInteraction.AnimationName[interactionCounter], false);
         Canvas.GetComponent<Canvas>().enabled = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

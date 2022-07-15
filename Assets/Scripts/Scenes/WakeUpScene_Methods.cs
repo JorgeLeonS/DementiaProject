@@ -13,9 +13,6 @@ public class WakeUpScene_Methods : MonoBehaviour
     public static Volume sceneVolume;
     private static Bloom bloom;
 
-    // Sequences variables
-    public static Sequence blindsOpenSequence;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -43,16 +40,18 @@ public class WakeUpScene_Methods : MonoBehaviour
     /// <summary>
     /// When the 
     /// </summary>
-    public static IEnumerator OpenBlinds()
+    public static IEnumerator OpenBlinds_VisualEffect()
     {
         var hasSequenceCompleted = false;
-        blindsOpenSequence = DOTween.Sequence();
+        Sequence blindsOpenSequence = DOTween.Sequence();
         Lights_Manager.ChangeAmbientLightIntensity(1, 0.5f);
         Lights_Manager.ChangeEnvironmentReflectionsIntensity(0.2f, 0.1f);
         blindsOpenSequence.Append(PostProcess_Manager.ChangeBloom_Intensity(bloom, 50, 3f));
-        blindsOpenSequence.AppendInterval(1f);
-        yield return new WaitForSeconds(4f);
-        blindsOpenSequence.Append(PostProcess_Manager.ChangeBloom_Intensity(bloom, 0.1f, 6f));
+        
+        blindsOpenSequence.AppendInterval(3f);
+        yield return new WaitForSeconds(3f);
+        
+        PostProcess_Manager.ChangeBloom_Intensity(bloom, 0.1f, 5f);
         blindsOpenSequence.OnComplete(() => {
             hasSequenceCompleted = true;
         });
