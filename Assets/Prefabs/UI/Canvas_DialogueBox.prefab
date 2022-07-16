@@ -114,7 +114,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.45, y: 2.1}
+  m_AnchoredPosition: {x: 0.4500122, y: 2.100006}
   m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2095998945463967101
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &2095998945463967103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 2095998945711759029}
   - component: {fileID: 2095998945711759030}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: AnimatedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -313,12 +313,3 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-  onAction:
-    m_PersistentCalls:
-      m_Calls: []
-  onTextReveal:
-    m_PersistentCalls:
-      m_Calls: []
-  onDialogueFinish:
-    m_PersistentCalls:
-      m_Calls: []
