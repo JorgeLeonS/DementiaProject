@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5809091777020309979}
+  - component: {fileID: 8619156394020717432}
   m_Layer: 0
   m_Name: Toothbrush Object
   m_TagString: Untagged
@@ -32,6 +33,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8619156394020717432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7833053729067026463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c57fd8674a62d634fa4a3febbf8cda3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toothbrush: {fileID: 501646098488329523}
+  maxToothbrushVisibility: 0.5
+  timeToTransitionVisibility: 1
 --- !u!1001 &1240638163630234039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -124,5 +140,10 @@ PrefabInstance:
 --- !u!4 &1638492963548200540 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7b6270325270c9547acc699e9626e9db, type: 3}
+  m_PrefabInstance: {fileID: 1240638163630234039}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &501646098488329523 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 7b6270325270c9547acc699e9626e9db, type: 3}
   m_PrefabInstance: {fileID: 1240638163630234039}
   m_PrefabAsset: {fileID: 0}

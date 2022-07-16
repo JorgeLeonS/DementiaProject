@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 7376445208086161994}
   - component: {fileID: 7376445208086161992}
   - component: {fileID: 7376445208086161995}
+  - component: {fileID: 3650419328391248131}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -257,6 +258,65 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3650419328391248131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7376445208086161997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ec122085849034da3abb01d0a62c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textComponent: {fileID: 7376445208086161995}
+  AutomaticUnreveal: 0
+  RevealOnEnabled: 0
+  UnrevealOnDisabled: 0
+  AutomaticUnrevealAfterSeconds: 1
+  UnrevealDelay: 0
+  revealMinHorizontalDistance: 0
+  revealMaxHorizontalDistance: 50
+  revealMinVerticalDistance: 0
+  revealMaxVerticalDistance: 50
+  unrevealMinHorizontalDistance: 0
+  unrevealMaxHorizontalDistance: 50
+  unrevealMinVerticalDistance: 0
+  unrevealMaxVerticalDistance: 50
+  RevealTime: 3
+  UnrevealTime: 3
+  RevealLetterOpacityBegin: 0
+  UnrevealLetterOpacityBegin: 1
+  RevealLetterOpacityEnd: 1
+  UnrevealLetterOpacityEnd: 0
+  RevealSmoothOverlap: 1
+  UnrevealSmoothOverlap: 1
+  RevealSmoothOverlapSmoothness: 0.125
+  UnrevealSmoothOverlapSmoothness: 0.125
+  RevealRandomRotation: 0
+  UnrevealRandomRotation: 0
+  RevealReverse: 0
+  UnrevealReverse: 0
+  RevealAnimationDirection: 2
+  RevealAnimationHorizontalDirection: 2
+  RevealAnimationVerticalDirection: 2
+  UnrevealAnimationDirection: 2
+  UnrevealAnimationHorizontalDirection: 2
+  UnrevealAnimationVerticalDirection: 2
+  IsEditorPlayingAnimation: 0
+  OnRevealStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRevealCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnrevealStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnrevealCompleted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7376445208320767798
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +328,6 @@ GameObject:
   - component: {fileID: 7376445208320767799}
   - component: {fileID: 7376445208320767797}
   - component: {fileID: 7376445208320767796}
-  - component: {fileID: 3789351669716084829}
   m_Layer: 5
   m_Name: Help sign
   m_TagString: Untagged
@@ -335,65 +394,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3789351669716084829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7376445208320767798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13ec122085849034da3abb01d0a62c19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textComponent: {fileID: 7376445208086161995}
-  AutomaticUnreveal: 0
-  RevealOnEnabled: 1
-  UnrevealOnDisabled: 1
-  AutomaticUnrevealAfterSeconds: 1
-  UnrevealDelay: 0
-  revealMinHorizontalDistance: 0
-  revealMaxHorizontalDistance: 50
-  revealMinVerticalDistance: 0
-  revealMaxVerticalDistance: 50
-  unrevealMinHorizontalDistance: 0
-  unrevealMaxHorizontalDistance: 50
-  unrevealMinVerticalDistance: 0
-  unrevealMaxVerticalDistance: 50
-  RevealTime: 3
-  UnrevealTime: 3
-  RevealLetterOpacityBegin: 0
-  UnrevealLetterOpacityBegin: 1
-  RevealLetterOpacityEnd: 1
-  UnrevealLetterOpacityEnd: 0
-  RevealSmoothOverlap: 1
-  UnrevealSmoothOverlap: 1
-  RevealSmoothOverlapSmoothness: 0.125
-  UnrevealSmoothOverlapSmoothness: 0.125
-  RevealRandomRotation: 0
-  UnrevealRandomRotation: 0
-  RevealReverse: 0
-  UnrevealReverse: 0
-  RevealAnimationDirection: 2
-  RevealAnimationHorizontalDirection: 2
-  RevealAnimationVerticalDirection: 2
-  UnrevealAnimationDirection: 2
-  UnrevealAnimationHorizontalDirection: 2
-  UnrevealAnimationVerticalDirection: 2
-  IsEditorPlayingAnimation: 0
-  OnRevealStarted:
-    m_PersistentCalls:
-      m_Calls: []
-  OnRevealCompleted:
-    m_PersistentCalls:
-      m_Calls: []
-  OnUnrevealStarted:
-    m_PersistentCalls:
-      m_Calls: []
-  OnUnrevealCompleted:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &1208873788636105394
 PrefabInstance:
   m_ObjectHideFlags: 0
