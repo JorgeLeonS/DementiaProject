@@ -82,6 +82,11 @@ public class PlayerController : MonoBehaviour
         {
             case "WakeUpScene":
                 SceneEvents.current.playerAction += Cor_PerformAction_WakeUpScene;
+                MoveToLayingDownPosition();
+                break;
+            case "ToothbrushScene":
+                // toDo something
+
                 break;
             default:
                 Debug.LogWarning("The scene name might not match!");
@@ -89,7 +94,8 @@ public class PlayerController : MonoBehaviour
         }
         //SceneEvents.current.playerAction += Cor_PerformAction;
         //StartCoroutine(HaveAFirsttext());
-        MoveToLayingDownPosition();
+        
+        
     }
 
     private void OnDestroy()
@@ -99,6 +105,9 @@ public class PlayerController : MonoBehaviour
         {
             case "WakeUpScene":
                 SceneEvents.current.playerAction -= Cor_PerformAction_WakeUpScene;
+                break;
+            case "ToothbrushScene":
+                // toDo something
                 break;
             default:
                 Debug.LogWarning("The scene name might not match!");

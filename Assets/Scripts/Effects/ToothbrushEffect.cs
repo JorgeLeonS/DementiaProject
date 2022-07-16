@@ -10,7 +10,7 @@ public class ToothbrushEffect : MonoBehaviour
     [Range(0f, 5f)]
     [SerializeField] float maxToothbrushVisibility = 0.5f;
     [Range(0.01f, 3f)]
-    [SerializeField] float timeToTransitionVisibility = 1f;
+    public float timeToTransitionVisibility = 1f;
 
     float toothbrushVisibility;
 
@@ -37,7 +37,7 @@ public class ToothbrushEffect : MonoBehaviour
         MakeToothbrushVisible(timeToTransitionVisibility, false);
     }
 
-    private Tween MakeToothbrushVisible(float duration, bool makeVisible)
+    public Tween MakeToothbrushVisible(float duration, bool makeVisible)
     {
         float fromValue, toValue;
         if (makeVisible)

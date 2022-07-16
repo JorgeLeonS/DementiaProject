@@ -18,7 +18,8 @@ public class ToothbrushSequenceManager: MonoBehaviour
     [SerializeField] List<string> prompts = new List<string>();
     [SerializeField] GameObject helpButton;
     [SerializeField] GameObject textSign;
-    
+    private TextRevealer textSignTR;
+
     [SerializeField] float fadeTime;
 
     [Header("Toothbrush Properties")]
@@ -28,31 +29,41 @@ public class ToothbrushSequenceManager: MonoBehaviour
     [SerializeField] Canvas fadeCanvas;
     [SerializeField] Transform jamesCharacter;
     [SerializeField] int currentSequence;
-
-    List<Material> toothbrushMats = new List<Material>();
+    
+ 
     float timer;
     int indexSequence;
     float toothbrushMatPower = 0f;
-    bool endOfthirdSequence = false;
+    bool helpRequested = false;
 
-    
+    private void OnEnable()
+    {
+        SceneEvents.current.sceneAction += SetSequence;
+    }
 
     private void Start()
     {
+        textSignTR = textSign.transform.GetChild(0).GetComponent<TextRevealer>();
+        fadeCanvas.gameObject.SetActive(true);
+        FadeCanvas.FadeOut(fadeTime);
+        
         indexSequence = currentSequence;
-        jamesCharacter.gameObject.SetActive(false);
+        timer = timers[indexSequence];
+        //jamesCharacter.gameObject.SetActive(false);
         helpButton.gameObject.SetActive(false);
-        toothbrush.gameObject.SetActive(false);
-        SetSequence();
-        foreach (Material material in toothbrush.GetComponent<Renderer>().materials)
-        {
-            toothbrushMats.Add(material);
-        }
+        //SetSequence(); // ToDo Subscribe to Scene Events
+        
+    }
+
+    private void OnDestroy()
+    {
+        SceneEvents.current.sceneAction -= SetSequence;
     }
 
     private void Update()
     {
-        timer -= Time.deltaTime;
+        // this will be invalid after changing script to be event based.
+        /*timer -= Time.deltaTime;
         if (timer < 0)
         {
             if (indexSequence < timers.Count - 1)
@@ -67,7 +78,7 @@ public class ToothbrushSequenceManager: MonoBehaviour
         else
         {
             //Debug.Log($"time left: {timer}");
-        }
+        }*/
     }
 
     /// <summary>
@@ -84,7 +95,8 @@ public class ToothbrushSequenceManager: MonoBehaviour
             helpButton.gameObject.SetActive(false);
             textSign.GetComponentInChildren<TextMeshProUGUI>().text = prompts[indexSequence];
             timer = timers[indexSequence];
-            textSign.SetActive(true);
+            //textSign.SetActive(true);
+            textSignTR.Reveal();
             EventSystem.current.SetSelectedGameObject(null);
         }
     }  
@@ -92,43 +104,64 @@ public class ToothbrushSequenceManager: MonoBehaviour
     /// <summary>
     /// This method indicates what to do on current sequence.
     /// </summary>
-    private void SetSequence()
+    public IEnumerator SetSequence()
     {
         switch (indexSequence)
         {
             case 0:
                 // The user gets the prompt to find the toothbrush.
-                StartCoroutine(FirstSequence());
+                yield return FirstSequence();
                 // ToDo Add toothbrush picture.
                 break;
             case 1:
-                SecondSequence();
+                yield return SecondSequence();
                 break;
             case 2:
-                StartCoroutine(ThirdSequence());
+                yield return FirstSequence();
                 break;
             case 3:
-                // the user gets the prompt to grab the toothbrush.
-                // After grabbing the toothbruh, the scene ends.
-                // And the user has to grab the toothtbrush
-                // Set screen active: Grab the toothbrush
-                // Enable toothbrush collider.
-                // fade out
-                // change to pill scene
+                yield return FourthSequence();
+                break;
+            case 4:
+                yield return EndScene();
+                break;
             default:
-                Debug.Log("Out of range");
+                yield return new WaitForSeconds(1f);
+                Debug.Log("IndexSequence Out of range");
                 break;
         }
+
+        indexSequence++;
+        //helpButton.gameObject.SetActive(false);
+        DestroySlicedTextRevealer();
+        textSign.GetComponentInChildren<TextMeshProUGUI>().text = prompts[indexSequence];
+        timer = timers[indexSequence];
+        //textSign.SetActive(true);
+        //return Button to Normal State
+        EventSystem.current.SetSelectedGameObject(null);
+        
+        SceneEvents.current.CompletedInteraction();
     }
 
     IEnumerator FirstSequence()
     {
-        Debug.Log("First Sequence");
-        fadeCanvas.gameObject.SetActive(true);
-        FadeCanvas.FadeOut(fadeTime);
+        // Small Delay before the start
+        //textSign.GetComponentInChildren<TextRevealer>().enabled = false;
+        yield return new WaitForSeconds(5f);
+
+        // Show prompt to Find the toothbrush
         textSign.GetComponentInChildren<TextMeshProUGUI>().text = prompts[indexSequence];
-        yield return new WaitForSeconds(fadeTime*2 + 1f);
-        textSign.SetActive(true);
+        //textSign.SetActive(true);
+        textSignTR.Reveal();
+        //textSign.GetComponentInChildren<TextRevealer>().enabled = true;
+
+        // Give time to the user to find the toothbrush
+        yield return new WaitForSeconds(10f);
+        //textSign.SetActive(false);
+        textSignTR.Unreveal();
+
+        // ToDo if()
+        helpButton.SetActive(true);
     }
 
     IEnumerator SecondSequence()
@@ -136,31 +169,73 @@ public class ToothbrushSequenceManager: MonoBehaviour
         // After asking for help the first time, the toothbrush slowly appears on the screen.
         Debug.Log("Second Sequence");
         fadeCanvas.gameObject.SetActive(false);
-        toothbrush.gameObject.SetActive(true);
-        toothbrush.StartToothbrushEffect();
-        yield return new WaitForSeconds(5f);
+        
+        // Wait until user has asked for help
+        yield return new WaitUntil(() => helpRequested);
+        helpRequested = false;
+        helpButton.SetActive(false);
     }
 
-
+    /*
     IEnumerator ThirdSequence()
     {
         Debug.Log("third Sequence");
+        bool endOfSequence = false;
         // James enters the room and goes towards the user to indicate where is the toothbrush.
         jamesCharacter.gameObject.SetActive(true);
         // James appears next to door
         // James walks towards the user
         // James points at toothbrush
         // wait until james finishes pointing at toothbrush to go to new sequence.
-        // the variable endOfThirdSequence is called from something
-        yield return new WaitUntil(() => endOfthirdSequence);
-        NextSequence();
-    }
+        // the variable endOfSequence is called from something
+        yield return new WaitUntil(() => endOfSequence);
+        //NextSequence();
+    }*/
 
     IEnumerator FourthSequence()
     {
-        yield return null;
+        
+        // After grabbing the toothbruh, the scene ends.
+        // And the user has to grab the toothtbrush
+        // Set screen active: Grab the toothbrush
+        toothbrush.StartToothbrushEffect();
+        yield return new WaitForSeconds(
+            toothbrush.timeToTransitionVisibility);
+        
+        // ToDo the user gets the prompt to grab the toothbrush.
+        textSignTR.Reveal();
+        // 
+        
+
+        // ToDo wait player to grab toothbrush
+        yield return new WaitForSeconds(3f);
+
+        // Enable toothbrush collider.
+        // fade out
+        // change to pill scene
     }
 
-    //ToDo Find toothbrush manager
+    IEnumerator EndScene()
+    {
+        yield return null;
+        MenuControl.LoadLevel("MainMenu");
+    }
+
+    
+
+    public void RequestHelp()
+    {
+        helpRequested = true;
+    }
+
+    private void DestroySlicedTextRevealer()
+    {
+        Transform sliced = textSign.transform.Find(textSign.transform.GetChild(0).name + "_sliced");
+        if (sliced != null)
+        {
+            GameObject.DestroyImmediate(sliced.gameObject);
+        }
+    }
+
 
 }
