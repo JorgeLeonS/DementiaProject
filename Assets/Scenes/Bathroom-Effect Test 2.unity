@@ -11712,7 +11712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5809091777020309979, guid: f0b03ba5008e44eaa83b587dacb116fc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.273
+      value: 0.281
       objectReference: {fileID: 0}
     - target: {fileID: 5809091777020309979, guid: f0b03ba5008e44eaa83b587dacb116fc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11720,7 +11720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5809091777020309979, guid: f0b03ba5008e44eaa83b587dacb116fc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.1559
+      value: 1.206
       objectReference: {fileID: 0}
     - target: {fileID: 5809091777020309979, guid: f0b03ba5008e44eaa83b587dacb116fc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17068,11 +17068,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5186010423757188425, guid: 5917bbce4c96f4a649e53bef201ff7bc, type: 3}
       propertyPath: timers.Array.size
-      value: 12
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5186010423757188425, guid: 5917bbce4c96f4a649e53bef201ff7bc, type: 3}
       propertyPath: prompts.Array.size
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5186010423757188425, guid: 5917bbce4c96f4a649e53bef201ff7bc, type: 3}
       propertyPath: timers.Array.data[0]
@@ -17117,6 +17117,14 @@ PrefabInstance:
     - target: {fileID: 5186010423757188425, guid: 5917bbce4c96f4a649e53bef201ff7bc, type: 3}
       propertyPath: toothbrushVisibility
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5186010423757188425, guid: 5917bbce4c96f4a649e53bef201ff7bc, type: 3}
+      propertyPath: prompts.Array.data[1]
+      value: James is here
+      objectReference: {fileID: 0}
+    - target: {fileID: 5186010423757188425, guid: 5917bbce4c96f4a649e53bef201ff7bc, type: 3}
+      propertyPath: prompts.Array.data[2]
+      value: Grab the toothbrush
       objectReference: {fileID: 0}
     - target: {fileID: 5186010423757188425, guid: 5917bbce4c96f4a649e53bef201ff7bc, type: 3}
       propertyPath: prompts.Array.data[3]
