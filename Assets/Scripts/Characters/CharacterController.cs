@@ -87,8 +87,9 @@ public class CharacterController : MonoBehaviour
         {
             if (interactionCounter >= characterInteraction.DialogueText.Count)
             {
+                yield return new WaitForSeconds(3f);
                 Debug.Log($"Bad action, the character, {characterInteraction.Name} has no more actions!");
-                SceneEvents.current.CharacterCompletedInteraction();
+                SceneEvents.current.CompletedInteraction();
             }
             else
             {
@@ -100,7 +101,7 @@ public class CharacterController : MonoBehaviour
 
                 yield return Cor_NextDialogue();
                 interactionCounter++;
-                SceneEvents.current.CharacterCompletedInteraction();
+                SceneEvents.current.CompletedInteraction();
             }
         }
     }

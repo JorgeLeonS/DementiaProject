@@ -38,15 +38,6 @@ public class SceneEvents : MonoBehaviour
             StartCoroutine(playerAction());
         }
     }
-
-    public event Action playerCompletedInteraction;
-    public void PlayerCompletedInteraction()
-    {
-        if (playerCompletedInteraction != null)
-        {
-            playerCompletedInteraction();
-        }
-    }
     #endregion
 
     #region Character events
@@ -60,13 +51,26 @@ public class SceneEvents : MonoBehaviour
             StartCoroutine(characterDialogue(characterName));
         }
     }
+    #endregion
 
-    public event Action characterCompletedInteraction;
-    public void CharacterCompletedInteraction()
+    #region Environment events
+    public delegate IEnumerator sceneActionHandler();
+    public event sceneActionHandler sceneAction;
+    public void SceneAction()
     {
-        if (characterCompletedInteraction != null)
+        sceneActionHandler hA = sceneAction;
+        if(sceneAction != null)
         {
-            characterCompletedInteraction();
+            StartCoroutine(sceneAction());
+        }
+    }
+
+    public event Action completedInteraction;
+    public void CompletedInteraction()
+    {
+        if (completedInteraction != null)
+        {
+            completedInteraction();
         }
     }
     #endregion

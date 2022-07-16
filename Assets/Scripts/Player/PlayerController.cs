@@ -23,8 +23,6 @@ public class PlayerController : MonoBehaviour
     private XRRayInteractor LeftXRInteractor;
     private XRRayInteractor RightXRInteractor;
 
-    public static PlayerController playerEvents;
-
     //public event Action InteractWithSomething;
 
     public List<GameObject> itemsToInteract;
@@ -52,7 +50,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        playerEvents = this;
         try
         {
             // Directly assign LeftXRInteractor and RightXRInteractor components.
@@ -111,20 +108,20 @@ public class PlayerController : MonoBehaviour
 
     /// <summary>
     /// Coroutine that is used to call the next dialogue of the player.
-    /// TODO IMPLEMENT WITH ACTION
     /// </summary>
-    /// <returns></returns>
     IEnumerator Cor_PerformDialogue()
     {
         if (dialogueCounter >= DialogueText.Count)
         {
+            yield return new WaitForSeconds(3f);
             Debug.Log($"Bad action, the player has no more dialogues!");
+            SceneEvents.current.CompletedInteraction();
         }
         else
         {
             yield return Cor_NextDialogue();
             dialogueCounter++;
-            SceneEvents.current.PlayerCompletedInteraction();
+            SceneEvents.current.CompletedInteraction();
         }
     }
 
@@ -173,16 +170,13 @@ public class PlayerController : MonoBehaviour
             case 0:
                 yield return StartCoroutine(FadeCanvas.FadeInOutWithAction(MoveToStandingPosition));
                 break;
-            case 1:
-                yield return StartCoroutine(WakeUpScene_Methods.OpenBlinds_VisualEffect());
-                break;
             default:
                 yield return new WaitForSeconds(3f);
                 Debug.Log("No more player actions!");
                 break;
         }
         interactionCounter++;
-        SceneEvents.current.PlayerCompletedInteraction();
+        SceneEvents.current.CompletedInteraction();
     }
     #endregion
 

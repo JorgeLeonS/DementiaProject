@@ -22,21 +22,21 @@ public class InteractionsManager : MonoBehaviour
     [SerializeField]
     private int characterTurn;
 
+    public float DelayTimeForStartingScene = 3f;
+
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        SceneEvents.current.playerCompletedInteraction += DoNextInteraction;
-        SceneEvents.current.characterCompletedInteraction += DoNextInteraction;
+        SceneEvents.current.completedInteraction += DoNextInteraction;
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(DelayTimeForStartingScene);
 
         DoNextInteraction();
     }
 
     private void OnDestroy()
     {
-        SceneEvents.current.playerCompletedInteraction -= DoNextInteraction;
-        SceneEvents.current.characterCompletedInteraction -= DoNextInteraction;
+        SceneEvents.current.completedInteraction -= DoNextInteraction;
     }
 
     // Update is called once per frame
@@ -50,6 +50,12 @@ public class InteractionsManager : MonoBehaviour
     /// </summary>
     void DoNextInteraction()
     {
+        // TODO ADDING A CONDITION FOR DELAY<TIME>
+        float delayTime;
+        if (turningNames[characterTurn].Contains("<"))
+        {
+
+        }
         switch (turningNames[characterTurn])
         {
             case "PlayerDialogue":
@@ -59,10 +65,12 @@ public class InteractionsManager : MonoBehaviour
                 SceneEvents.current.PlayerAction();
                 break;
             case "SceneAction":
-
+                SceneEvents.current.SceneAction();
+                break;
             case "James":
                 SceneEvents.current.CharacterDialogue("James");
                 break;
+            case "":
             default:
                 break;
         }
