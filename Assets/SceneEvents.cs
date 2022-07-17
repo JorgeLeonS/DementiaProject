@@ -19,23 +19,23 @@ public class SceneEvents : MonoBehaviour
     #region Player events
     public delegate IEnumerator playerDialogueHanlder();
     public event playerDialogueHanlder playerDialogue;
-    public void PlayerDialogue()
+    public IEnumerator PlayerDialogue()
     {
         playerDialogueHanlder pD = playerDialogue;
         if (playerDialogue != null)
         {
-            StartCoroutine(playerDialogue());
+            yield return StartCoroutine(playerDialogue());
         }
     }
 
     public delegate IEnumerator playerActionHanlder();
     public event playerActionHanlder playerAction;
-    public void PlayerAction()
+    public IEnumerator PlayerAction()
     {
         playerActionHanlder pA = playerAction;
         if (playerAction != null)
         {
-            StartCoroutine(playerAction());
+            yield return StartCoroutine(playerAction());
         }
     }
     #endregion
@@ -43,12 +43,12 @@ public class SceneEvents : MonoBehaviour
     #region Character events
     public delegate IEnumerator characterDialogueHanlder(string characterName);
     public event characterDialogueHanlder characterDialogue;
-    public void CharacterDialogue(string characterName)
+    public IEnumerator CharacterDialogue(string characterName)
     {
         characterDialogueHanlder chD = characterDialogue;
         if (characterDialogue != null)
         {
-            StartCoroutine(characterDialogue(characterName));
+            yield return StartCoroutine(characterDialogue(characterName));
         }
     }
     #endregion
@@ -56,15 +56,17 @@ public class SceneEvents : MonoBehaviour
     #region Environment events
     public delegate IEnumerator sceneActionHandler();
     public event sceneActionHandler sceneAction;
-    public void SceneAction()
+    public IEnumerator SceneAction()
     {
         sceneActionHandler hA = sceneAction;
         if(sceneAction != null)
         {
-            StartCoroutine(sceneAction());
+            yield return StartCoroutine(sceneAction());
         }
     }
+    #endregion
 
+    // Should not use this method
     public event Action completedInteraction;
     public void CompletedInteraction()
     {
@@ -73,5 +75,15 @@ public class SceneEvents : MonoBehaviour
             completedInteraction();
         }
     }
-    #endregion
+
+    public delegate IEnumerator completedActionHandler();
+    public event completedActionHandler completedAction;
+    public void CompletedAction()
+    {
+        completedActionHandler cA = completedAction;
+        if (completedAction != null)
+        {
+            StartCoroutine(completedAction());
+        }
+    }
 }

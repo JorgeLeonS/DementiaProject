@@ -12,6 +12,7 @@ public class CharacterData : MonoBehaviour
     public string Name;
     public List<string> DialogueText;
     public List<AudioClip> DialogueAudios;
+    public List<float> DialogueDurations;
     public List<string> AnimationName;
     public List<bool> MoveToNextLocation;
 

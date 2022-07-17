@@ -88,8 +88,8 @@ public class CharacterController : MonoBehaviour
             if (interactionCounter >= characterInteraction.DialogueText.Count)
             {
                 yield return new WaitForSeconds(3f);
-                Debug.Log($"Bad action, the character, {characterInteraction.Name} has no more actions!");
-                SceneEvents.current.CompletedInteraction();
+                Debug.LogWarning($"Bad action, the character, {characterInteraction.Name} has no more actions!");
+                //SceneEvents.current.CompletedAction();
             }
             else
             {
@@ -101,7 +101,7 @@ public class CharacterController : MonoBehaviour
 
                 yield return Cor_NextDialogue();
                 interactionCounter++;
-                SceneEvents.current.CompletedInteraction();
+                //SceneEvents.current.CompletedAction();
             }
         }
     }
@@ -148,12 +148,18 @@ public class CharacterController : MonoBehaviour
         animator.SetBool(characterInteraction.AnimationName[interactionCounter], true);
         Canvas.GetComponent<Canvas>().enabled = true;
 
-        var currentClip = audioSource.clip = characterInteraction.DialogueAudios[interactionCounter];
-
-        animatedText.ReadText(characterInteraction.DialogueText[interactionCounter], currentClip);
-
-        audioSource.Play();
-        yield return new WaitForSeconds(currentClip.length + 1.0f);
+        if(characterInteraction.DialogueAudios[interactionCounter] == null)
+        {
+            animatedText.ReadText(characterInteraction.DialogueText[interactionCounter], characterInteraction.DialogueDurations[interactionCounter]);
+            yield return new WaitForSeconds(characterInteraction.DialogueDurations[interactionCounter] + 1.0f);
+        }
+        else
+        {
+            var currentClip = audioSource.clip = characterInteraction.DialogueAudios[interactionCounter];
+            animatedText.ReadText(characterInteraction.DialogueText[interactionCounter], currentClip);
+            audioSource.Play();
+            yield return new WaitForSeconds(currentClip.length + 1.0f);
+        }
 
         GetComponent<Animator>().SetBool(characterInteraction.AnimationName[interactionCounter], false);
         Canvas.GetComponent<Canvas>().enabled = false;

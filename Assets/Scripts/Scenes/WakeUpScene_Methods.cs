@@ -70,7 +70,7 @@ public class WakeUpScene_Methods : MonoBehaviour
                 break;
         }
         interactionCounter++;
-        SceneEvents.current.CompletedInteraction();
+        //SceneEvents.current.CompletedAction();
     }
 
     #region Scene specific methods
@@ -99,7 +99,6 @@ public class WakeUpScene_Methods : MonoBehaviour
     {
         blindsAnimator.SetTrigger("PullBlinds");
         yield return new WaitForSeconds(0.7f);
-        print("Animation finished");
     }
 
     public static IEnumerator OpenBlinds() 

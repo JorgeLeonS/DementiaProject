@@ -124,13 +124,13 @@ public class PlayerController : MonoBehaviour
         {
             yield return new WaitForSeconds(3f);
             Debug.Log($"Bad action, the player has no more dialogues!");
-            SceneEvents.current.CompletedInteraction();
+            //SceneEvents.current.CompletedAction();
         }
         else
         {
             yield return Cor_NextDialogue();
             dialogueCounter++;
-            SceneEvents.current.CompletedInteraction();
+            //SceneEvents.current.CompletedAction();
         }
     }
 
@@ -181,11 +181,11 @@ public class PlayerController : MonoBehaviour
                 break;
             default:
                 yield return new WaitForSeconds(3f);
-                Debug.Log("No more player actions!");
+                Debug.LogWarning("No more player actions!");
                 break;
         }
         interactionCounter++;
-        SceneEvents.current.CompletedInteraction();
+        //SceneEvents.current.CompletedAction();
     }
     #endregion
 

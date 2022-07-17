@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 /// <summary>
 /// Class used to define whose turn it is to have an interaction.
@@ -27,16 +28,19 @@ public class InteractionsManager : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        SceneEvents.current.completedInteraction += DoNextInteraction;
+        //SceneEvents.current.completedInteraction += CheckNextInteraction;
+        SceneEvents.current.completedAction += CheckNextInteraction;
 
         yield return new WaitForSeconds(DelayTimeForStartingScene);
 
-        DoNextInteraction();
+        StartCoroutine(CheckNextInteraction());
     }
 
     private void OnDestroy()
     {
-        SceneEvents.current.completedInteraction -= DoNextInteraction;
+        //SceneEvents.current.completedInteraction -= CheckNextInteraction;
+        SceneEvents.current.completedAction -= CheckNextInteraction;
+
     }
 
     // Update is called once per frame
@@ -46,35 +50,79 @@ public class InteractionsManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Method to parse the turningNames list items. If they contain <int> or <float>,
+    /// they should call an action or a delay for the detected number.
+    /// </summary>
+    IEnumerator CheckNextInteraction()
+    {
+        int repeatTimes;
+        float delayTime;
+        string nameInList = turningNames[characterTurn];
+        if (nameInList.Contains("<"))
+        {
+            int firstArrowIndex = nameInList.IndexOf("<");
+            string nextInteraction = nameInList.Substring(0, firstArrowIndex);
+            if(nextInteraction == "Delay")
+            {
+                delayTime = float.Parse(nameInList.Substring(firstArrowIndex + 1, 3));
+                print("starting delay");
+                yield return StartCoroutine(DoNextInteraction(nextInteraction, delayTime));
+                print("finished delay");
+                NextTurn();
+                SceneEvents.current.CompletedAction();
+            }
+            else
+            {
+                repeatTimes = int.Parse(nameInList.Substring(firstArrowIndex + 1, 1));
+                for (int i = 0; i < repeatTimes; i++)
+                {
+                    yield return StartCoroutine(DoNextInteraction(nextInteraction));
+                }
+                NextTurn();
+                SceneEvents.current.CompletedAction();
+            }
+        }
+        else
+        {
+            //yield return DoNextInteraction(nameInList);
+            yield return StartCoroutine(DoNextInteraction(nameInList));
+            NextTurn();
+            SceneEvents.current.CompletedAction();
+            //yield return new WaitForSeconds(1f);
+        }
+    }
+
+    /// <summary>
     /// This method will decide if it's a character's or player's turn. 
     /// </summary>
-    void DoNextInteraction()
+    IEnumerator DoNextInteraction(string interaction, float delayTime = 0f)
     {
-        // TODO ADDING A CONDITION FOR DELAY<TIME>
-        float delayTime;
-        if (turningNames[characterTurn].Contains("<"))
-        {
-
-        }
-        switch (turningNames[characterTurn])
+        print(interaction + " turn " + characterTurn);
+        switch (interaction)
         {
             case "PlayerDialogue":
-                SceneEvents.current.PlayerDialogue();
+                yield return SceneEvents.current.PlayerDialogue();
                 break;
             case "PlayerAction":
-                SceneEvents.current.PlayerAction();
+                yield return SceneEvents.current.PlayerAction();
                 break;
             case "SceneAction":
-                SceneEvents.current.SceneAction();
+                yield return SceneEvents.current.SceneAction();
                 break;
             case "James":
-                SceneEvents.current.CharacterDialogue("James");
+                yield return SceneEvents.current.CharacterDialogue("James");
                 break;
-            case "":
+            case "Delay":
+                yield return StartCoroutine(WaitForSeconds(delayTime));
+                break;
             default:
                 break;
         }
-        NextTurn();
+    }
+
+    IEnumerator WaitForSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
     }
 
     /// <summary>
@@ -85,12 +133,12 @@ public class InteractionsManager : MonoBehaviour
     {
         if(characterTurn < turningNames.Count-1)
         {
-            Debug.Log($"Current turn: {characterTurn}, {turningNames[characterTurn]}");
             characterTurn++;
+            Debug.Log($"Current turn: {characterTurn}, {turningNames[characterTurn]}");
         }
         else
         {
-            Debug.Log("No more actions!!");
+            Debug.LogWarning("No more actions!!");
         }
     }
 }
