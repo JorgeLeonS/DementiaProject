@@ -58,21 +58,25 @@ public class InteractionsManager : MonoBehaviour
         int repeatTimes;
         float delayTime;
         string nameInList = turningNames[characterTurn];
+        // Check if the string has a '<' on it, meaning there is a Delay, or the event needs to be called multiple times.
         if (nameInList.Contains("<"))
         {
             int firstArrowIndex = nameInList.IndexOf("<");
             string nextInteraction = nameInList.Substring(0, firstArrowIndex);
+            // Check if the interaction is a Delay
             if(nextInteraction == "Delay")
             {
+                // Parse the content to a float inside of <>. Right now it will only get a float with one decimal.
+                // (It gets the next 3 characters after the '<')
                 delayTime = float.Parse(nameInList.Substring(firstArrowIndex + 1, 3));
-                print("starting delay");
                 yield return StartCoroutine(DoNextInteraction(nextInteraction, delayTime));
-                print("finished delay");
                 NextTurn();
                 SceneEvents.current.CompletedAction();
             }
             else
             {
+                // Parse the content to an int inside of <>. Will only get one number for now.
+                // (It gets the next character after the '<')
                 repeatTimes = int.Parse(nameInList.Substring(firstArrowIndex + 1, 1));
                 for (int i = 0; i < repeatTimes; i++)
                 {
@@ -84,11 +88,9 @@ public class InteractionsManager : MonoBehaviour
         }
         else
         {
-            //yield return DoNextInteraction(nameInList);
             yield return StartCoroutine(DoNextInteraction(nameInList));
             NextTurn();
             SceneEvents.current.CompletedAction();
-            //yield return new WaitForSeconds(1f);
         }
     }
 
