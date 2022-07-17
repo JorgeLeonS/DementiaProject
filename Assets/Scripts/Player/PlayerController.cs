@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
         if (dialogueCounter >= DialogueText.Count)
         {
             yield return new WaitForSeconds(3f);
-            Debug.Log($"Bad action, the player has no more dialogues!");
+            Debug.LogWarning($"Bad action, the player has no more dialogues!");
             //SceneEvents.current.CompletedAction();
         }
         else
