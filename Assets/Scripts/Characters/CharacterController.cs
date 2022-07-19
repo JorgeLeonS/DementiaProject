@@ -49,7 +49,10 @@ public class CharacterController : MonoBehaviour
 
         // Directly assign navMeshAgent component
         navMeshAgent = GetComponent<NavMeshAgent>();
+
         // Position of the NavMeshAQgent is decoupled from the position of the character
+        // Important so that the character movement is driven by the animation clip so the feet don't slide on the ground,
+        // making the movement look more natural.
         navMeshAgent.updatePosition = false;
 
         // Directly assign Canvas component
@@ -79,12 +82,17 @@ public class CharacterController : MonoBehaviour
 
     private void Update()
     {
-        // Control all the velocity 
+        // Adapted method from:
+        // https://www.youtube.com/watch?v=_yuAaEbl_ns
+        // Compare the next position of the nav mesh agent with its current postion
         worldDeltaPosition = navMeshAgent.nextPosition - transform.position;
+        // Obtain the dot products to obtain the component in the forward and sides direction
         groundDeltaPosition.x = Vector3.Dot(transform.right, worldDeltaPosition);
         groundDeltaPosition.y = Vector3.Dot(transform.forward, worldDeltaPosition);
+        // Divide the time duration of the frame to get the velocity the character should move
         velocity = (Time.deltaTime > 1e-5f) ? groundDeltaPosition / Time.deltaTime : velocity = Vector2.zero;
-        bool shouldMove = velocity.magnitude > 0 && navMeshAgent.remainingDistance > navMeshAgent.radius;
+        // If the velocity is greater than a small number and character has not yet arrived to its destination 
+        bool shouldMove = velocity.magnitude > 0.025f && navMeshAgent.remainingDistance > navMeshAgent.radius;
 
         // Set animator variables
         animator.SetBool("Walk", shouldMove);
@@ -142,6 +150,7 @@ public class CharacterController : MonoBehaviour
 
     private void OnAnimatorMove()
     {
+        // Correction so that the character and agent positions match.
         transform.position = navMeshAgent.nextPosition;
     }
 
@@ -170,23 +179,36 @@ public class CharacterController : MonoBehaviour
     /// </summary>
     IEnumerator Cor_NextDialogue()
     {
-        animator.SetBool(characterInteraction.AnimationName[interactionCounter], true);
-        Canvas.GetComponent<Canvas>().enabled = true;
-
-        if(characterInteraction.DialogueAudios[interactionCounter] == null)
+        // If there is no dialogue, but there is an animation
+        if (characterInteraction.DialogueText[interactionCounter] == null && characterInteraction.AnimationName[interactionCounter] != null)
         {
-            animatedText.ReadText(characterInteraction.DialogueText[interactionCounter], characterInteraction.DialogueDurations[interactionCounter]);
+            animator.SetBool(characterInteraction.AnimationName[interactionCounter], true);
             yield return new WaitForSeconds(characterInteraction.DialogueDurations[interactionCounter] + 1.0f);
+            GetComponent<Animator>().SetBool(characterInteraction.AnimationName[interactionCounter], false);
         }
         else
         {
-            var currentClip = audioSource.clip = characterInteraction.DialogueAudios[interactionCounter];
-            animatedText.ReadText(characterInteraction.DialogueText[interactionCounter], currentClip);
-            audioSource.Play();
-            yield return new WaitForSeconds(currentClip.length + 1.0f);
-        }
+            animator.SetBool(characterInteraction.AnimationName[interactionCounter], true);
+            Canvas.GetComponent<Canvas>().enabled = true;
 
-        GetComponent<Animator>().SetBool(characterInteraction.AnimationName[interactionCounter], false);
-        Canvas.GetComponent<Canvas>().enabled = false;
+            // To display the text over a period of time:
+            // If there is no audio on the inspector, then use the DialogueDurations list.
+            if (characterInteraction.DialogueAudios[interactionCounter] == null)
+            {
+                animatedText.ReadText(characterInteraction.DialogueText[interactionCounter], characterInteraction.DialogueDurations[interactionCounter]);
+                yield return new WaitForSeconds(characterInteraction.DialogueDurations[interactionCounter] + 1.0f);
+            }
+            // Else, get the duration of the audio on the DialogueAudios list.
+            else
+            {
+                var currentClip = audioSource.clip = characterInteraction.DialogueAudios[interactionCounter];
+                animatedText.ReadText(characterInteraction.DialogueText[interactionCounter], currentClip);
+                audioSource.Play();
+                yield return new WaitForSeconds(currentClip.length + 1.0f);
+            }
+
+            GetComponent<Animator>().SetBool(characterInteraction.AnimationName[interactionCounter], false);
+            Canvas.GetComponent<Canvas>().enabled = false;
+        }
     }
 }
