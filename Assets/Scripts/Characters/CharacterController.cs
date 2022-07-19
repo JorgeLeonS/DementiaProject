@@ -17,6 +17,10 @@ public class CharacterController : MonoBehaviour
     private CharacterData characterInteraction;
     private Animator animator;
     private NavMeshAgent navMeshAgent;
+    private Vector3 worldDeltaPosition;
+    private Vector2 groundDeltaPosition;
+    private Vector2 velocity = Vector2.zero;
+
     private GameObject Canvas;
     private DialogueAnimator animatedText;
     private AudioSource audioSource;
@@ -45,7 +49,9 @@ public class CharacterController : MonoBehaviour
 
         // Directly assign navMeshAgent component
         navMeshAgent = GetComponent<NavMeshAgent>();
-            
+        // Position of the NavMeshAQgent is decoupled from the position of the character
+        navMeshAgent.updatePosition = false;
+
         // Directly assign Canvas component
         Canvas = transform.Find("Canvas_DialogueBox").gameObject;
         // Directly assign AnimatedText component First access the image, then the text
@@ -69,6 +75,21 @@ public class CharacterController : MonoBehaviour
 
         //animatedText = TextManager.instance.animatedText;
         Canvas.GetComponent<Canvas>().enabled = false;
+    }
+
+    private void Update()
+    {
+        // Control all the velocity 
+        worldDeltaPosition = navMeshAgent.nextPosition - transform.position;
+        groundDeltaPosition.x = Vector3.Dot(transform.right, worldDeltaPosition);
+        groundDeltaPosition.y = Vector3.Dot(transform.forward, worldDeltaPosition);
+        velocity = (Time.deltaTime > 1e-5f) ? groundDeltaPosition / Time.deltaTime : velocity = Vector2.zero;
+        bool shouldMove = velocity.magnitude > 0 && navMeshAgent.remainingDistance > navMeshAgent.radius;
+
+        // Set animator variables
+        animator.SetBool("Walk", shouldMove);
+        animator.SetFloat("velX", velocity.x);
+        animator.SetFloat("velY", velocity.y);
     }
 
     private void OnDestroy()
@@ -111,13 +132,17 @@ public class CharacterController : MonoBehaviour
     /// </summary>
     IEnumerator Cor_MoveToNextLocation()
     {
-        animator.SetBool("Walk", true);
         navMeshAgent.destination = moveLocations[walkCounter].position;
         walkCounter++;
 
         yield return new WaitUntil(() => HasCharacterReachedDestination());
 
-        animator.SetBool("Walk", false);
+        //animator.SetBool("Walk", false);
+    }
+
+    private void OnAnimatorMove()
+    {
+        transform.position = navMeshAgent.nextPosition;
     }
 
     /// <summary>

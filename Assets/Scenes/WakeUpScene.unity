@@ -106,7 +106,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.3
+    agentRadius: 0.15
     agentHeight: 2
     agentSlope: 0
     agentClimb: 0.02
@@ -114,7 +114,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.1
+    cellSize: 0.05
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: e5a87daf78d93a94eab54076946e8b19, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 8c606da3a2244c6458808fc3db875836, type: 2}
 --- !u!1 &933160
 GameObject:
   m_ObjectHideFlags: 0
@@ -2894,6 +2894,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2056892508}
+    - target: {fileID: 2095998945463967102, guid: 00a17017293f0f0479831ca37eeabed4, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2095998945711759024, guid: 00a17017293f0f0479831ca37eeabed4, type: 3}
       propertyPath: m_Name
       value: AnimatedText
@@ -4623,6 +4627,7 @@ MonoBehaviour:
   DialogueAudios:
   - {fileID: 8300000, guid: 8e3de74a6ea9b294ab84b9aa82a40ddb, type: 3}
   - {fileID: 8300000, guid: d8cd76a7f0362ab45a60b87c12d58dd1, type: 3}
+  DialogueDurations: []
   AnimationName:
   - Wave
   - 
@@ -7411,12 +7416,12 @@ MonoBehaviour:
   characters:
   - {fileID: 6461283002877383224}
   turningNames:
+  - James
+  - James
   - PlayerDialogue<3>
   - Delay<1.5>
   - SceneAction
-  - James
   - PlayerAction
-  - James
   - PlayerDialogue
   - PlayerDialogue
   characterTurn: 0
@@ -11009,12 +11014,12 @@ NavMeshAgent:
   m_GameObject: {fileID: 5971990830560757902}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 0.8
-  m_Acceleration: 8
+  m_Radius: 0.1
+  m_Speed: 1.2
+  m_Acceleration: 3
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 48
+  m_StoppingDistance: 0.05
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -11053,8 +11058,11 @@ MonoBehaviour:
   - Hello! Welcome to this tutorial
   - And now it's my turn to speak again
   DialogueAudios:
-  - {fileID: 8300000, guid: 8e3de74a6ea9b294ab84b9aa82a40ddb, type: 3}
-  - {fileID: 8300000, guid: d8cd76a7f0362ab45a60b87c12d58dd1, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  DialogueDurations:
+  - 2
+  - 2.5
   AnimationName:
   - Wave
   - 
