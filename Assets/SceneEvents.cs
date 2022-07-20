@@ -66,7 +66,7 @@ public class SceneEvents : MonoBehaviour
     }
     #endregion
 
-    // Should not use this method
+    // Should not use this method beacuse of the new CompletedAction() method.
     public event Action completedInteraction;
     public void CompletedInteraction()
     {

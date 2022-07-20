@@ -27,6 +27,7 @@ public class MenuControl : MonoBehaviour
     }
     public static void LoadLevel(string Level)
     {
+        Time.timeScale = 1;
         FadeCanvas.FadeIn().OnComplete(() => SceneManager.LoadScene(Level));
     }
     public void RestartGame()

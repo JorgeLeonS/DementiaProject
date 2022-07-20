@@ -98,7 +98,7 @@ public class ToothbrushSequenceManager: MonoBehaviour
         // Returns Button to Normal State.
         EventSystem.current.SetSelectedGameObject(null);
         
-        SceneEvents.current.CompletedInteraction();
+        //SceneEvents.current.CompletedInteraction();
     }
 
     IEnumerator FirstSequence()
