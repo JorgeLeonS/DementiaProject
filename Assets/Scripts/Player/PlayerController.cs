@@ -43,6 +43,21 @@ public class PlayerController : MonoBehaviour
     private int dialogueCounter;
     private int interactionCounter;
 
+    private Vector3 WakeUpScene_LayDownPos = new Vector3(-0.15f, 0.2f, -1.0f);
+    private Quaternion WakeUpScene_LayDownRot = Quaternion.Euler(-50, 90, 0);
+
+    private Vector3 WakeUpScene_StandingPos = new Vector3(-0.5f, 0f, 1f);
+    private Quaternion WakeUpScene_StandingRot = Quaternion.Euler(0, 150, 0);
+
+    private Vector3 WakeUpScene2_LayDownPos = new Vector3(1.06f, 0f, -2.7f);
+    private Quaternion WakeUpScene2_LayDownRot = Quaternion.Euler(-50, 90, 0);
+
+    private Vector3 WakeUpScene2_StandingPos = new Vector3(0f, 0f, -1.42f);
+    private Quaternion WakeUpScene2_StandingRot = Quaternion.Euler(0, 90, 0);
+
+    private Vector3 WakeUpScene2_BathroomPos = new Vector3(2.1f, 0f, -0.75f);
+    private Quaternion WakeUpScene2_BathroomRot = Quaternion.Euler(0, 30, 0);
+
     /// <summary>
     /// The XROrigin needs to be referenced from Unity, then, through their name  
     /// the next components, are assigned on the Awake function:
@@ -84,6 +99,10 @@ public class PlayerController : MonoBehaviour
                 SceneEvents.current.playerAction += Cor_PerformAction_WakeUpScene;
                 MoveToLayingDownPosition();
                 break;
+            case "WakeUpScene2":
+                SceneEvents.current.playerAction += Cor_PerformAction_WakeUpScene2;
+                MoveToPosition(WakeUpScene2_LayDownPos, WakeUpScene2_LayDownRot);
+                break;
             case "ToothbrushScene":
                 // toDo something
 
@@ -94,8 +113,8 @@ public class PlayerController : MonoBehaviour
         }
         //SceneEvents.current.playerAction += Cor_PerformAction;
         //StartCoroutine(HaveAFirsttext());
-        
-        
+
+
     }
 
     private void OnDestroy()
@@ -179,6 +198,28 @@ public class PlayerController : MonoBehaviour
             case 0:
                 yield return StartCoroutine(FadeCanvas.FadeInOutWithAction(MoveToStandingPosition));
                 break;
+            case 1:
+                yield return StartCoroutine(FadeCanvas.FadeInOutWithAction(MoveToStandingPosition));
+                break;
+            default:
+                yield return new WaitForSeconds(3f);
+                Debug.LogWarning("No more player actions!");
+                break;
+        }
+        interactionCounter++;
+        //SceneEvents.current.CompletedAction();
+    }
+
+    IEnumerator Cor_PerformAction_WakeUpScene2()
+    {
+        switch (interactionCounter)
+        {
+            case 0:
+                yield return StartCoroutine(FadeCanvas.FadeInOutWithAction(MoveToStandingPosition));
+                break;
+            case 1:
+                yield return StartCoroutine(FadeCanvas.FadeInOutWithAction(MoveToBathroomPosition));
+                break;
             default:
                 yield return new WaitForSeconds(3f);
                 Debug.LogWarning("No more player actions!");
@@ -190,16 +231,31 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Other Player's methods
+    private void MoveToPosition(Vector3 pos, Quaternion rot)
+    {
+        MyXROrigin.transform.position = pos;
+        MyXROrigin.transform.localRotation = rot;
+    }
     private void MoveToStandingPosition()
     {
-        MyXROrigin.transform.position = new Vector3(-0.5f, 0f, 1f);
-        MyXROrigin.transform.localRotation = Quaternion.Euler(0, 150, 0);
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case ("WakeUpScene"):
+                MoveToPosition(WakeUpScene_StandingPos, WakeUpScene_StandingRot);
+                break;
+            case ("WakeUpScene2"):
+                MoveToPosition(WakeUpScene2_StandingPos, WakeUpScene2_StandingRot);
+                break;
+        }
+    }
+    private void MoveToBathroomPosition()
+    {
+        MoveToPosition(WakeUpScene2_BathroomPos, WakeUpScene2_BathroomRot);
     }
 
     private void MoveToLayingDownPosition()
     {
-        MyXROrigin.transform.position = new Vector3(-0.15f, 0.2f, -1.0f);
-        MyXROrigin.transform.localRotation = Quaternion.Euler(-50, 90, 0);
+        MoveToPosition(WakeUpScene_LayDownPos, WakeUpScene_LayDownRot);
     }
     #endregion
 

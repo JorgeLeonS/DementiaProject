@@ -12,9 +12,13 @@ public class WakeUpScene_Methods : MonoBehaviour
 {
     public Volume sceneVolume;
     private static Bloom bloom;
+    private static ShadowsMidtonesHighlights smh;
 
     public GameObject blinds;
     private static Animator blindsAnimator;
+
+    public GameObject doorText;
+    private static TextRevealer TRDoorText;
 
     private int interactionCounter;
 
@@ -36,6 +40,7 @@ public class WakeUpScene_Methods : MonoBehaviour
                 blinds = GameObject.Find("Blinds");
             }
             blindsAnimator = blinds.GetComponent<Animator>();
+            TRDoorText = doorText.transform.GetChild(0).GetComponent<TextRevealer>();
 
         }
         catch (System.Exception e)
@@ -44,6 +49,7 @@ public class WakeUpScene_Methods : MonoBehaviour
                 $"Is the naming correct?\n {e}");
         }
         sceneVolume.profile.TryGet<Bloom>(out bloom);
+        sceneVolume.profile.TryGet<ShadowsMidtonesHighlights>(out smh);
     }
 
     // Update is called once per frame
@@ -63,6 +69,9 @@ public class WakeUpScene_Methods : MonoBehaviour
         {
             case 0:
                 yield return OpenBlinds();
+                break;
+            case 1:
+                ActivateDoorText();
                 break;
             default:
                 yield return new WaitForSeconds(3f);
@@ -85,14 +94,24 @@ public class WakeUpScene_Methods : MonoBehaviour
         Lights_Manager.ChangeEnvironmentReflectionsIntensity(0.2f, 0.1f);
         blindsOpenSequence.Append(PostProcess_Manager.ChangeBloom_Intensity(bloom, 50, 3f));
         
+        
         blindsOpenSequence.AppendInterval(1.5f);
         yield return new WaitForSeconds(1.5f);
         
+        // TODO Change these to PPManager
+        smh.shadows.value = new Vector4(0.32f, 0.32f, 0.32f, 0);
+        smh.midtones.value = new Vector4(0.57f, 0.57f, 0.57f, 0);
+
         PostProcess_Manager.ChangeBloom_Intensity(bloom, 0.1f, 4f);
         blindsOpenSequence.OnComplete(() => {
             hasSequenceCompleted = true;
         });
         yield return new WaitUntil(() => hasSequenceCompleted);
+    }
+
+    public static void ActivateDoorText()
+    {
+        TRDoorText.Reveal();
     }
 
     public static IEnumerator OpenBlinds_Animation()
