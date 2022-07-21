@@ -13,10 +13,14 @@ public class MainMenu_Methods : MonoBehaviour
     public Canvas CanvasObject;
     public GameObject TextRevealerObject;
 
-    [SerializeField]
-    private AudioClip[] pianoNotes;
-    [SerializeField]
-    private AudioSource[] sourcesForPianoNotes;
+    /*
+     * Variables for playing random piano notes on a random audio source.
+     * Commented it because it sounds terrible.
+    //[SerializeField]
+    //private AudioClip[] pianoNotes;
+    //[SerializeField]
+    //private AudioSource[] sourcesForPianoNotes;
+    */
 
     // Start is called before the first frame update
     void Start()
@@ -27,12 +31,16 @@ public class MainMenu_Methods : MonoBehaviour
         StartCoroutine(Lights_Manager.FadeInAndOutRepeatALight(defectiveLamp_Light, duration));
     }
 
-    public void PlayRandomNoteOnRandomSource()
-    {
-        AudioSource selected = sourcesForPianoNotes[Random.Range(0, sourcesForPianoNotes.Length)];
-        AudioClip clip = pianoNotes[Random.Range(0, pianoNotes.Length)];
-        selected.PlayOneShot(clip);
-    } 
+    /// <summary>
+    /// Method for playing random piano notes on a random audio source.
+    /// Commented it because it sounds terrible.
+    /// </summary>
+    //public void PlayRandomNoteOnRandomSource()
+    //{
+    //    AudioSource selected = sourcesForPianoNotes[Random.Range(0, sourcesForPianoNotes.Length)];
+    //    AudioClip clip = pianoNotes[Random.Range(0, pianoNotes.Length)];
+    //    selected.PlayOneShot(clip);
+    //} 
 
     /// <summary>
     /// Action to be called on the "Start Experience" button, on the scene.

@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &21797336946796219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 21797336946796217}
+  - component: {fileID: 21797336946796216}
+  m_Layer: 0
+  m_Name: MainMenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &21797336946796217
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21797336946796219}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.304388, y: -1.6292027, z: -4.901758}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &21797336946796216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21797336946796219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81dc63fcc11cce34a9e75568fd89fc7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextLevel: WakeUpScene
+  defectiveLamp_Light: {fileID: 0}
+  defectiveLamp_Audio: {fileID: 0}
+  bulbPop_AudioClip: {fileID: 8300000, guid: 3e57fe7c37742fd4e97cc9b09992853a, type: 3}
+  CanvasObject: {fileID: 0}
+  TextRevealerObject: {fileID: 0}
+  pianoNotes:
+  - {fileID: 8300000, guid: ac8a39eca0975d445a23df004e90e257, type: 3}
+  - {fileID: 8300000, guid: a314ffb68ed1ddb4ca50287c2fdd0ce5, type: 3}
+  - {fileID: 8300000, guid: e5daf9a4367c07545b4d2d9bb3b12499, type: 3}
+  - {fileID: 8300000, guid: 38bf83cb7ea2b3647a474102c4b06b44, type: 3}
+  - {fileID: 8300000, guid: 2631c18929d0dfc47bfadbb7dc28f9be, type: 3}
+  - {fileID: 8300000, guid: 1fe52b7aa0b2b3f4a8549a6139a2d2a1, type: 3}
+  - {fileID: 8300000, guid: 39ad4474f4b224241b4b693b9cb838d2, type: 3}
+  - {fileID: 8300000, guid: e7292712e8e82f84d831c7ab72ecb7ed, type: 3}
+  - {fileID: 8300000, guid: f16d1bad25b62c5479b8eedc0edd6e78, type: 3}
+  - {fileID: 8300000, guid: 4e9a834a6e555e94882ef74c9222a2f7, type: 3}
+  - {fileID: 8300000, guid: 8fb1af5052025b14e8558c5206cdd5ef, type: 3}
+  - {fileID: 8300000, guid: 5a00587edeb774c499d296b32417e68b, type: 3}
+  - {fileID: 8300000, guid: 6168af47abce61a41bec1915e09a6fc4, type: 3}
+  - {fileID: 8300000, guid: ec232770cec9c594e8aeb49cc9f486d8, type: 3}
+  - {fileID: 8300000, guid: b49a98f4e6586dc47af7759f167df0b0, type: 3}
+  - {fileID: 8300000, guid: 4edc619997ff2d14f8c3064c2c021d0b, type: 3}
+  - {fileID: 8300000, guid: 5141e9f359cfc4f4a8666486a3bfae4e, type: 3}
+  - {fileID: 8300000, guid: 995b1a6edfabe314f81d14e737b0e704, type: 3}
+  - {fileID: 8300000, guid: 42ba9fd4d478b064c8fd524da71eadfb, type: 3}
+  - {fileID: 8300000, guid: 0d580f0572000e841861aa41e7390ee4, type: 3}
+  - {fileID: 8300000, guid: 26b27b397776e13408519d1be9748afa, type: 3}
+  - {fileID: 8300000, guid: 67b39fb3b012cfe4793172003fee12c5, type: 3}
+  - {fileID: 8300000, guid: ba93e7057c0943f4dad3f623761d3e06, type: 3}
+  - {fileID: 8300000, guid: 44a2813ac823a1048a9ccaebbd189566, type: 3}
+  - {fileID: 8300000, guid: ae18865ed70f1d94a9794fc15568001c, type: 3}
+  - {fileID: 8300000, guid: 8539c4dd2a7b8c24099e0cbca8a4f9c8, type: 3}
+  - {fileID: 8300000, guid: cf5b8de4d98cd88489c4cbc45c193321, type: 3}
+  - {fileID: 8300000, guid: dbf3302b32a98174a88287000dd30393, type: 3}
+  - {fileID: 8300000, guid: 4b0f6c1238632ad4ba609fa6f06631b6, type: 3}
+  - {fileID: 8300000, guid: 098d152f65a2f1e429336e88190ab98d, type: 3}
+  - {fileID: 8300000, guid: a17566992856e9a41a5d16a24e3aaef8, type: 3}
+  - {fileID: 8300000, guid: 2bcb2ebc210852849a1da1e54ead9a08, type: 3}
+  - {fileID: 8300000, guid: b1da0c8966e02194f8548e5d034c020e, type: 3}
+  - {fileID: 8300000, guid: adad977ad5899a24a94354abee384b8e, type: 3}
+  - {fileID: 8300000, guid: fdbf36566c40d1646a84c8dd1ae4c5d3, type: 3}
+  - {fileID: 8300000, guid: 666c1fa940a0900439da66e18d582f13, type: 3}
+  - {fileID: 8300000, guid: 713fcce2f91c57d4ead0d8ec274e7e04, type: 3}
+  sourcesForPianoNotes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
