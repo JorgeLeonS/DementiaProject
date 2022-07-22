@@ -92,11 +92,11 @@ public class WakeUpScene_Methods : MonoBehaviour
         Sequence blindsOpenSequence = DOTween.Sequence();
         Lights_Manager.ChangeAmbientLightIntensity(1, 0.5f);
         Lights_Manager.ChangeEnvironmentReflectionsIntensity(0.2f, 0.1f);
-        blindsOpenSequence.Append(PostProcess_Manager.ChangeBloom_Intensity(bloom, 50, 3f));
+        blindsOpenSequence.Append(PostProcess_Manager.ChangeBloom_Intensity(bloom, 100, 3f));
         
         
-        blindsOpenSequence.AppendInterval(1.5f);
-        yield return new WaitForSeconds(1.5f);
+        blindsOpenSequence.AppendInterval(2f);
+        yield return new WaitForSeconds(2f);
         
         // TODO Change these to PPManager
         smh.shadows.value = new Vector4(0.32f, 0.32f, 0.32f, 0);

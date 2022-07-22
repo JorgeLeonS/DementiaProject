@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.33736125, g: 0.39182475, b: 0.5100114, a: 1}
+  m_IndirectSpecularColor: {r: 0.33775195, g: 0.3914866, b: 0.5104226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12496,18 +12496,29 @@ MonoBehaviour:
   - your Saturday medication
   - I'll be right back
   DialogueAudios:
-  - {fileID: 8300000, guid: 8e3de74a6ea9b294ab84b9aa82a40ddb, type: 3}
-  - {fileID: 8300000, guid: d8cd76a7f0362ab45a60b87c12d58dd1, type: 3}
-  - {fileID: 8300000, guid: 8e3de74a6ea9b294ab84b9aa82a40ddb, type: 3}
-  - {fileID: 8300000, guid: 8e3de74a6ea9b294ab84b9aa82a40ddb, type: 3}
-  - {fileID: 8300000, guid: 8e3de74a6ea9b294ab84b9aa82a40ddb, type: 3}
-  - {fileID: 8300000, guid: 63e027aeefeb8344b8216ce66c1d4cff, type: 3}
-  - {fileID: 8300000, guid: 63e027aeefeb8344b8216ce66c1d4cff, type: 3}
-  - {fileID: 8300000, guid: 63e027aeefeb8344b8216ce66c1d4cff, type: 3}
-  - {fileID: 8300000, guid: 63e027aeefeb8344b8216ce66c1d4cff, type: 3}
-  - {fileID: 8300000, guid: 63e027aeefeb8344b8216ce66c1d4cff, type: 3}
-  - {fileID: 8300000, guid: 63e027aeefeb8344b8216ce66c1d4cff, type: 3}
-  DialogueDurations: []
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  DialogueDurations:
+  - 2
+  - 0
+  - 2.5
+  - 1
+  - 2.2
+  - 2
+  - 1.5
+  - 1
+  - 1.5
+  - 1.5
+  - 1.5
   AnimationName:
   - 
   - Point
