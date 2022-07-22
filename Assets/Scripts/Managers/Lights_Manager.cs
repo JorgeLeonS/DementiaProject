@@ -26,8 +26,8 @@ public static class Lights_Manager
     // https://stackoverflow.com/questions/46419975/increase-and-decrease-light-intensity-overtime
     public static IEnumerator FadeInAndOutALight(Light lightToFade, bool fadeIn, float duration = 1f)
     {
-        float minLuminosity = 0.03f; // min intensity
-        float maxLuminosity = 0.3f; // max intensity
+        float minLuminosity = 0.2f; // min intensity
+        float maxLuminosity = 2f; // max intensity
 
         float counter = 0f;
 

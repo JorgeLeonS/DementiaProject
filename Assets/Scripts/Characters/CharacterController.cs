@@ -96,6 +96,7 @@ public class CharacterController : MonoBehaviour
 
         // Set animator variables
         animator.SetBool("Walk", shouldMove);
+        //animator.SetFloat("direction");
         animator.SetFloat("velX", velocity.x);
         animator.SetFloat("velY", velocity.y);
     }
@@ -152,6 +153,8 @@ public class CharacterController : MonoBehaviour
     {
         // Correction so that the character and agent positions match.
         transform.position = navMeshAgent.nextPosition;
+
+        
     }
 
     /// <summary>
@@ -162,6 +165,10 @@ public class CharacterController : MonoBehaviour
     {
         if (!navMeshAgent.pathPending)
         {
+            Vector3 dir = moveLocations[walkCounter - 1].position - transform.position;
+            dir.y = 0;
+            Quaternion rot = Quaternion.LookRotation(dir);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, 1.5f * Time.deltaTime);
             if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {
                 if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)

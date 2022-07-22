@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: f3069d27cbcb83e4c84b9ec3eb13db58, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: c200942100111b8458a22afc23c520d9, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -1600,7 +1600,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &1917892443
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1833,7 +1833,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2067267598
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1870,9 +1870,9 @@ MonoBehaviour:
   characters:
   - {fileID: 6461283002877383224}
   turningNames:
-  - James
-  - SceneAction
   - PlayerDialogue<3>
+  - James<8>
+  - SceneAction
   - PlayerAction
   - James
   - Delay<1.5>
@@ -3508,12 +3508,12 @@ MonoBehaviour:
   - 3.5
   - 3.5
   - 3.5
-  - 4
-  - 2.5
-  - 2
-  - 4
-  - 4
+  - 3.7
+  - 1.5
+  - 1.7
   - 3.5
+  - 3.7
+  - 3
   AnimationName:
   - 
   - 
