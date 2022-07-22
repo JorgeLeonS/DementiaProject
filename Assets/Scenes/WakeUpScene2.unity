@@ -1531,7 +1531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneVolume: {fileID: 1364900722}
   blinds: {fileID: 6562620199329160763}
-  doorText: {fileID: 0}
+  doorText: {fileID: 2131771798342595147}
 --- !u!4 &1873873361
 Transform:
   m_ObjectHideFlags: 0
@@ -1600,7 +1600,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &1917892443
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1714,6 +1714,10 @@ PrefabInstance:
     - target: {fileID: 1135487164161192621, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
       propertyPath: m_Name
       value: Walls
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791918555971253756, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
+      propertyPath: nextLevel
+      value: Bathroom-Effect Test 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
@@ -1833,7 +1837,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2067267598
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1870,9 +1874,9 @@ MonoBehaviour:
   characters:
   - {fileID: 6461283002877383224}
   turningNames:
+  - SceneAction<2>
   - PlayerDialogue<3>
   - James<8>
-  - SceneAction
   - PlayerAction
   - James
   - Delay<1.5>
@@ -2514,7 +2518,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 2.15, y: 1.68}
+  m_AnchoredPosition: {x: 2.15, y: 2.04}
   m_SizeDelta: {x: 150, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2142702266855171017
@@ -2769,6 +2773,14 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 1992613287}
+    - target: {fileID: 3865424606233956695, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: CameraYDistance
+      value: -0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3865424606233956695, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: CameraZDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5071196646476049988, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -3524,7 +3536,7 @@ MonoBehaviour:
   - 
   - 
   - 
-  MoveToNextLocation: 010100010000010000
+  MoveToNextLocation: 010100010001000000
 --- !u!1 &6562620199329160763
 GameObject:
   m_ObjectHideFlags: 0
