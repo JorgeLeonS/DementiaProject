@@ -32,6 +32,13 @@ public class Door : MonoBehaviour
         FadeCanvas.FadeIn().OnComplete(() => Invoke(nameof(ChangeScene), 1.20f));
     }
 
+    public void OpenDoorWithNoTransition()
+    {
+        // Called from Button or XR Interactable.
+        animator.SetBool("Open", true);
+        arrow.gameObject.SetActive(false);
+    }
+
     private void ChangeScene()
     {
         MenuControl.LoadLevel(nextLevel);

@@ -14,8 +14,6 @@ using System;
 /// </summary>
 public class InteractionsManager : MonoBehaviour
 {
-    public PlayerController playerController;
-
     public List<CharacterController> characters;
 
     public List<string> turningNames;

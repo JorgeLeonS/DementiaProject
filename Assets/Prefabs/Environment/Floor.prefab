@@ -332,6 +332,10 @@ PrefabInstance:
       value: Floor_1x1 (15)
       objectReference: {fileID: 0}
     - target: {fileID: 8697053701023270371, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697053701023270371, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -1252,6 +1256,10 @@ PrefabInstance:
     - target: {fileID: 8697053701023270371, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
       propertyPath: m_Name
       value: Floor_1x1 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697053701023270371, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8697053701023270371, guid: e1e6ee3c369514df6b999adf17143104, type: 3}
       propertyPath: m_StaticEditorFlags

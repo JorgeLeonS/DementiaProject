@@ -150,7 +150,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1364900721}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1018,8 +1019,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 85593845}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1364900722
 MonoBehaviour:
@@ -1570,6 +1571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneVolume: {fileID: 1364900722}
   blinds: {fileID: 6562620199329160763}
+  doorArrow: {fileID: 1952414277}
   doorText: {fileID: 2131771798342595147}
 --- !u!4 &1873873361
 Transform:
@@ -1760,6 +1762,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
+--- !u!1 &1952414277 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 753914492082044320, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
+  m_PrefabInstance: {fileID: 1952414276}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1966231182
 GameObject:
   m_ObjectHideFlags: 0
@@ -1914,9 +1921,10 @@ MonoBehaviour:
   - {fileID: 6461283002877383224}
   turningNames:
   - SceneAction<2>
+  - PlayerAction
+  - PlayerAction
   - PlayerDialogue<3>
   - James<8>
-  - PlayerAction
   - James
   - Delay<1.5>
   - PlayerDialogue
@@ -2812,14 +2820,6 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 1992613287}
-    - target: {fileID: 3865424606233956695, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
-      propertyPath: CameraYDistance
-      value: -0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3865424606233956695, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
-      propertyPath: CameraZDistance
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5071196646476049988, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_RootOrder
       value: 0

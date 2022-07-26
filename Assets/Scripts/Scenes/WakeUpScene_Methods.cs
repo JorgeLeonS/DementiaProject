@@ -17,6 +17,7 @@ public class WakeUpScene_Methods : MonoBehaviour
     public GameObject blinds;
     private static Animator blindsAnimator;
 
+    public GameObject doorArrow;
     public GameObject doorText;
     private static TextRevealer TRDoorText;
 
@@ -26,6 +27,8 @@ public class WakeUpScene_Methods : MonoBehaviour
     void Start()
     {
         SceneEvents.current.sceneAction += PerformSceneAction;
+
+        doorArrow.SetActive(false);
 
         Lights_Manager.ChangeAmbientLightIntensity(0.1f, 0.1f);
         Lights_Manager.ChangeEnvironmentReflectionsIntensity(0.2f, 0.1f);
@@ -50,6 +53,8 @@ public class WakeUpScene_Methods : MonoBehaviour
         }
         sceneVolume.profile.TryGet<Bloom>(out bloom);
         sceneVolume.profile.TryGet<ShadowsMidtonesHighlights>(out smh);
+        smh.active = true;
+
     }
 
     // Update is called once per frame
@@ -111,9 +116,10 @@ public class WakeUpScene_Methods : MonoBehaviour
         yield return new WaitUntil(() => hasSequenceCompleted);
     }
 
-    public static void ActivateDoorText()
+    public void ActivateDoorText()
     {
         TRDoorText.Reveal();
+        doorArrow.SetActive(true);
     }
 
     public static IEnumerator OpenBlinds_Animation()

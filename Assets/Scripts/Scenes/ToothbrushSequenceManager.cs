@@ -26,6 +26,8 @@ public class ToothbrushSequenceManager: MonoBehaviour
     [Header("Others")]
     [SerializeField] Canvas fadeCanvas;
 
+    public Door door;
+
     private InteractableObject interactableObject;
 
     float timer;
@@ -46,7 +48,7 @@ public class ToothbrushSequenceManager: MonoBehaviour
         interactableObject = toothbrush.GetComponent<InteractableObject>();
         interactableObject.MakeInteractable(false);
 
-        if (!TryGetComponent<InteractableObject>(out interactableObject))
+        if (interactableObject==null)
         {
             Debug.LogError("Missing InteractableObject Component");
         }
@@ -79,6 +81,7 @@ public class ToothbrushSequenceManager: MonoBehaviour
                 break;
             case 2:
                 yield return FirstSequence();
+                yield return OpenDoor();
                 break;
             case 3:
                 yield return FourthSequence();
@@ -103,9 +106,6 @@ public class ToothbrushSequenceManager: MonoBehaviour
 
     IEnumerator FirstSequence()
     {
-        // Small Delay before the start
-        yield return new WaitForSeconds(5f);
-
         // Show prompt to Find the toothbrush
         textSign.GetComponentInChildren<TextMeshProUGUI>().text = prompts[indexPrompts];
         textSignTR.Reveal();
@@ -114,6 +114,13 @@ public class ToothbrushSequenceManager: MonoBehaviour
         yield return new WaitForSeconds(10f);
         textSignTR.Unreveal(); 
         indexPrompts++;
+        yield return new WaitForSeconds(textSignTR.UnrevealTime);
+    }
+
+    IEnumerator OpenDoor()
+    {
+        door.OpenDoorWithNoTransition();
+        yield return new WaitForSeconds(1.5f);
     }
 
     IEnumerator SecondSequence()
