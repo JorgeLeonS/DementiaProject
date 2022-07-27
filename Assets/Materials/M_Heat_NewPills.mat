@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Heat_Pills
+  m_Name: M_Heat_NewPills
   m_Shader: {fileID: -6465566751694194690, guid: c4e85d21342b943eda519c49c08b1bdd, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -48,7 +48,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: 5c02cf44536459248ab70a86158549cd, type: 3}
+        m_Texture: {fileID: 2800000, guid: b3bd20ec23bc81743894490174cd8646, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -108,9 +108,9 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 0.2
+    - _Speed: 0.1
     - _SrcBlend: 1
-    - _Strength: 0.05
+    - _Strength: 0.02
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1

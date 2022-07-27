@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class PillsSequenceManager : MonoBehaviour
 {
+    XRIDefaultInputActions inputControllers;
+    bool isAGripBeingPressed = false;
+
     [SerializeField] GameObject textSign;
     private TextRevealer textSignTR;
 
@@ -16,37 +21,71 @@ public class PillsSequenceManager : MonoBehaviour
     [SerializeField] Canvas fadeCanvas;
 
     public Door door;
-    public DistortionEffect[] pills;
+    public List<DistortionEffect> pills;
 
-    private List<string> grabbedPills;
+    InteractableObject grabbedPill;
+    private string grabbedPillName;
+    private bool aPillHasBeenGrabbed;
+    //private List<Vector3> pillsPositions;
+    private Dictionary<string, Vector3> pillsPositions;
     public List<string> pillsToGrab = new List<string>
+
     {
         "BottlePillNight", "BottlePillAfternoon", "BottlePillMorning"
     };
 
+
     int indexSequence;
     int indexPrompts;
 
-    private void Start()
+    void Start()
     {
+        // Subscribe to interactions manager event
         SceneEvents.current.sceneAction += SetSequence;
 
         indexSequence = 0;
         indexPrompts = 0;
-        
-        // TODO Start with the door open instead of opening it here.
-        //door.OpenDoorWithNoTransition();
 
         textSignTR = textSign.transform.GetChild(0).GetComponent<TextRevealer>();
         fadeCanvas.gameObject.SetActive(true);
         FadeCanvas.FadeOut(fadeTime);
 
-        grabbedPills = new List<string>();
+        pillsPositions = new Dictionary<string, Vector3>();
+
+        foreach (var pill in pills)
+        {
+            pillsPositions.Add(pill.gameObject.name, pill.transform.localPosition);
+        }
+
     }
-    
+
+    private void Awake()
+    {
+        inputControllers = new XRIDefaultInputActions();
+
+        inputControllers.XRILeftHand.Enable();
+        inputControllers.XRILeftHand.Select.canceled += cntxt => isAGripBeingPressed = false;
+        inputControllers.XRILeftHand.Select.performed += cntxt => isAGripBeingPressed = true;
+
+        inputControllers.XRIRightHand.Enable();
+        inputControllers.XRIRightHand.Select.canceled += cntxt => isAGripBeingPressed = false;
+        inputControllers.XRIRightHand.Select.performed += cntxt => isAGripBeingPressed = true;
+    }
+
+    private void Update()
+    {
+        //if (isAPillBeingHeld)
+        //{
+        //    print("Pressing the grip");
+        //}
+        //print("is a pill being held: " + isAPillBeingHeld);
+    }
+
     private void OnDestroy()
     {
         SceneEvents.current.sceneAction -= SetSequence;
+        inputControllers.XRILeftHand.Disable();
+        inputControllers.XRIRightHand.Disable();
     }
 
     /// <summary>
@@ -57,25 +96,27 @@ public class PillsSequenceManager : MonoBehaviour
         switch (indexSequence)
         {
             case 0:
-                yield return GrabPillsSequence();
+                // TODO Start with the door open instead of opening it here.
+                door.OpenDoorWithNoTransition();
+                yield return GrabFirstPillsSequence();
                 break;
             case 1:
-                yield return GrabPillsSequence();
+                yield return GrabSecondPillsSequence();
                 break;
             case 2:
                 RemamingPill();
                 break;
             default:
                 yield return new WaitForSeconds(1f);
-                Debug.Log("IndexSequence Out of range");
+                Debug.LogWarning("IndexSequence Out of range");
                 break;
         }
 
         indexSequence++;
-        DestroySlicedTextRevealer();
+        //DestroySlicedTextRevealer();
 
         // Returns Button to Normal State.
-        EventSystem.current.SetSelectedGameObject(null);
+        //EventSystem.current.SetSelectedGameObject(null);
 
         //SceneEvents.current.CompletedInteraction();
     }
@@ -86,33 +127,50 @@ public class PillsSequenceManager : MonoBehaviour
     /// Wait for the player to grab one bottle
     /// Disable the colliders
     /// </summary>
-    IEnumerator GrabPillsSequence()
+    IEnumerator GrabFirstPillsSequence()
     {
-        //indexPrompts = 0;
-        // Show prompt to Find the toothbrush
+        // Show prompt to grab the pills
         textSign.GetComponentInChildren<TextMeshProUGUI>().text = prompts[indexPrompts];
         textSignTR.Reveal();
         indexPrompts++;
-        // Enable the colliders for all the pills
-        foreach (var pill in pills)
-        {
-            pill.gameObject.GetComponent<BoxCollider>().enabled = true;
-        }
+        yield return new WaitForSeconds(textSignTR.RevealTime);
 
-        string grabbedPill = "";
-        yield return new WaitUntil(() => WaitForInteraction(out grabbedPill));
-        textSignTR.Unreveal();
-        yield return new WaitForSeconds(textSignTR.UnrevealTime);
-        grabbedPills.Add(grabbedPill);
-        pillsToGrab.Remove(grabbedPill);
+        EnableInteractionForPills();
 
+        // Wait for the user to grab one of the pills
+        grabbedPill = null;
+        yield return WaitForUserToGrabAPill();
+
+        // When a pill bottle has been grabbed, prompt to take another one
+        //textSignTR.Unreveal();
+        //yield return new WaitForSeconds(textSignTR.UnrevealTime);
         DestroySlicedTextRevealer();
         textSign.GetComponentInChildren<TextMeshProUGUI>().text = prompts[indexPrompts];
         textSignTR.Reveal();
-        foreach (var pill in pills)
-        {
-            pill.gameObject.GetComponent<BoxCollider>().enabled = false;
-        }
+        indexPrompts++;
+
+        yield return WaitForUserToLetGoOfPill();
+    }
+
+    IEnumerator GrabSecondPillsSequence()
+    {
+        EnableInteractionForPills();
+
+        // Wait for the user to grab one of the pills
+        grabbedPill = null;
+        yield return WaitForUserToGrabAPill();
+
+        // When a pill bottle has been grabbed, prompt to take another one
+        //textSignTR.Unreveal();
+        //yield return new WaitForSeconds(textSignTR.UnrevealTime);
+        DestroySlicedTextRevealer();
+        textSign.GetComponentInChildren<TextMeshProUGUI>().text = prompts[indexPrompts];
+        textSignTR.Reveal();
+        indexPrompts++;
+
+        yield return WaitForUserToLetGoOfPill();
+
+        //TODO ADD A CHROMATIC ABERRATION THING
 
     }
 
@@ -121,21 +179,65 @@ public class PillsSequenceManager : MonoBehaviour
         print(pillsToGrab[0]);
     }
 
-    bool WaitForInteraction(out string pillName)
+    void EnableInteractionForPills()
     {
-        bool interaction = false;
+        // Enable the colliders for the rest of the pills
         foreach (var pill in pills)
         {
-            //pill.GetComponent<InteractableObject>();
-            if (pill.GetComponent<InteractableObject>().InteractingWithObject())
-            {
-                pillName = pill.gameObject.name;
-                return interaction = true;
-            }
+            pill.gameObject.GetComponent<BoxCollider>().enabled = true;
+            pill.gameObject.GetComponent<XRGrabInteractable>().enabled = true;
         }
-        pillName = "aa";
-        return interaction;
     }
+
+    IEnumerator WaitForUserToGrabAPill()
+    {
+        aPillHasBeenGrabbed = false;
+
+        while (!aPillHasBeenGrabbed)
+        {
+            yield return new WaitUntil(() => isAGripBeingPressed);
+
+            foreach (var pill in pills)
+            {
+                if (pill.GetComponent<InteractableObject>().InteractingWithObject())
+                {
+                    grabbedPillName = pill.gameObject.name;
+                    aPillHasBeenGrabbed = true;
+                }
+            }
+
+            //yield return new WaitForSeconds(1f);
+        }
+
+        yield return new WaitUntil(() => aPillHasBeenGrabbed);
+
+    }
+
+    IEnumerator WaitForUserToLetGoOfPill()
+    {
+        // Wait the user has let go of the trigger
+        yield return new WaitWhile(() => isAGripBeingPressed);
+
+        // Take those pills out of the list of strings
+        pillsToGrab.Remove(grabbedPillName);
+
+        // Get the grabbed pill and return it to its original position
+        grabbedPill = GameObject.Find(grabbedPillName).GetComponent<InteractableObject>();
+        grabbedPill.transform.localPosition = pillsPositions[grabbedPill.gameObject.name];
+        grabbedPill.transform.localRotation = new Quaternion(0, 0, 0, 0);
+
+        // Disable the colliders on all the pills
+        foreach (var pill in pills)
+        {
+            pill.gameObject.GetComponent<BoxCollider>().enabled = false;
+            pill.gameObject.GetComponent<XRGrabInteractable>().enabled = false;
+        }
+
+        pills.Remove(grabbedPill.GetComponent<DistortionEffect>());
+
+    }
+
+
 
     private void DestroySlicedTextRevealer()
     {
