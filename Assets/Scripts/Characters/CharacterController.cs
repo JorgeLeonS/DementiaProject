@@ -186,16 +186,26 @@ public class CharacterController : MonoBehaviour
     /// </summary>
     IEnumerator Cor_NextDialogue()
     {
+        // If there is no dialogue, simply wait on dialogue duration
+        if (characterInteraction.DialogueText[interactionCounter] == "")
+        {
+            yield return new WaitForSeconds(characterInteraction.DialogueDurations[interactionCounter] + 1.0f);
+
+        }
         // If there is no dialogue, but there is an animation
-        if (characterInteraction.DialogueText[interactionCounter] == null && characterInteraction.AnimationName[interactionCounter] != null)
+        else if (characterInteraction.DialogueText[interactionCounter] == "" && characterInteraction.AnimationName[interactionCounter] != "")
         {
             animator.SetBool(characterInteraction.AnimationName[interactionCounter], true);
             yield return new WaitForSeconds(characterInteraction.DialogueDurations[interactionCounter] + 1.0f);
             GetComponent<Animator>().SetBool(characterInteraction.AnimationName[interactionCounter], false);
         }
+        // If there is a dialogue
         else
         {
-            animator.SetBool(characterInteraction.AnimationName[interactionCounter], true);
+            // Check for animation name, and play it
+            if(characterInteraction.AnimationName[interactionCounter] != "")
+                animator.SetBool(characterInteraction.AnimationName[interactionCounter], true);
+            
             Canvas.GetComponent<Canvas>().enabled = true;
 
             // To display the text over a period of time:
@@ -214,7 +224,10 @@ public class CharacterController : MonoBehaviour
                 yield return new WaitForSeconds(currentClip.length + 1.0f);
             }
 
-            GetComponent<Animator>().SetBool(characterInteraction.AnimationName[interactionCounter], false);
+            // Check for animation name, and stop it
+            if (characterInteraction.AnimationName[interactionCounter] != "")
+                GetComponent<Animator>().SetBool(characterInteraction.AnimationName[interactionCounter], false);
+            
             Canvas.GetComponent<Canvas>().enabled = false;
         }
     }

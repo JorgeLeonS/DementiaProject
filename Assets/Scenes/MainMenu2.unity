@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioSource_Background
       objectReference: {fileID: 0}
+    - target: {fileID: 1998582533300972348, guid: 92fbfb9f40c67ce4b8cc4d5d8c829c0e, type: 3}
+      propertyPath: m_TagString
+      value: Music
+      objectReference: {fileID: 0}
     - target: {fileID: 1998582533300972349, guid: 92fbfb9f40c67ce4b8cc4d5d8c829c0e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1092,6 +1096,10 @@ PrefabInstance:
     - target: {fileID: 1135487164161192621, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
       propertyPath: m_Name
       value: Walls
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760831066135720533, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7079211760742938923, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
       propertyPath: m_CastShadows

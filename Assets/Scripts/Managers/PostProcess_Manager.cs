@@ -54,5 +54,11 @@ public static class PostProcess_Manager
             bloom.intensity.value = newVal;
         });
     }
+
+    //public static Tween ChangeChAOverTime(ChromaticAberration chA, float duration = 3f)
+    //{
+    //    Mathf.Lerp(0.5f, 1f, Time.deltaTime);
+    //    //return DOVirtual.Float(chA.intensity)
+    //}
     #endregion
 }

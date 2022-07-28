@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class PillsSequenceManager : MonoBehaviour
 {
+    public Volume sceneVolume;
+    private ChromaticAberration chA;
+    private LensDistortion lD;
+    private FilmGrain fG;
+
+    bool triggerEffects = false;
+
     XRIDefaultInputActions inputControllers;
     bool isAGripBeingPressed = false;
 
@@ -57,6 +64,23 @@ public class PillsSequenceManager : MonoBehaviour
             pillsPositions.Add(pill.gameObject.name, pill.transform.localPosition);
         }
 
+        try
+        {
+            if (sceneVolume == null)
+            {
+                sceneVolume = GameObject.Find("PostProcessVolume").GetComponent<Volume>();
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"PostProcessVolume could not be found on the scene! \n" +
+                $"Is the naming correct?\n {e}");
+        }
+
+        sceneVolume.profile.TryGet<ChromaticAberration>(out chA);
+        sceneVolume.profile.TryGet<LensDistortion>(out lD);
+        sceneVolume.profile.TryGet<FilmGrain>(out fG);
+
     }
 
     private void Awake()
@@ -74,11 +98,24 @@ public class PillsSequenceManager : MonoBehaviour
 
     private void Update()
     {
-        //if (isAPillBeingHeld)
-        //{
-        //    print("Pressing the grip");
-        //}
-        //print("is a pill being held: " + isAPillBeingHeld);
+        chA.intensity.value = Mathf.Lerp(0.1f, 1f, Mathf.PingPong(Time.time, 1));
+        lD.intensity.value = Mathf.Lerp(0f, 0.5f, Mathf.PingPong(Time.time/2, 1));
+
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //    triggerEffects = !triggerEffects;
+
+        if (triggerEffects)
+        {
+            chA.active = true;
+            lD.active = true;
+            fG.active = true;
+        }
+        else
+        {
+            chA.active = false;
+            lD.active = false;
+            fG.active = false;
+        }
     }
 
     private void OnDestroy()
@@ -208,7 +245,7 @@ public class PillsSequenceManager : MonoBehaviour
 
             //yield return new WaitForSeconds(1f);
         }
-
+        triggerEffects = true;
         yield return new WaitUntil(() => aPillHasBeenGrabbed);
 
     }
@@ -217,7 +254,7 @@ public class PillsSequenceManager : MonoBehaviour
     {
         // Wait the user has let go of the trigger
         yield return new WaitWhile(() => isAGripBeingPressed);
-
+        triggerEffects = false;
         // Take those pills out of the list of strings
         pillsToGrab.Remove(grabbedPillName);
 
