@@ -37,27 +37,17 @@ public class ToothbrushSequenceManager: MonoBehaviour
 
     private void OnEnable()
     {
-        SceneEvents.current.sceneAction += SetSequence;
+        //SceneEvents.current.sceneAction += SetSequence;
     }
 
     private void Start()
     {
         indexPrompts = 0;
         indexSequence = 0;
-
-        interactableObject = toothbrush.GetComponent<InteractableObject>();
-        interactableObject.MakeInteractable(false);
-
-        if (interactableObject==null)
-        {
-            Debug.LogError("Missing InteractableObject Component");
-        }
-
-        textSignTR = textSign.transform.GetChild(0).GetComponent<TextRevealer>();
-        fadeCanvas.gameObject.SetActive(true);
-        FadeCanvas.FadeOut(fadeTime);
-        timer = timers[indexPrompts];
         helpButton.gameObject.SetActive(false);
+        SceneEvents.current.sceneAction += SetSequence;
+
+        
     }
 
     private void OnDestroy()
@@ -73,6 +63,17 @@ public class ToothbrushSequenceManager: MonoBehaviour
         switch (indexSequence)
         {
             case 0:
+                interactableObject = toothbrush.GetComponent<InteractableObject>();
+                if (interactableObject == null)
+                {
+                    Debug.LogError("Missing InteractableObject Component");
+                }
+                interactableObject.MakeInteractable(false);
+                textSignTR = textSign.transform.GetChild(0).GetComponent<TextRevealer>();
+                fadeCanvas.gameObject.SetActive(true);
+                FadeCanvas.FadeOut(fadeTime);
+                timer = timers[indexPrompts];
+                helpButton.gameObject.SetActive(false);
                 yield return FirstSequence();
                 helpButton.SetActive(true);
                 break;
@@ -125,7 +126,7 @@ public class ToothbrushSequenceManager: MonoBehaviour
 
     IEnumerator SecondSequence()
     {
-        fadeCanvas.gameObject.SetActive(false);
+        //fadeCanvas.gameObject.SetActive(false);
         
         // Wait until user has asked for help
         yield return new WaitUntil(() => helpRequested);
@@ -152,7 +153,7 @@ public class ToothbrushSequenceManager: MonoBehaviour
     IEnumerator EndScene()
     {
         yield return null;
-        MenuControl.LoadLevel("MainMenu");
+        MenuControl.LoadLevel("PillsScene");
     }
 
     // Called from OnClick event

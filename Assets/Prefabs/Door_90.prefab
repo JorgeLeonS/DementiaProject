@@ -134,7 +134,7 @@ MonoBehaviour:
   nextLevel: Bathroom
   handle: {fileID: 7339146868469751391}
   arrow: {fileID: 4092486918515558352}
-  isTest: 1
+  isTest: 0
 --- !u!1 &3928426707365036935
 GameObject:
   m_ObjectHideFlags: 0
