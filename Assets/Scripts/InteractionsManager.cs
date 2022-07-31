@@ -27,9 +27,9 @@ public class InteractionsManager : MonoBehaviour
     IEnumerator Start()
     {
         //SceneEvents.current.completedInteraction += CheckNextInteraction;
-        SceneEvents.current.completedAction += CheckNextInteraction;
-
         yield return new WaitForSeconds(DelayTimeForStartingScene);
+
+        SceneEvents.current.completedAction += CheckNextInteraction;
 
         StartCoroutine(CheckNextInteraction());
     }

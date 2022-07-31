@@ -201,14 +201,11 @@ public class PillsSequenceManager : MonoBehaviour
         //textSignTR.Unreveal();
         //yield return new WaitForSeconds(textSignTR.UnrevealTime);
         DestroySlicedTextRevealer();
-        textSign.GetComponentInChildren<TextMeshProUGUI>().text = prompts[indexPrompts];
-        textSignTR.Reveal();
-        indexPrompts++;
+        //textSign.GetComponentInChildren<TextMeshProUGUI>().text = prompts[indexPrompts];
+        //textSignTR.Reveal();
+        //indexPrompts++;
 
         yield return WaitForUserToLetGoOfPill();
-
-        //TODO ADD A CHROMATIC ABERRATION THING
-
     }
 
     void RemamingPill()

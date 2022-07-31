@@ -36,7 +36,8 @@ public class PlayerController : MonoBehaviour
     private GameObject Canvas;
     //private DialogueAnimator AnimatedText;
     private GameObject TextObject;
-    private DialogueAnimator AnimatedTextObject;
+    //private DialogueAnimator AnimatedTextObject;
+    private TMP_Text AnimatedTextObject;
     private TextRevealer TRAnimatedTextObject;
 
 
@@ -74,8 +75,9 @@ public class PlayerController : MonoBehaviour
             // Directly assign Canvas component.
             Canvas = MyXROrigin.transform.Find("FollowingCanvas_DialogueBox_Player").gameObject;
             // Directly assign AnimatedText component First access the image, then the text.
-            TextObject = Canvas.transform.GetChild(0).gameObject;
-            AnimatedTextObject = TextObject.GetComponent<DialogueAnimator>();
+            TextObject = Canvas.transform.Find("AnimatedText").gameObject;
+            //AnimatedTextObject = TextObject.GetComponent<DialogueAnimator>();
+            AnimatedTextObject = TextObject.GetComponent<TMP_Text>();
             TRAnimatedTextObject = TextObject.GetComponent<TextRevealer>();
         }
         catch (System.Exception e)
@@ -124,6 +126,9 @@ public class PlayerController : MonoBehaviour
         {
             case "WakeUpScene":
                 SceneEvents.current.playerAction -= Cor_PerformAction_WakeUpScene;
+                break;
+            case "WakeUpScene2":
+                SceneEvents.current.playerAction -= Cor_PerformAction_WakeUpScene2;
                 break;
             case "ToothbrushScene":
                 // toDo something

@@ -106,15 +106,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.15
+    agentRadius: 0.25
     agentHeight: 2
     agentSlope: 0
-    agentClimb: 0.02
+    agentClimb: 0.2
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.05
+    cellSize: 0.083333336
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -735,7 +735,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 783214923842417599, guid: 00a17017293f0f0479831ca37eeabed4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 00a17017293f0f0479831ca37eeabed4, type: 3}
 --- !u!224 &905955586 stripped
 RectTransform:
@@ -921,7 +922,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1966231183}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1334243906
 GameObject:
@@ -1100,7 +1101,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1966231183}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1427319526
 MonoBehaviour:
@@ -1586,7 +1587,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1966231183}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1881163871
 GameObject:
@@ -1707,6 +1708,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 565327037}
     m_Modifications:
+    - target: {fileID: 753914492082044320, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1135487164161192620, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1756,8 +1761,12 @@ PrefabInstance:
       value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 4791918555971253756, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
+      propertyPath: isTest
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791918555971253756, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
       propertyPath: nextLevel
-      value: Bathroom-Effect Test 2
+      value: ToothbrushScene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
@@ -1795,11 +1804,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1917892444}
+  - {fileID: 2067267598}
   - {fileID: 1292231113}
   - {fileID: 1873873361}
   - {fileID: 373654973}
   - {fileID: 1427319525}
-  - {fileID: 2067267598}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1877,7 +1886,7 @@ GameObject:
   - component: {fileID: 2067267600}
   - component: {fileID: 2067267599}
   m_Layer: 0
-  m_Name: DialogTest Manager (1)
+  m_Name: 'TESTING InteractionsManager '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1896,7 +1905,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1966231183}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1918,11 +1927,11 @@ MonoBehaviour:
   characters:
   - {fileID: 6461283002877383224}
   turningNames:
+  - PlayerAction
   - SceneAction<2>
   - PlayerAction
-  - PlayerAction
-  - PlayerDialogue<3>
   - James<8>
+  - PlayerDialogue<3>
   - James
   - Delay<1.5>
   - PlayerDialogue
@@ -1969,6 +1978,81 @@ Transform:
   m_Father: {fileID: 1026499560}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2145433318 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3865424606523691652, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+  m_PrefabInstance: {fileID: 3707888874178469197}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2145433320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145433318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ec122085849034da3abb01d0a62c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textComponent: {fileID: 2145433322}
+  AutomaticUnreveal: 0
+  RevealOnEnabled: 1
+  UnrevealOnDisabled: 1
+  AutomaticUnrevealAfterSeconds: 1
+  UnrevealDelay: 0
+  revealMinHorizontalDistance: 300
+  revealMaxHorizontalDistance: 300
+  revealMinVerticalDistance: 300
+  revealMaxVerticalDistance: 300
+  unrevealMinHorizontalDistance: 300
+  unrevealMaxHorizontalDistance: 300
+  unrevealMinVerticalDistance: 300
+  unrevealMaxVerticalDistance: 300
+  RevealTime: 1
+  UnrevealTime: 1
+  RevealLetterOpacityBegin: 0
+  UnrevealLetterOpacityBegin: 1
+  RevealLetterOpacityEnd: 1
+  UnrevealLetterOpacityEnd: 0
+  RevealSmoothOverlap: 1
+  UnrevealSmoothOverlap: 1
+  RevealSmoothOverlapSmoothness: 0.5
+  UnrevealSmoothOverlapSmoothness: 0.5
+  RevealRandomRotation: 0
+  UnrevealRandomRotation: 0
+  RevealReverse: 0
+  UnrevealReverse: 0
+  RevealAnimationDirection: 0
+  RevealAnimationHorizontalDirection: 0
+  RevealAnimationVerticalDirection: 0
+  UnrevealAnimationDirection: 0
+  UnrevealAnimationHorizontalDirection: 0
+  UnrevealAnimationVerticalDirection: 0
+  IsEditorPlayingAnimation: 0
+  OnRevealStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRevealCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnrevealStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnrevealCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2145433322 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3865424606523691650, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+  m_PrefabInstance: {fileID: 3707888874178469197}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145433318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bbe1d40ec3cc064da3eb758943a97d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &10394185030008652
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2818,6 +2902,22 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 1992613287}
+    - target: {fileID: 3865424606523691648, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3865424606523691652, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: m_Name
+      value: AnimatedText -
+      objectReference: {fileID: 0}
+    - target: {fileID: 3865424606523691652, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4648496580228631764, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5071196646476049988, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2866,7 +2966,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Origin - Hands W Dialogue
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3865424606523691648, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
 --- !u!4 &3766182740319246743
 Transform:
@@ -4045,7 +4146,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8384684659080479418, guid: 17c194b7b899e854ebf6739ae5ed6ed3, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8384684659080479418, guid: 17c194b7b899e854ebf6739ae5ed6ed3, type: 3}
       propertyPath: m_LocalPosition.x
