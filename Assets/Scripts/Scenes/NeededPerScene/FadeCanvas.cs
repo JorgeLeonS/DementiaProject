@@ -52,17 +52,17 @@ public class FadeCanvas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            FadeIn();
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            FadeOut();
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            FadeInOut();
-        }
+        //if (Input.GetKeyDown(KeyCode.UpArrow))
+        //{
+        //    FadeIn();
+        //}
+        //if (Input.GetKeyDown(KeyCode.DownArrow))
+        //{
+        //    FadeOut();
+        //}
+        //if (Input.GetKeyDown(KeyCode.RightArrow))
+        //{
+        //    FadeInOut();
+        //}
     }
 }

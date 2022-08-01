@@ -145,16 +145,12 @@ public class CharacterController : MonoBehaviour
         walkCounter++;
 
         yield return new WaitUntil(() => HasCharacterReachedDestination());
-
-        //animator.SetBool("Walk", false);
     }
 
     private void OnAnimatorMove()
     {
         // Correction so that the character and agent positions match.
         transform.position = navMeshAgent.nextPosition;
-
-        
     }
 
     /// <summary>
@@ -167,8 +163,11 @@ public class CharacterController : MonoBehaviour
         {
             Vector3 dir = moveLocations[walkCounter - 1].position - transform.position;
             dir.y = 0;
+
+            // Adjustment so the character rotates faster
             Quaternion rot = Quaternion.LookRotation(dir);
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, 1.5f * Time.deltaTime);
+
             if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {
                 if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
@@ -197,7 +196,7 @@ public class CharacterController : MonoBehaviour
         {
             animator.SetBool(characterInteraction.AnimationName[interactionCounter], true);
             yield return new WaitForSeconds(characterInteraction.DialogueDurations[interactionCounter] + 1.0f);
-            GetComponent<Animator>().SetBool(characterInteraction.AnimationName[interactionCounter], false);
+            animator.SetBool(characterInteraction.AnimationName[interactionCounter], false);
         }
         // If there is a dialogue
         else
@@ -226,7 +225,7 @@ public class CharacterController : MonoBehaviour
 
             // Check for animation name, and stop it
             if (characterInteraction.AnimationName[interactionCounter] != "")
-                GetComponent<Animator>().SetBool(characterInteraction.AnimationName[interactionCounter], false);
+                animator.SetBool(characterInteraction.AnimationName[interactionCounter], false);
             
             Canvas.GetComponent<Canvas>().enabled = false;
         }
