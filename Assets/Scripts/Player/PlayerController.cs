@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour
 
         TRAnimatedTextObject.Unreveal();
 
-        yield return new WaitForSeconds(TRAnimatedTextObject.UnrevealTime + 1.0f);
+        yield return new WaitForSeconds(TRAnimatedTextObject.UnrevealTime + 0.5f);
     }
 
     /// <summary>

@@ -17,7 +17,10 @@ public class WakeUpScene_Methods : MonoBehaviour
     public GameObject blinds;
     private static Animator blindsAnimator;
 
+    public Door entranceDoor;
+
     public GameObject doorArrow;
+    public GameObject doorHandle;
     public GameObject doorText;
     private static TextRevealer TRDoorText;
 
@@ -73,9 +76,12 @@ public class WakeUpScene_Methods : MonoBehaviour
         switch (interactionCounter)
         {
             case 0:
-                yield return OpenBlinds();
+                yield return OpenEntranceDoor();
                 break;
             case 1:
+                yield return OpenBlinds();
+                break;
+            case 2:
                 ActivateDoorText();
                 break;
             default:
@@ -119,7 +125,14 @@ public class WakeUpScene_Methods : MonoBehaviour
     public void ActivateDoorText()
     {
         TRDoorText.Reveal();
+        doorHandle.GetComponent<BoxCollider>().enabled = true;
         doorArrow.SetActive(true);
+    }
+
+    IEnumerator OpenEntranceDoor()
+    {
+        entranceDoor.OpenDoorWithNoTransition();
+        yield return new WaitForSeconds(1f);
     }
 
     public static IEnumerator OpenBlinds_Animation()

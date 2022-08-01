@@ -121,7 +121,7 @@ public class ToothbrushSequenceManager: MonoBehaviour
     IEnumerator OpenDoor()
     {
         door.OpenDoorWithNoTransition();
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
     }
 
     IEnumerator SecondSequence()

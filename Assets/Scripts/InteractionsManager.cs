@@ -60,13 +60,15 @@ public class InteractionsManager : MonoBehaviour
         if (nameInList.Contains("<"))
         {
             int firstArrowIndex = nameInList.IndexOf("<");
+            int lastArrowIndex = nameInList.IndexOf(">")-1;
+            int numbersInside = lastArrowIndex - firstArrowIndex;
             string nextInteraction = nameInList.Substring(0, firstArrowIndex);
             // Check if the interaction is a Delay
             if(nextInteraction == "Delay")
             {
                 // Parse the content to a float inside of <>. Right now it will only get a float with one decimal.
                 // (It gets the next 3 characters after the '<')
-                delayTime = float.Parse(nameInList.Substring(firstArrowIndex + 1, 3));
+                delayTime = float.Parse(nameInList.Substring(firstArrowIndex + 1, numbersInside));
                 yield return StartCoroutine(DoNextInteraction(nextInteraction, delayTime));
                 NextTurn();
                 SceneEvents.current.CompletedAction();
@@ -75,7 +77,7 @@ public class InteractionsManager : MonoBehaviour
             {
                 // Parse the content to an int inside of <>. Will only get one number for now.
                 // (It gets the next character after the '<')
-                repeatTimes = int.Parse(nameInList.Substring(firstArrowIndex + 1, 1));
+                repeatTimes = int.Parse(nameInList.Substring(firstArrowIndex + 1, numbersInside));
                 for (int i = 0; i < repeatTimes; i++)
                 {
                     yield return StartCoroutine(DoNextInteraction(nextInteraction));
