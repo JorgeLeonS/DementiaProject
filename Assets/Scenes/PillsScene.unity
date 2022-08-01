@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: e903f42ffcf419d41b83030ec31d5a62, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -788,6 +788,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f6f09f2e1820e6d49a0ee724f97816e1, type: 2}
+    - target: {fileID: 1357529570601631670, guid: f54e64007d81e5848a56298808abdfff, type: 3}
+      propertyPath: m_Color.b
+      value: 0.92156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357529570601631670, guid: f54e64007d81e5848a56298808abdfff, type: 3}
+      propertyPath: m_Color.g
+      value: 0.972549
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357529570601631670, guid: f54e64007d81e5848a56298808abdfff, type: 3}
+      propertyPath: m_Color.r
+      value: 0.85882354
+      objectReference: {fileID: 0}
     - target: {fileID: 1357529570666051692, guid: f54e64007d81e5848a56298808abdfff, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

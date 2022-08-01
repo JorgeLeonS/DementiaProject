@@ -184,15 +184,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4312847017914235622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0741f57bd63724e6591a6d5efc09f4df, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d69fbd8f3c045145b0a153ec64a4af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor: {r: 0.9433962, g: 0.68383527, b: 0.13794944, a: 1}
-  selectedColor: {r: 0.3491094, g: 1, b: 0, a: 0}
-  hoveredColor: {r: 0.4528302, g: 0.33807993, b: 0.06621573, a: 0}
-  myRenderers:
-  - {fileID: 306451045862476923}
-  - {fileID: 2444286154043482138}
+  normalColor: {r: 0, g: 0, b: 0, a: 0}
+  selectedColor: {r: 0, g: 0, b: 0, a: 0}
+  hoveredColor: {r: 0, g: 0, b: 0, a: 0}
+  myRenderers: []
 --- !u!1 &4524691576391501689
 GameObject:
   m_ObjectHideFlags: 0
