@@ -532,6 +532,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5071196646476049988, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
   m_PrefabInstance: {fileID: 804944834}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &804944836 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5071196647292621789, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+  m_PrefabInstance: {fileID: 804944834}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &857135596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1965,7 +1970,7 @@ PrefabInstance:
     - target: {fileID: 8044693570769402229, guid: 4c0a4a5f5e246134f900672399fd303c, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 804944836}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c0a4a5f5e246134f900672399fd303c, type: 3}
 --- !u!224 &163816541273744209 stripped
@@ -2507,6 +2512,7 @@ MonoBehaviour:
   - James<5>
   - SceneAction
   - James<2>
+  - SceneAction
   characterTurn: 0
   DelayTimeForStartingScene: 1
 --- !u!1 &6197944580287173372
