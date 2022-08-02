@@ -179,6 +179,14 @@ public class CharacterController : MonoBehaviour
         return false;
     }
 
+    public IEnumerator Cor_CustomDialogue(string dialogue, float duration)
+    {
+        Canvas.GetComponent<Canvas>().enabled = true;
+        animatedText.ReadText(dialogue, duration);
+        yield return new WaitForSeconds(duration + 1.0f);
+        Canvas.GetComponent<Canvas>().enabled = false;
+    }
+
     /// <summary>
     /// Coroutine that makes the character have a dialogue.
     /// Can also call an animation and an audio.

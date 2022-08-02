@@ -8,6 +8,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class PillsSequenceManager : MonoBehaviour
 {
+    public CharacterController James;
+
     public Volume sceneVolume;
     private ChromaticAberration chA;
     private LensDistortion lD;
@@ -141,7 +143,10 @@ public class PillsSequenceManager : MonoBehaviour
                 yield return GrabSecondPillsSequence();
                 break;
             case 2:
-                RemamingPill();
+                yield return RemainingPill();
+                break;
+            case 3:
+                yield return EndScene();
                 break;
             default:
                 yield return new WaitForSeconds(1f);
@@ -208,9 +213,33 @@ public class PillsSequenceManager : MonoBehaviour
         yield return WaitForUserToLetGoOfPill();
     }
 
-    void RemamingPill()
+    IEnumerator RemainingPill()
     {
-        print(pillsToGrab[0]);
+        string toBeSearched = "BottlePill";
+        int index = pillsToGrab[0].IndexOf(toBeSearched);
+        string day = pillsToGrab[0].Substring(index + toBeSearched.Length);
+        string color = "";
+
+        switch (day)
+        {
+            case "Monday":
+                color = "Green";
+                break;
+            case "Wednesday":
+                color = "Orange";
+                break;
+            case "Friday":
+                color = "Blue";
+                break;
+        }
+
+        yield return James.Cor_CustomDialogue($"Today is {day}, so take the ones on the {color} bottle.", 3);
+    }
+
+    IEnumerator EndScene()
+    {
+        yield return null;
+        MenuControl.LoadLevel("MainMenu2");
     }
 
     void EnableInteractionForPills()
@@ -239,8 +268,6 @@ public class PillsSequenceManager : MonoBehaviour
                     aPillHasBeenGrabbed = true;
                 }
             }
-
-            //yield return new WaitForSeconds(1f);
         }
         triggerEffects = true;
         yield return new WaitUntil(() => aPillHasBeenGrabbed);

@@ -37,6 +37,17 @@ public class MenuSpawn : MonoBehaviour
             Pause();
     }
 
+    public void OnMenuBtnPressed()
+    {
+        showMenu = !showMenu;
+        if (showMenu)
+        {
+            Resume();
+        }
+        else
+            Pause();
+    }
+
     public void Resume()
     {
         Time.timeScale = 0;
