@@ -932,6 +932,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1043526214 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4791918555971253756, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
+  m_PrefabInstance: {fileID: 1952414276}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8663f3ee3a3b904fa3f891a5a5ef709, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1214112474 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4791918557061913524, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
@@ -1831,8 +1842,7 @@ MonoBehaviour:
   sceneVolume: {fileID: 1364900722}
   blinds: {fileID: 6562620199329160763}
   entranceDoor: {fileID: 1214112474}
-  doorArrow: {fileID: 1952414277}
-  doorHandle: {fileID: 2127032515}
+  bathroomDoor: {fileID: 1043526214}
   doorText: {fileID: 2131771798342595147}
 --- !u!4 &1873873361
 Transform:
@@ -2023,7 +2033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3614160695498450558, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4603265680802114415, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
       propertyPath: m_Layer
@@ -2031,7 +2041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4791918555971253756, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
       propertyPath: isTest
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4791918555971253756, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
       propertyPath: nextLevel
@@ -2039,11 +2049,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
---- !u!1 &1952414277 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 753914492082044320, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
-  m_PrefabInstance: {fileID: 1952414276}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1966231182
 GameObject:
   m_ObjectHideFlags: 0
@@ -2198,8 +2203,8 @@ MonoBehaviour:
   turningNames:
   - PlayerAction
   - SceneAction<3>
-  - James<11>
   - PlayerAction
+  - James<11>
   - PlayerDialogue<3>
   - James
   - Delay<1.5>
@@ -2247,11 +2252,6 @@ Transform:
   m_Father: {fileID: 1026499560}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2127032515 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4603265680802114415, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
-  m_PrefabInstance: {fileID: 1952414276}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2145433318 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3865424606523691652, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
@@ -2714,10 +2714,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 36
+  m_fontSize: 8
+  m_fontSizeBase: 8
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 8
   m_fontSizeMax: 15
   m_fontStyle: 0
@@ -2921,8 +2921,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 2.15, y: 2.04}
-  m_SizeDelta: {x: 150, y: 75}
+  m_AnchoredPosition: {x: 2, y: 1.7}
+  m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2142702266855171017
 GameObject:
