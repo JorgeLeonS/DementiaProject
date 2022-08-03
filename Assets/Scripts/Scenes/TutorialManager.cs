@@ -26,7 +26,11 @@ public class TutorialManager : MonoBehaviour
     {
         explanationCounter++;
         if (explanationCounter >= textExplanations.Count)
+        {
             SkipExplanation();
+            explanationCounter = -1;
+            NextExplanation();
+        }    
         else
         {
             previousButton.interactable = true;
@@ -52,7 +56,7 @@ public class TutorialManager : MonoBehaviour
     public void SkipExplanation()
     {
         TutorialSection.SetActive(false);
-        StartExperienceSection.SetActive(true);
+        //StartExperienceSection.SetActive(true);
     }
 
     public void BackToExplanations()
