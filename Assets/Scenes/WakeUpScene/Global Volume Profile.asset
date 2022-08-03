@@ -143,8 +143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   postExposure:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.5
   contrast:
     m_OverrideState: 0
     m_Value: 0
@@ -217,7 +217,7 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 1
+          inSlope: 0
           outSlope: 1
           tangentMode: 0
           weightedMode: 0
@@ -227,7 +227,7 @@ MonoBehaviour:
           time: 1
           value: 1
           inSlope: 1
-          outSlope: 1
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -352,8 +352,8 @@ MonoBehaviour:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0.12757201
-          value: 0.8197425
+          time: 0.13150685
+          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -361,8 +361,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.5720165
-          value: 0.36909872
+          time: 0.6657534
+          value: 0.7209302
           inSlope: 0
           outSlope: 0
           tangentMode: 0
