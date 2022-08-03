@@ -19,7 +19,8 @@ public class WakeUpScene_Methods : MonoBehaviour
 
     public Door entranceDoor;
 
-    public Door bathroomDoor;
+    public GameObject doorArrow;
+    public GameObject doorHandle;
     public GameObject doorText;
     private static TextRevealer TRDoorText;
 
@@ -29,6 +30,8 @@ public class WakeUpScene_Methods : MonoBehaviour
     void Start()
     {
         SceneEvents.current.sceneAction += PerformSceneAction;
+
+        doorArrow.SetActive(false);
 
         Lights_Manager.ChangeAmbientLightIntensity(0.1f, 0.1f);
         Lights_Manager.ChangeEnvironmentReflectionsIntensity(0.2f, 0.1f);
@@ -122,7 +125,8 @@ public class WakeUpScene_Methods : MonoBehaviour
     public void ActivateDoorText()
     {
         TRDoorText.Reveal();
-        bathroomDoor.StartInteraction(true);
+        doorHandle.GetComponent<BoxCollider>().enabled = true;
+        doorArrow.SetActive(true);
     }
 
     IEnumerator OpenEntranceDoor()
