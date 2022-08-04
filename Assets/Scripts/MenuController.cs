@@ -17,6 +17,7 @@ public class MenuController : MonoBehaviour
 
     [SerializeField] Canvas tutorialCanvas;
     [SerializeField] Canvas chaptersCanvas;
+    [SerializeField] Canvas exitConfirmation;
 
     List<Canvas> pages = new List<Canvas>();
 
@@ -24,6 +25,7 @@ public class MenuController : MonoBehaviour
     {
         pages.Add(tutorialCanvas);
         pages.Add(chaptersCanvas);
+        pages.Add(exitConfirmation);
         HideAllPages();
     }
 
@@ -32,8 +34,9 @@ public class MenuController : MonoBehaviour
         startButton.onClick.AddListener(StartFirstScene);
         tutorialButton.onClick.AddListener(ShowTutorialScreen);
         creditsButton.onClick.AddListener(GoToCredits);
-        quitButton.onClick.AddListener(ExitExperience);
+        quitButton.onClick.AddListener(ShowExitConfirmationPage);
         chapterSelectionButton.onClick.AddListener(ShowChapterSelectionScreen);
+
     }
 
     private void OnDisable()
@@ -70,10 +73,15 @@ public class MenuController : MonoBehaviour
         Debug.Log("Credits");
     }
 
-    private void ExitExperience()
+    public void ExitExperience()
     {
         Debug.Log("Exit");
         Application.Quit();
+    }
+
+    private void ShowExitConfirmationPage()
+    {
+        ShowSelectedPage(exitConfirmation);
     }
 
     private void ShowSelectedPage(Canvas selectedCanvas)
@@ -89,7 +97,7 @@ public class MenuController : MonoBehaviour
         }
     }
 
-    private void HideAllPages()
+    public void HideAllPages()
     {
         foreach(Canvas page in pages)
         {
