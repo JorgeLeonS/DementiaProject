@@ -2201,13 +2201,13 @@ MonoBehaviour:
   characters:
   - {fileID: 6461283002877383224}
   turningNames:
-  - PlayerAction
-  - SceneAction<3>
-  - PlayerAction
+  - SceneAction<2>
   - James<11>
   - PlayerDialogue<3>
   - James
   - Delay<1.5>
+  - PlayerAction
+  - PlayerAction
   - PlayerDialogue
   - PlayerDialogue
   characterTurn: 0

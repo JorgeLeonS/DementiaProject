@@ -716,11 +716,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2596887826340726861, guid: 29ef676ed567ca945934a4a2c3c9576d, type: 3}
       propertyPath: AnimationName.Array.data[4]
-      value: Breath
+      value: Talk3
       objectReference: {fileID: 0}
     - target: {fileID: 2596887826340726861, guid: 29ef676ed567ca945934a4a2c3c9576d, type: 3}
       propertyPath: AnimationName.Array.data[5]
-      value: Talk3
+      value: Breath
       objectReference: {fileID: 0}
     - target: {fileID: 2596887826340726861, guid: 29ef676ed567ca945934a4a2c3c9576d, type: 3}
       propertyPath: AnimationName.Array.data[7]

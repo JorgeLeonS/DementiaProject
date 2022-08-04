@@ -27,6 +27,8 @@ public class CharacterController : MonoBehaviour
 
     private Transform CharacterWaypoints;
 
+    private bool hasAnimationFinished;
+
     int interactionCounter;
     int walkCounter;
 
@@ -82,6 +84,8 @@ public class CharacterController : MonoBehaviour
 
     private void Update()
     {
+        print($"Animation: {animator.GetCurrentAnimatorClipInfo(0)[0].clip.name} {hasAnimationFinished}");
+
         // Adapted method from:
         // https://www.youtube.com/watch?v=_yuAaEbl_ns
         // Compare the next position of the nav mesh agent with its current postion
@@ -220,7 +224,7 @@ public class CharacterController : MonoBehaviour
             if (characterInteraction.DialogueAudios[interactionCounter] == null)
             {
                 animatedText.ReadText(characterInteraction.DialogueText[interactionCounter], characterInteraction.DialogueDurations[interactionCounter]);
-                yield return new WaitForSeconds(characterInteraction.DialogueDurations[interactionCounter] + 1.0f);
+                yield return new WaitForSeconds(characterInteraction.DialogueDurations[interactionCounter] + 0.7f);
             }
             // Else, get the duration of the audio on the DialogueAudios list.
             else
@@ -228,14 +232,25 @@ public class CharacterController : MonoBehaviour
                 var currentClip = audioSource.clip = characterInteraction.DialogueAudios[interactionCounter];
                 animatedText.ReadText(characterInteraction.DialogueText[interactionCounter], currentClip);
                 audioSource.Play();
-                yield return new WaitForSeconds(currentClip.length + 1.0f);
+                yield return new WaitForSeconds(currentClip.length + 0.7f);
             }
 
             // Check for animation name, and stop it
             if (characterInteraction.AnimationName[interactionCounter] != "")
+            {
+                yield return new WaitUntil(() => hasAnimationFinished);
+                hasAnimationFinished = false;
                 animator.SetBool(characterInteraction.AnimationName[interactionCounter], false);
+            }
+                
             
             Canvas.GetComponent<Canvas>().enabled = false;
         }
+    }
+
+    private void AnimationFinish()
+    {
+        Debug.LogWarning("ANIMATION FINSHED");
+        hasAnimationFinished = true;
     }
 }
