@@ -260,14 +260,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8808420025914075113, guid: d5448c1df03bf6842b1e1d30b88ce92d, type: 3}
-      propertyPath: movementSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8808420025914075113, guid: d5448c1df03bf6842b1e1d30b88ce92d, type: 3}
-      propertyPath: rotationSpeed
-      value: 19
-      objectReference: {fileID: 0}
     - target: {fileID: 8808420025914075114, guid: d5448c1df03bf6842b1e1d30b88ce92d, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -347,18 +339,6 @@ PrefabInstance:
     - target: {fileID: 8808420027143168565, guid: d5448c1df03bf6842b1e1d30b88ce92d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8808420027143168566, guid: d5448c1df03bf6842b1e1d30b88ce92d, type: 3}
-      propertyPath: m_Depth
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 8808420027143168566, guid: d5448c1df03bf6842b1e1d30b88ce92d, type: 3}
-      propertyPath: field of view
-      value: 44.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8808420027143168566, guid: d5448c1df03bf6842b1e1d30b88ce92d, type: 3}
-      propertyPath: m_projectionMatrixMode
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5448c1df03bf6842b1e1d30b88ce92d, type: 3}
@@ -2098,7 +2078,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &1917892443
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2351,7 +2331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2067267598
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2387,8 +2367,9 @@ MonoBehaviour:
   characters:
   - {fileID: 6461283002877383224}
   turningNames:
-  - SceneAction<2>
-  - James<11>
+  - SceneAction
+  - James
+  - SceneAction
   - PlayerDialogue<3>
   - James
   - Delay<1.5>

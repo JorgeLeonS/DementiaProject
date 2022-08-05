@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d8bc15aba944b346af947dc2eb75fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 8
-  rotationSpeed: 10
+  movementSpeed: 3
+  rotationSpeed: 19
 --- !u!54 &8808420025914075112
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -137,10 +137,10 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 26.991467
+  field of view: 45
   orthographic: 0
   orthographic size: 5
-  m_Depth: 0
+  m_Depth: 2.96
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
