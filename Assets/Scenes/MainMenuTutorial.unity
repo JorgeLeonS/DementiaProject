@@ -567,6 +567,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+--- !u!4 &1406571693 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5071196647292621786, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+  m_PrefabInstance: {fileID: 1406571692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1540919051
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8641477398124610441, guid: b50f6cb4e74ab7642a5c8eb357cfb1a3, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8641477398124610441, guid: b50f6cb4e74ab7642a5c8eb357cfb1a3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8641477398124610441, guid: b50f6cb4e74ab7642a5c8eb357cfb1a3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8641477398124610441, guid: b50f6cb4e74ab7642a5c8eb357cfb1a3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8641477398124610441, guid: b50f6cb4e74ab7642a5c8eb357cfb1a3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8641477398124610441, guid: b50f6cb4e74ab7642a5c8eb357cfb1a3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8641477398124610441, guid: b50f6cb4e74ab7642a5c8eb357cfb1a3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8641477398124610441, guid: b50f6cb4e74ab7642a5c8eb357cfb1a3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8641477398124610441, guid: b50f6cb4e74ab7642a5c8eb357cfb1a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8641477398124610441, guid: b50f6cb4e74ab7642a5c8eb357cfb1a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8641477398124610441, guid: b50f6cb4e74ab7642a5c8eb357cfb1a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8641477398124610485, guid: b50f6cb4e74ab7642a5c8eb357cfb1a3, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1406571693}
+    - target: {fileID: 8641477398124610486, guid: b50f6cb4e74ab7642a5c8eb357cfb1a3, type: 3}
+      propertyPath: m_Name
+      value: VRSpectatorCamera
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b50f6cb4e74ab7642a5c8eb357cfb1a3, type: 3}
 --- !u!1 &1834617338
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,6 +1173,22 @@ PrefabInstance:
     - target: {fileID: 2534011044425770364, guid: 4fe324e3690a3402c8ad7bcf95d2a5fb, type: 3}
       propertyPath: m_Name
       value: MenuScene - Menus
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612549308883429419, guid: 4fe324e3690a3402c8ad7bcf95d2a5fb, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.6509434
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612549308883429419, guid: 4fe324e3690a3402c8ad7bcf95d2a5fb, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.56973344
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612549308883429419, guid: 4fe324e3690a3402c8ad7bcf95d2a5fb, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.24870951
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612549308883429419, guid: 4fe324e3690a3402c8ad7bcf95d2a5fb, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4289106239
       objectReference: {fileID: 0}
     - target: {fileID: 3924442813372094260, guid: 4fe324e3690a3402c8ad7bcf95d2a5fb, type: 3}
       propertyPath: m_AnchorMax.y

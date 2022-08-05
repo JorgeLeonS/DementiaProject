@@ -22,8 +22,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Hands_solid
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: _RECEIVE_SHADOWS_OFF _SPECULARHIGHLIGHTS_OFF _SURFACE_TYPE_TRANSPARENT
-  m_LightmapFlags: 6
+  m_ShaderKeywords: _EMISSION _RECEIVE_SHADOWS_OFF _SPECULARHIGHLIGHTS_OFF _SURFACE_TYPE_TRANSPARENT
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
@@ -129,7 +129,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 0
     - _Shininess: 0.75
-    - _Smoothness: 0.75
+    - _Smoothness: 0.251
     - _SmoothnessSource: 1
     - _SmoothnessTextureChannel: 0
     - _SpecSource: 0
@@ -141,9 +141,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0.031372555, g: 0.08264617, b: 0.98039216, a: 0.5764706}
-    - _Color: {r: 0.031372555, g: 0.08264614, b: 0.98039216, a: 0.5764706}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BaseColor: {r: 0.6179245, g: 0.6179245, b: 1, a: 0.6156863}
+    - _Color: {r: 0.6179245, g: 0.6179245, b: 1, a: 0.6156863}
+    - _EmissionColor: {r: 0.09314174, g: 0.20180711, b: 0.5898977, a: 1}
     - _MyColor: {r: 0.87058824, g: 0.87058824, b: 0.87058824, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectColor: {r: 1, g: 0, b: 0, a: 0.5019608}

@@ -58,7 +58,7 @@ public class CharacterController : MonoBehaviour
         navMeshAgent.updatePosition = false;
 
         // Directly assign Canvas component
-        Canvas = transform.Find("Canvas_DialogueBox").gameObject;
+        Canvas = transform.Find("Canvas_DialogueBoxSquared").gameObject;
         // Directly assign AnimatedText component First access the image, then the text
         animatedText = Canvas.transform.GetChild(0).Find("AnimatedText").GetComponent<DialogueAnimator>();
 
@@ -84,7 +84,7 @@ public class CharacterController : MonoBehaviour
 
     private void Update()
     {
-        print($"Animation: {animator.GetCurrentAnimatorClipInfo(0)[0].clip.name} {hasAnimationFinished}");
+        //print($"Animation: {animator.GetCurrentAnimatorClipInfo(0)[0].clip.name} {hasAnimationFinished}");
 
         // Adapted method from:
         // https://www.youtube.com/watch?v=_yuAaEbl_ns

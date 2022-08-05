@@ -78,10 +78,10 @@ public class SpectatorController : MonoBehaviour
         Debug.Log(rotation);
 
         xRotation -= rotationY;
-        xRotation = Mathf.Clamp(xRotation,-90f, 90f);
+        //xRotation = Mathf.Clamp(xRotation,-90f, 90f);
 
         yRotation += rotationX;
-        yRotation = Mathf.Clamp(yRotation, -90f, 90f);
+        //yRotation = Mathf.Clamp(yRotation, -90f, 90f);
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
     }

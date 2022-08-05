@@ -8,6 +8,8 @@ TagManager:
   - AnimatedText
   - Textbox
   - Music
+  - VRSpectator
+  - Spectator
   layers:
   - Default
   - TransparentFX
