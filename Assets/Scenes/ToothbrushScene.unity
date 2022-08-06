@@ -1939,6 +1939,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnMenuBtnPressed
       objectReference: {fileID: 0}
+    - target: {fileID: 2589994921930267218, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: textComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589994921930267218, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: revealMaxHorizontalDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589994921930267218, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: revealMinHorizontalDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589994921930267218, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: unrevealMaxHorizontalDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589994921930267218, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: unrevealMinHorizontalDistance
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3865424606523691652, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_Name
       value: AnimatedText -

@@ -1183,10 +1183,10 @@ MonoBehaviour:
   MyXROrigin: {fileID: 8436811321640268554}
   itemsToInteract: []
   DialogueText:
-  - I really need to use the bathroom...
   - Where am I?
+  - I really need to use the bathroom...
   - It's so dark in here!
-  - I can't find the door to the bathroom
+  - Where is the door to the bathroom?
   - I... I feel lost...
   - Yes, thank you
   - "But there is something else I\u2026"
@@ -1194,10 +1194,10 @@ MonoBehaviour:
   - "Wait\u2026 How did you know?"
   DialogueAudios: []
   DialogueDurations:
-  - 3.5
   - 2
+  - 6
   - 4
-  - 4
+  - 6
   - 3
   - 3.5
   - 3
@@ -2124,7 +2124,7 @@ MonoBehaviour:
   - Delay<5.0>
   - PlayerDialogue
   - SceneAction
-  - James<4>
+  - James<3>
   - SceneAction
   - James
   - PlayerDialogue<2>
@@ -2946,9 +2946,9 @@ MonoBehaviour:
   AutomaticUnrevealAfterSeconds: 3
   UnrevealDelay: 0
   revealMinHorizontalDistance: 0
-  revealMaxHorizontalDistance: 359.2624
+  revealMaxHorizontalDistance: 300
   revealMinVerticalDistance: 0
-  revealMaxVerticalDistance: 359.2624
+  revealMaxVerticalDistance: 300
   unrevealMinHorizontalDistance: 0
   unrevealMaxHorizontalDistance: 300
   unrevealMinVerticalDistance: 0
@@ -3453,6 +3453,14 @@ PrefabInstance:
       propertyPath: m_RaycastMask.m_Bits
       value: 224
       objectReference: {fileID: 0}
+    - target: {fileID: 1458185075956983943, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1458185075956983943, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190080
+      objectReference: {fileID: 0}
     - target: {fileID: 1461995287963468428, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -3460,6 +3468,22 @@ PrefabInstance:
     - target: {fileID: 1461995287963468428, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnMenuBtnPressed
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589994921930267218, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: revealMaxHorizontalDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589994921930267218, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: revealMinHorizontalDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589994921930267218, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: unrevealMaxHorizontalDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589994921930267218, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: unrevealMinHorizontalDistance
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3865424606523691648, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_Enabled
@@ -4221,7 +4245,6 @@ MonoBehaviour:
   - How is it pitch black in here?
   - The bulb for your night light must have went out...
   - It's no wonder you couldn't see anything.
-  - 
   - Now, is that better?
   - You need to use the bathroom, right?
   - Let's just say we have had this conversation
@@ -4238,12 +4261,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   DialogueDurations:
   - 3
   - 3
   - 3
-  - 0
   - 1.5
   - 1.7
   - 3.2
@@ -4254,15 +4275,13 @@ MonoBehaviour:
   - 
   - 
   - 
-  - 
-  - 
   - Talk1
   - Talk2
-  - Breath
+  - HeadShake
   - Talk3
   - 
   - 
-  MoveToNextLocation: 01010101000000000101
+  MoveToNextLocation: 010101010000000101
 --- !u!1 &6562620199329160763
 GameObject:
   m_ObjectHideFlags: 0
