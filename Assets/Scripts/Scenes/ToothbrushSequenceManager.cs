@@ -86,13 +86,16 @@ public class ToothbrushSequenceManager: MonoBehaviour
                 yield return SecondSequence();
                 break;
             case 2:
-                yield return FirstSequence();
+                yield return ThirdSequence();
                 yield return OpenDoor();
                 break;
             case 3:
-                yield return FourthSequence();
+                yield return ToothbrushAppears();
                 break;
             case 4:
+                yield return FourthSequence();
+                break;
+            case 5:
                 yield return EndScene();
                 break;
             default:
@@ -102,7 +105,6 @@ public class ToothbrushSequenceManager: MonoBehaviour
         }
 
         indexSequence++;
-        DestroySlicedTextRevealer();
 
         // Returns Button to Normal State.
         EventSystem.current.SetSelectedGameObject(null);
@@ -117,6 +119,20 @@ public class ToothbrushSequenceManager: MonoBehaviour
         textSignTR.Reveal();
         // Give time to the user to find the toothbrush
         yield return new WaitForSeconds(10f);
+    }
+
+    IEnumerator ThirdSequence()
+    {
+        // Show prompt to Find the toothbrush
+        textSign.GetComponentInChildren<TextMeshProUGUI>().text = prompts[indexPrompts];
+        textSignTR.Reveal();
+        // Give time to the user to find the toothbrush
+        yield return new WaitForSeconds(10f);
+
+        textSignTR.Unreveal();
+        DestroySlicedTextRevealer();
+
+        indexPrompts++;
     }
 
     IEnumerator OpenDoor()
@@ -134,6 +150,8 @@ public class ToothbrushSequenceManager: MonoBehaviour
 
         // Unreveal past text
         textSignTR.Unreveal();
+        DestroySlicedTextRevealer();
+
         indexPrompts++;
         yield return new WaitForSeconds(textSignTR.UnrevealTime);
 
@@ -141,13 +159,17 @@ public class ToothbrushSequenceManager: MonoBehaviour
         helpButton.SetActive(false);
     }
 
-    IEnumerator FourthSequence()
+    IEnumerator ToothbrushAppears()
     {
         //Toothbrush slowly appears on the counter
         toothbrush.StartToothbrushEffect();
         yield return new WaitForSeconds(
             toothbrush.timeToTransitionVisibility);
+    }
 
+    IEnumerator FourthSequence()
+    {
+        
         // Prompt appears to grab the toothbrush.
         textSign.GetComponentInChildren<TextMeshProUGUI>().text = prompts[indexPrompts];
         textSignTR.Reveal();
@@ -155,6 +177,10 @@ public class ToothbrushSequenceManager: MonoBehaviour
         // Makes toothbrush Interactable and waits for player to grab the toothbrush.
         interactableObject.MakeInteractable(true);
         yield return new WaitUntil(() => interactableObject.InteractingWithObject());
+
+        // Unreveal past text
+        textSignTR.Unreveal();
+        DestroySlicedTextRevealer();
     }
 
     IEnumerator EndScene()

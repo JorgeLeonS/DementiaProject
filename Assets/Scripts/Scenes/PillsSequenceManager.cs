@@ -239,7 +239,7 @@ public class PillsSequenceManager : MonoBehaviour
     IEnumerator EndScene()
     {
         yield return null;
-        MenuControl.LoadLevel("MainMenu2");
+        MenuControl.LoadLevel("MainMenuTutorial");
     }
 
     void EnableInteractionForPills()

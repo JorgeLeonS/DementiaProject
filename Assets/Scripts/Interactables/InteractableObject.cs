@@ -9,9 +9,14 @@ public class InteractableObject : MonoBehaviour
     XRGrabInteractable grabInteractable;
     bool interactionState = false;
 
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
+
     private void Start()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
     }
 
     public void MakeInteractable(bool makeInteractable)
@@ -28,5 +33,11 @@ public class InteractableObject : MonoBehaviour
     {
         interactionState = grabInteractable.isSelected;
         return interactionState;
+    }
+
+    public void ReturnToOriginalPosition()
+    {
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
     }
 }
