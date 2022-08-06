@@ -50,32 +50,30 @@ public class MenuController : MonoBehaviour
 
     private void StartFirstScene()
     {
-        Debug.Log("Start");
         HideAllPages();
         MenuControl.LoadLevel("WakeUpScene2");
     }
 
     private void ShowChapterSelectionScreen()
     {
-        Debug.Log("Chapter Selection");
+        
         ShowSelectedPage(chaptersCanvas);
     }
 
     private void ShowTutorialScreen()
     {
-        Debug.Log("Tutorial Screen");
+        
         ShowSelectedPage(tutorialCanvas);
     }
 
     private void GoToCredits()
     {
         HideAllPages();
-        Debug.Log("Credits");
     }
 
     public void ExitExperience()
     {
-        Debug.Log("Exit");
+        //Debug.Log("Exit");
         Application.Quit();
     }
 
