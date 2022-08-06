@@ -1183,11 +1183,10 @@ MonoBehaviour:
   MyXROrigin: {fileID: 8436811321640268554}
   itemsToInteract: []
   DialogueText:
-  - Hello!?
+  - I really need to use the bathroom...
   - Where am I?
-  - I ... I cannot see anything!
-  - I need help please!
-  - Please someone come help me
+  - It's so dark in here!
+  - I can't find the door to the bathroom
   - I... I feel lost...
   - Yes, thank you
   - "But there is something else I\u2026"
@@ -1195,11 +1194,10 @@ MonoBehaviour:
   - "Wait\u2026 How did you know?"
   DialogueAudios: []
   DialogueDurations:
-  - 2
+  - 3.5
   - 2
   - 4
-  - 3
-  - 3
+  - 4
   - 3
   - 3.5
   - 3
@@ -2078,7 +2076,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &1917892443
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2123,18 +2121,16 @@ MonoBehaviour:
   - {fileID: 6461283002877383224}
   turningNames:
   - PlayerDialogue<4>
-  - PlayerAction
   - Delay<5.0>
-  - PlayerDialogue<2>
+  - PlayerDialogue
   - SceneAction
   - James<4>
   - SceneAction
-  - James<2>
+  - James
   - PlayerDialogue<2>
   - James
   - PlayerDialogue<2>
   - James<4>
-  - PlayerAction
   - SceneAction
   characterTurn: 0
   DelayTimeForStartingScene: 3
@@ -2331,7 +2327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2067267598
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3487,7 +3483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5071196646476049988, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.5
+      value: 1.464
       objectReference: {fileID: 0}
     - target: {fileID: 5071196646476049988, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3495,23 +3491,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5071196646476049988, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.293
       objectReference: {fileID: 0}
     - target: {fileID: 5071196646476049988, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.64278764
       objectReference: {fileID: 0}
     - target: {fileID: 5071196646476049988, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5071196646476049988, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.76604444
       objectReference: {fileID: 0}
     - target: {fileID: 5071196646476049988, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5071196646476049988, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3519,7 +3515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5071196646476049988, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5071196646476049988, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -4223,10 +4219,9 @@ MonoBehaviour:
   Name: James
   DialogueText:
   - How is it pitch black in here?
-  - How did your night light go out?
-  - Ah, the bulb must have finally died
+  - The bulb for your night light must have went out...
   - It's no wonder you couldn't see anything.
-  - There we go
+  - 
   - Now, is that better?
   - You need to use the bathroom, right?
   - Let's just say we have had this conversation
@@ -4244,19 +4239,17 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   DialogueDurations:
   - 3
   - 3
   - 3
-  - 3.2
-  - 1
+  - 0
+  - 1.5
   - 1.7
-  - 3
   - 3.2
   - 2.5
-  - 0.1
-  - 0.1
+  - 0
+  - 0
   AnimationName:
   - 
   - 
@@ -4269,7 +4262,7 @@ MonoBehaviour:
   - Talk3
   - 
   - 
-  MoveToNextLocation: 0101000100010000000101
+  MoveToNextLocation: 01010101000000000101
 --- !u!1 &6562620199329160763
 GameObject:
   m_ObjectHideFlags: 0

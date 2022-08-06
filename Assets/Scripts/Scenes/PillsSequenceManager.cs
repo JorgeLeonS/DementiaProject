@@ -233,7 +233,7 @@ public class PillsSequenceManager : MonoBehaviour
                 break;
         }
 
-        yield return James.Cor_CustomDialogue($"Today is {day}, so take the ones on the {color} bottle.", 3);
+        yield return James.Cor_CustomDialogue($"Today is {day}, so take the ones on the {color} bottle.", 4);
     }
 
     IEnumerator EndScene()

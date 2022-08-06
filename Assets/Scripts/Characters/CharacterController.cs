@@ -187,7 +187,7 @@ public class CharacterController : MonoBehaviour
     {
         Canvas.GetComponent<Canvas>().enabled = true;
         animatedText.ReadText(dialogue, duration);
-        yield return new WaitForSeconds(duration + 1.0f);
+        yield return new WaitForSeconds(duration + 1.5f);
         Canvas.GetComponent<Canvas>().enabled = false;
     }
 

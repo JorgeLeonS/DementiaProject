@@ -55,6 +55,21 @@ public class ToothbrushSequenceManager: MonoBehaviour
         SceneEvents.current.sceneAction -= SetSequence;
     }
 
+    private void LoadObjects()
+    {
+        interactableObject = toothbrush.GetComponent<InteractableObject>();
+        if (interactableObject == null)
+        {
+            Debug.LogError("Missing InteractableObject Component");
+        }
+        interactableObject.MakeInteractable(false);
+        textSignTR = textSign.transform.GetChild(0).GetComponent<TextRevealer>();
+        fadeCanvas.gameObject.SetActive(true);
+        FadeCanvas.FadeOut(fadeTime);
+        timer = timers[indexPrompts];
+        helpButton.gameObject.SetActive(false);
+    }
+
     /// <summary>
     /// This method indicates what to do on current sequence.
     /// </summary>
@@ -63,17 +78,7 @@ public class ToothbrushSequenceManager: MonoBehaviour
         switch (indexSequence)
         {
             case 0:
-                interactableObject = toothbrush.GetComponent<InteractableObject>();
-                if (interactableObject == null)
-                {
-                    Debug.LogError("Missing InteractableObject Component");
-                }
-                interactableObject.MakeInteractable(false);
-                textSignTR = textSign.transform.GetChild(0).GetComponent<TextRevealer>();
-                fadeCanvas.gameObject.SetActive(true);
-                FadeCanvas.FadeOut(fadeTime);
-                timer = timers[indexPrompts];
-                helpButton.gameObject.SetActive(false);
+                LoadObjects();
                 yield return FirstSequence();
                 helpButton.SetActive(true);
                 break;
@@ -110,12 +115,8 @@ public class ToothbrushSequenceManager: MonoBehaviour
         // Show prompt to Find the toothbrush
         textSign.GetComponentInChildren<TextMeshProUGUI>().text = prompts[indexPrompts];
         textSignTR.Reveal();
-
         // Give time to the user to find the toothbrush
         yield return new WaitForSeconds(10f);
-        textSignTR.Unreveal(); 
-        indexPrompts++;
-        yield return new WaitForSeconds(textSignTR.UnrevealTime);
     }
 
     IEnumerator OpenDoor()
@@ -130,6 +131,12 @@ public class ToothbrushSequenceManager: MonoBehaviour
         
         // Wait until user has asked for help
         yield return new WaitUntil(() => helpRequested);
+
+        // Unreveal past text
+        textSignTR.Unreveal();
+        indexPrompts++;
+        yield return new WaitForSeconds(textSignTR.UnrevealTime);
+
         helpRequested = false;
         helpButton.SetActive(false);
     }

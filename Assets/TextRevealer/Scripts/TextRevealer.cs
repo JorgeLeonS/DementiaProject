@@ -259,6 +259,8 @@ public class TextRevealer : MonoBehaviour {
 
         slicedParent = new GameObject(textComponent.gameObject.name + "_sliced");
         slicedParent.AddComponent<RectTransform>();
+        slicedParent.gameObject.layer = 9;
+
         slicedParent.transform.SetParent(textComponent.transform.parent);
         slicedParent.transform.localScale = textComponent.transform.localScale;
 
@@ -270,6 +272,11 @@ public class TextRevealer : MonoBehaviour {
         CopyTransformFields(rectTransformNew, rectTransformOld);
 
         List<Transform> slices = CreateSlices(slicedParent.transform);
+
+        foreach(Transform t in slices)
+        {
+            t.gameObject.layer = 9;
+        }
 
         m_animationReveal = CreateRevealAnimation(slicedParent, slices);
         m_animationUnreveal = CreateUnrevealAnimation(slicedParent, slices);

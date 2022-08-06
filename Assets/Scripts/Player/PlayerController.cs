@@ -44,12 +44,6 @@ public class PlayerController : MonoBehaviour
     private int dialogueCounter;
     private int interactionCounter;
 
-    private Vector3 WakeUpScene_LayDownPos = new Vector3(-0.15f, 0.2f, -1.0f);
-    private Quaternion WakeUpScene_LayDownRot = Quaternion.Euler(-50, 90, 0);
-
-    private Vector3 WakeUpScene_StandingPos = new Vector3(-0.5f, 0f, 1f);
-    private Quaternion WakeUpScene_StandingRot = Quaternion.Euler(0, 150, 0);
-
     private Vector3 WakeUpScene2_LayDownPos = new Vector3(1.06f, 0f, -2.7f);
     private Quaternion WakeUpScene2_LayDownRot = Quaternion.Euler(-50, 90, 0);
 
@@ -97,13 +91,9 @@ public class PlayerController : MonoBehaviour
         SceneEvents.current.playerDialogue += Cor_PerformDialogue;
         switch (SceneManager.GetActiveScene().name)
         {
-            case "WakeUpScene":
-                SceneEvents.current.playerAction += Cor_PerformAction_WakeUpScene;
-                MoveToLayingDownPosition();
-                break;
             case "WakeUpScene2":
                 SceneEvents.current.playerAction += Cor_PerformAction_WakeUpScene2;
-                MoveToPosition(WakeUpScene2_LayDownPos, WakeUpScene2_LayDownRot);
+                //MoveToPosition(WakeUpScene2_LayDownPos, WakeUpScene2_LayDownRot);
                 break;
             case "ToothbrushScene":
                 // toDo something
@@ -124,9 +114,6 @@ public class PlayerController : MonoBehaviour
         SceneEvents.current.playerDialogue -= Cor_PerformDialogue;
         switch (SceneManager.GetActiveScene().name)
         {
-            case "WakeUpScene":
-                SceneEvents.current.playerAction -= Cor_PerformAction_WakeUpScene;
-                break;
             case "WakeUpScene2":
                 SceneEvents.current.playerAction -= Cor_PerformAction_WakeUpScene2;
                 break;
@@ -196,24 +183,6 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Switch based method that is used to call the different actions the player needs to do on the Scene: WakeUpScene
     /// </summary>
-    IEnumerator Cor_PerformAction_WakeUpScene()
-    {
-        switch (interactionCounter)
-        {
-            case 0:
-                yield return StartCoroutine(FadeCanvas.FadeInOutWithAction(MoveToStandingPosition));
-                break;
-            case 1:
-                yield return StartCoroutine(FadeCanvas.FadeInOutWithAction(MoveToStandingPosition));
-                break;
-            default:
-                yield return new WaitForSeconds(3f);
-                Debug.LogWarning("No more player actions!");
-                break;
-        }
-        interactionCounter++;
-        //SceneEvents.current.CompletedAction();
-    }
 
     IEnumerator Cor_PerformAction_WakeUpScene2()
     {
@@ -243,44 +212,12 @@ public class PlayerController : MonoBehaviour
     }
     private void MoveToStandingPosition()
     {
-        switch (SceneManager.GetActiveScene().name)
-        {
-            case ("WakeUpScene"):
-                MoveToPosition(WakeUpScene_StandingPos, WakeUpScene_StandingRot);
-                break;
-            case ("WakeUpScene2"):
-                MoveToPosition(WakeUpScene2_StandingPos, WakeUpScene2_StandingRot);
-                break;
-        }
+        MoveToPosition(WakeUpScene2_StandingPos, WakeUpScene2_StandingRot);
     }
     private void MoveToBathroomPosition()
     {
         MoveToPosition(WakeUpScene2_BathroomPos, WakeUpScene2_BathroomRot);
     }
 
-    private void MoveToLayingDownPosition()
-    {
-        MoveToPosition(WakeUpScene_LayDownPos, WakeUpScene_LayDownRot);
-    }
-    #endregion
-
-    #region Player Events Testing section
-    //void PlayerAction(bool hasCompletedAction)
-    //{
-    //    playerCompletion.Invoke(hasCompletedAction);
-    //}
-
-    //public void CheckSelectedInteractable(XRRayInteractor obj)
-    //{
-    //    Debug.Log(obj.)
-    //}
-
-    //void DoPlayerAction()
-    //{
-    //    Debug.Log("Player is doing an action!");
-
-    //    bool hasCompletedAction = true;
-    //    PlayerCompletedAction.Invoke();
-    //}
     #endregion
 }

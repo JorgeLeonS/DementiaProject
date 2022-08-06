@@ -590,7 +590,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &940138245
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1808,6 +1808,22 @@ PrefabInstance:
       propertyPath: isTest
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8691232068683066382, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691232068930882209, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691232069102863010, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691232069229384116, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.07
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22c992b49f1397a428df1d0605313f30, type: 3}
 --- !u!4 &2084233308 stripped
@@ -1899,7 +1915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
       propertyPath: DialogueText.Array.data[1]
-      value: I...
+      value: I.. *Sigh
       objectReference: {fileID: 0}
     - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
       propertyPath: DialogueText.Array.data[2]
@@ -1915,7 +1931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
       propertyPath: DialogueText.Array.data[5]
-      value: Here, let me help you
+      value: It's no problem
       objectReference: {fileID: 0}
     - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
       propertyPath: DialogueText.Array.data[6]
@@ -1930,16 +1946,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
-      propertyPath: AnimationName.Array.data[2]
+      propertyPath: AnimationName.Array.data[1]
       value: HeadShake
       objectReference: {fileID: 0}
     - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
-      propertyPath: AnimationName.Array.data[4]
+      propertyPath: AnimationName.Array.data[2]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
-      propertyPath: AnimationName.Array.data[5]
+      propertyPath: AnimationName.Array.data[4]
       value: Talk1
+      objectReference: {fileID: 0}
+    - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
+      propertyPath: AnimationName.Array.data[5]
+      value: Talk2
       objectReference: {fileID: 0}
     - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
       propertyPath: DialogueDurations.Array.size
@@ -1971,7 +1991,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
       propertyPath: DialogueDurations.Array.data[5]
-      value: 1.5
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
       propertyPath: DialogueDurations.Array.data[6]
@@ -2268,11 +2288,15 @@ MonoBehaviour:
   - Oh my...
   - Why can't I read this?
   - I'm getting dizzy
+  - Thank you
+  - I wouldn't know what to do without you
   DialogueAudios: []
   DialogueDurations:
   - 1.5
   - 2.5
   - 2
+  - 1.5
+  - 3
 --- !u!4 &444452717529214641
 Transform:
   m_ObjectHideFlags: 0
@@ -2703,7 +2727,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &5459005009332303555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2771,9 +2795,10 @@ MonoBehaviour:
   - PlayerDialogue
   - SceneAction
   - PlayerDialogue<2>
-  - James<6>
+  - James<5>
   - SceneAction
-  - James<3>
+  - PlayerDialogue<2>
+  - James<4>
   - SceneAction
   characterTurn: 0
   DelayTimeForStartingScene: 1
