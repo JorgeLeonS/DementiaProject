@@ -340,6 +340,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8808420027143168566, guid: d5448c1df03bf6842b1e1d30b88ce92d, type: 3}
+      propertyPath: m_Depth
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5448c1df03bf6842b1e1d30b88ce92d, type: 3}
 --- !u!1 &110017249
@@ -798,7 +802,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8641477398124610442, guid: b50f6cb4e74ab7642a5c8eb357cfb1a3, type: 3}
       propertyPath: m_Depth
-      value: 1.19
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8641477398124610484, guid: b50f6cb4e74ab7642a5c8eb357cfb1a3, type: 3}
       propertyPath: m_CameraType
@@ -1644,7 +1648,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503035235}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8e3de74a6ea9b294ab84b9aa82a40ddb, type: 3}
@@ -2076,7 +2080,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &1917892443
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2327,7 +2331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2067267598
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2364,8 +2368,8 @@ MonoBehaviour:
   - {fileID: 6461283002877383224}
   turningNames:
   - SceneAction
+  - James<9>
   - James
-  - SceneAction
   - PlayerDialogue<3>
   - James
   - Delay<1.5>
@@ -4252,13 +4256,13 @@ MonoBehaviour:
   - 
   - 
   DialogueAudios:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 5f55e6d04cc7fd944b5aff7fab56efd4, type: 3}
+  - {fileID: 8300000, guid: c8474f3c3053f3f4a92a39dbcf515f35, type: 3}
+  - {fileID: 8300000, guid: 5fb3b376c82d086478af4cdbaca5f8e7, type: 3}
+  - {fileID: 8300000, guid: 2e410631097aa544b81507309a18290d, type: 3}
+  - {fileID: 8300000, guid: 49ef426c474148045a16452f833bf199, type: 3}
+  - {fileID: 8300000, guid: 1ce4dcf10852ac441b6a95e67668349a, type: 3}
+  - {fileID: 8300000, guid: 660bc300855be0a4dbca9c461bbbd67b, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   DialogueDurations:
