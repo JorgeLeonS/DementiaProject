@@ -196,9 +196,25 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3865424606233956680, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 233
+      objectReference: {fileID: 0}
+    - target: {fileID: 3865424606523691650, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: m_text
+      value: The following experience is an empathy based VR project following the
+        life of a person with dementia. You are situated in a house with a caretaker
+        to assist you. The goal of this experience is to generate awareness and empathy
+        for those with dementia by focusing on the visual impairments associated
+        with this disorder.
+      objectReference: {fileID: 0}
     - target: {fileID: 3865424606523691650, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3865424606523691650, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: m_fontSize
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3865424606523691652, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_IsActive
@@ -318,8 +334,8 @@ MonoBehaviour:
   unrevealMaxHorizontalDistance: 50
   unrevealMinVerticalDistance: 0
   unrevealMaxVerticalDistance: 50
-  RevealTime: 2
-  UnrevealTime: 2
+  RevealTime: 6
+  UnrevealTime: 6
   RevealLetterOpacityBegin: 0
   UnrevealLetterOpacityBegin: 1
   RevealLetterOpacityEnd: 1
@@ -681,6 +697,10 @@ MonoBehaviour:
   MyXROrigin: {fileID: 2017949374}
   itemsToInteract: []
   DialogueText:
+  - The following experience is an empathy based VR project following the life of
+    a person with dementia. You are situated in a house with a caretaker to assist
+    you. The goal of this experience is to generate awareness and empathy for those
+    with dementia by focusing on the visual impairments associated with this disorder.
   - The following experience
   - ' is an empathy based VR project'
   - following the life of a person with dementia.
@@ -694,6 +714,7 @@ MonoBehaviour:
   - 'associated with this disorder. '
   DialogueAudios: []
   DialogueDurations:
+  - 20
   - 2
   - 2
   - 3
