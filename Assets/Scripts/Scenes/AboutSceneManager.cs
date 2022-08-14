@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class AboutSceneManager : MonoBehaviour
 {
-    void Start()
+
+    [SerializeField]
+    private AudioSource aboutDialogue;
+
+    [SerializeField]
+    private TextRevealer aboutText;
+
+    IEnumerator Start()
     {
         SceneEvents.current.sceneAction += SetSequence;
+
+        yield return new WaitForSeconds(2f);
+
+        aboutText.Reveal();
+        aboutDialogue.Play();
     }
 
     private void OnDestroy()

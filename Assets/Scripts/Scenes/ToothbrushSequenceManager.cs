@@ -26,6 +26,8 @@ public class ToothbrushSequenceManager: MonoBehaviour
     [Header("Others")]
     [SerializeField] Canvas fadeCanvas;
 
+    [SerializeField]
+    private AudioSource doorAudio;
     public Door door;
 
     private InteractableObject interactableObject;
@@ -138,6 +140,7 @@ public class ToothbrushSequenceManager: MonoBehaviour
     IEnumerator OpenDoor()
     {
         door.OpenDoorWithNoTransition();
+        doorAudio.Play();
         yield return new WaitForSeconds(1f);
     }
 

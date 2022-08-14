@@ -60,7 +60,7 @@ namespace TMPro
         }
         
         /// <summary>
-        /// The method can also be sent an AudioClip parameter, 
+        /// The method can also be called, sending an AudioClip parameter, 
         /// which length will replace the duration of the original method.
         /// </summary>
         public void ReadText(string textToRead, AudioClip audioToPlay)

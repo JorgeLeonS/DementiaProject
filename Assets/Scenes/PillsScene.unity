@@ -181,6 +181,10 @@ MonoBehaviour:
   - {fileID: 1589461396}
   - {fileID: 1589461395}
   - {fileID: 1589461391}
+  extraLines:
+  - {fileID: 8300000, guid: 90e299676f10c7244b95bc72650191bc, type: 3}
+  - {fileID: 8300000, guid: 9a6c946a024fa214b88ec658b95edfca, type: 3}
+  - {fileID: 8300000, guid: 14cf0ef52aae7384cae22aa1435102f0, type: 3}
   pillsToGrab:
   - BottlePillMonday
   - BottlePillWednesday
@@ -2038,6 +2042,30 @@ PrefabInstance:
       propertyPath: AnimationName.Array.data[5]
       value: Talk2
       objectReference: {fileID: 0}
+    - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
+      propertyPath: DialogueAudios.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
+      propertyPath: DialogueAudios.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 72b8493d84da6214a854917aa1e56058, type: 3}
+    - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
+      propertyPath: DialogueAudios.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: a31da439f740859488ef6fc18ab88659, type: 3}
+    - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
+      propertyPath: DialogueAudios.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 79e23e3ddfbcb9344a2c0aa5e44d047f, type: 3}
+    - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
+      propertyPath: DialogueAudios.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6013f5bacd07737479f49a1f604a5e20, type: 3}
+    - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
+      propertyPath: DialogueAudios.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 24fc4cb99721f064693817c4f49d7e6d, type: 3}
     - target: {fileID: 930291056949475274, guid: 689dcdabf6f1b604b9262dc792634a22, type: 3}
       propertyPath: DialogueDurations.Array.size
       value: 9
