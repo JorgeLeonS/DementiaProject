@@ -193,10 +193,12 @@ public class CharacterController : MonoBehaviour
 
     public IEnumerator Cor_CustomDialogue(string dialogue, AudioClip clip)
     {
+        Canvas.GetComponent<Canvas>().enabled = true;
         var currentClip = audioSource.clip = clip;
         animatedText.ReadText(dialogue, currentClip);
         audioSource.Play();
         yield return new WaitForSeconds(currentClip.length + 0.5f);
+        Canvas.GetComponent<Canvas>().enabled = false;
     }
 
     /// <summary>
