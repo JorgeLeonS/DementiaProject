@@ -1572,8 +1572,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa023339b7840e24f885aa33cb4dbc3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  righRotationRef: {fileID: 0}
-  leftRotationRef: {fileID: 0}
 --- !u!114 &1589461402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1586,8 +1584,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa023339b7840e24f885aa33cb4dbc3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  righRotationRef: {fileID: 0}
-  leftRotationRef: {fileID: 0}
 --- !u!114 &1597790764 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5071196646476049991, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
@@ -1742,8 +1738,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa023339b7840e24f885aa33cb4dbc3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  righRotationRef: {fileID: 0}
-  leftRotationRef: {fileID: 0}
 --- !u!1001 &1689259528
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2512,7 +2506,7 @@ MonoBehaviour:
   MyXROrigin: {fileID: 1597790764}
   itemsToInteract: []
   DialogueText:
-  - Oh my...
+  - Oh dear...
   - Why can't I read this?
   - I'm getting dizzy
   - Thank you
