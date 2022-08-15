@@ -10,11 +10,13 @@ public class MenuController : MonoBehaviour
 {
     [Header("Buttons")]
     [SerializeField] Button startButton;
+    [SerializeField] Button aboutButton;
     [SerializeField] Button tutorialButton;
     [SerializeField] Button creditsButton;
     [SerializeField] Button quitButton;
     [SerializeField] Button chapterSelectionButton;
 
+    [SerializeField] Canvas aboutCanvas;
     [SerializeField] Canvas tutorialCanvas;
     [SerializeField] Canvas chaptersCanvas;
     [SerializeField] Canvas exitConfirmation;
@@ -23,6 +25,7 @@ public class MenuController : MonoBehaviour
 
     private void Start()
     {
+        pages.Add(aboutCanvas);
         pages.Add(tutorialCanvas);
         pages.Add(chaptersCanvas);
         pages.Add(exitConfirmation);
@@ -32,6 +35,7 @@ public class MenuController : MonoBehaviour
     private void OnEnable()
     {
         startButton.onClick.AddListener(StartFirstScene);
+        aboutButton.onClick.AddListener(ShowAboutScreen);
         tutorialButton.onClick.AddListener(ShowTutorialScreen);
         creditsButton.onClick.AddListener(GoToCredits);
         quitButton.onClick.AddListener(ShowExitConfirmationPage);
@@ -42,6 +46,7 @@ public class MenuController : MonoBehaviour
     private void OnDisable()
     {
         startButton.onClick.RemoveAllListeners();
+        aboutButton.onClick.RemoveAllListeners();
         tutorialButton.onClick.RemoveAllListeners();
         creditsButton.onClick.RemoveAllListeners();
         quitButton.onClick.RemoveAllListeners();
@@ -58,6 +63,12 @@ public class MenuController : MonoBehaviour
     {
         
         ShowSelectedPage(chaptersCanvas);
+    }
+
+    private void ShowAboutScreen()
+    {
+
+        ShowSelectedPage(aboutCanvas);
     }
 
     private void ShowTutorialScreen()

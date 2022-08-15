@@ -7,12 +7,12 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 
 /// <summary>
-/// Class used to manage the sequences of "Bathroom Scene"
+/// Class used to manage the sequences of "Toothbrush Scene"
 /// </summary>
 public class ToothbrushSequenceManager: MonoBehaviour
 {
     [Header("Text")]
-    [SerializeField] List<float> timers = new List<float>();
+    //[SerializeField] List<float> timers = new List<float>();
     [SerializeField] List<string> prompts = new List<string>();
     [SerializeField] GameObject helpButton;
     [SerializeField] GameObject textSign;
@@ -26,19 +26,16 @@ public class ToothbrushSequenceManager: MonoBehaviour
     [Header("Others")]
     [SerializeField] Canvas fadeCanvas;
 
+    [SerializeField]
+    private AudioSource doorAudio;
     public Door door;
 
     private InteractableObject interactableObject;
 
-    float timer;
+    //float timer;
     int indexSequence;
     int indexPrompts;
     bool helpRequested = false;
-
-    private void OnEnable()
-    {
-        //SceneEvents.current.sceneAction += SetSequence;
-    }
 
     private void Start()
     {
@@ -46,8 +43,6 @@ public class ToothbrushSequenceManager: MonoBehaviour
         indexSequence = 0;
         helpButton.gameObject.SetActive(false);
         SceneEvents.current.sceneAction += SetSequence;
-
-        
     }
 
     private void OnDestroy()
@@ -66,7 +61,7 @@ public class ToothbrushSequenceManager: MonoBehaviour
         textSignTR = textSign.transform.GetChild(0).GetComponent<TextRevealer>();
         fadeCanvas.gameObject.SetActive(true);
         FadeCanvas.FadeOut(fadeTime);
-        timer = timers[indexPrompts];
+        //timer = timers[indexPrompts];
         helpButton.gameObject.SetActive(false);
     }
 
@@ -138,13 +133,12 @@ public class ToothbrushSequenceManager: MonoBehaviour
     IEnumerator OpenDoor()
     {
         door.OpenDoorWithNoTransition();
+        doorAudio.Play();
         yield return new WaitForSeconds(1f);
     }
 
     IEnumerator SecondSequence()
     {
-        //fadeCanvas.gameObject.SetActive(false);
-        
         // Wait until user has asked for help
         yield return new WaitUntil(() => helpRequested);
 
@@ -169,7 +163,6 @@ public class ToothbrushSequenceManager: MonoBehaviour
 
     IEnumerator FourthSequence()
     {
-        
         // Prompt appears to grab the toothbrush.
         textSign.GetComponentInChildren<TextMeshProUGUI>().text = prompts[indexPrompts];
         textSignTR.Reveal();

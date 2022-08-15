@@ -191,6 +191,16 @@ public class CharacterController : MonoBehaviour
         Canvas.GetComponent<Canvas>().enabled = false;
     }
 
+    public IEnumerator Cor_CustomDialogue(string dialogue, AudioClip clip)
+    {
+        Canvas.GetComponent<Canvas>().enabled = true;
+        var currentClip = audioSource.clip = clip;
+        animatedText.ReadText(dialogue, currentClip);
+        audioSource.Play();
+        yield return new WaitForSeconds(currentClip.length + 0.5f);
+        Canvas.GetComponent<Canvas>().enabled = false;
+    }
+
     /// <summary>
     /// Coroutine that makes the character have a dialogue.
     /// Can also call an animation and an audio.
@@ -232,7 +242,7 @@ public class CharacterController : MonoBehaviour
                 var currentClip = audioSource.clip = characterInteraction.DialogueAudios[interactionCounter];
                 animatedText.ReadText(characterInteraction.DialogueText[interactionCounter], currentClip);
                 audioSource.Play();
-                yield return new WaitForSeconds(currentClip.length + 0.7f);
+                yield return new WaitForSeconds(currentClip.length + 0.5f);
             }
 
             // Check for animation name, and stop it

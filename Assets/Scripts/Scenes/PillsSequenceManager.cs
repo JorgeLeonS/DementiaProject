@@ -31,17 +31,14 @@ public class PillsSequenceManager : MonoBehaviour
 
     public Door door;
     public List<DistortionEffect> pills;
+    public List<AudioClip> extraLines;
 
     InteractableObject grabbedPill;
     private string grabbedPillName;
     private bool aPillHasBeenGrabbed;
     //private List<Vector3> pillsPositions;
     private Dictionary<string, Vector3> pillsPositions;
-    public List<string> pillsToGrab = new List<string>
-
-    {
-        "BottlePillNight", "BottlePillAfternoon", "BottlePillMorning"
-    };
+    public List<string> pillsToGrab = new List<string>();
 
 
     int indexSequence;
@@ -216,6 +213,7 @@ public class PillsSequenceManager : MonoBehaviour
     IEnumerator RemainingPill()
     {
         string toBeSearched = "BottlePill";
+        AudioClip extraLineAudio = null;
         int index = pillsToGrab[0].IndexOf(toBeSearched);
         string day = pillsToGrab[0].Substring(index + toBeSearched.Length);
         string color = "";
@@ -224,22 +222,25 @@ public class PillsSequenceManager : MonoBehaviour
         {
             case "Monday":
                 color = "Green";
+                extraLineAudio = extraLines[0];
                 break;
             case "Wednesday":
                 color = "Orange";
+                extraLineAudio = extraLines[1];
                 break;
             case "Friday":
                 color = "Blue";
+                extraLineAudio = extraLines[2];
                 break;
         }
 
-        yield return James.Cor_CustomDialogue($"Today is {day}, so take the ones on the {color} bottle.", 4);
+        yield return James.Cor_CustomDialogue($"Today is {day}, so take the ones on the {color} bottle.", extraLineAudio);
     }
 
     IEnumerator EndScene()
     {
         yield return null;
-        MenuControl.LoadLevel("MainMenuTutorial");
+        MenuControl.LoadLevel("CreditsScene");
     }
 
     void EnableInteractionForPills()

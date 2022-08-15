@@ -18,6 +18,8 @@ public class WakeUpScene_Methods : MonoBehaviour
     private static Animator blindsAnimator;
 
     public Door entranceDoor;
+    [SerializeField]
+    private AudioSource entranceDoorAudio;
 
     public Door bathroomDoor;
     public GameObject doorText;
@@ -128,6 +130,7 @@ public class WakeUpScene_Methods : MonoBehaviour
     IEnumerator OpenEntranceDoor()
     {
         entranceDoor.OpenDoorWithNoTransition();
+        entranceDoorAudio.Play();
         yield return new WaitForSeconds(1f);
     }
 
