@@ -2084,6 +2084,24 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1655633302689557152, guid: 32bb7bb11afc7b14d857b42bf716adf5, type: 3}
+      propertyPath: m_text
+      value: 'Developer
+
+        UI Designer'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655633303705713872, guid: 32bb7bb11afc7b14d857b42bf716adf5, type: 3}
+      propertyPath: m_text
+      value: '3D Artist
+
+        Environment designer'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655633304501678086, guid: 32bb7bb11afc7b14d857b42bf716adf5, type: 3}
+      propertyPath: m_text
+      value: 'Lead developer
+
+        Project Manager'
+      objectReference: {fileID: 0}
     - target: {fileID: 1956609282433765963, guid: 32bb7bb11afc7b14d857b42bf716adf5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -2519,6 +2537,10 @@ PrefabInstance:
     - target: {fileID: 6550115080256737021, guid: 32bb7bb11afc7b14d857b42bf716adf5, type: 3}
       propertyPath: m_Name
       value: CreditsCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6550115080661031742, guid: 32bb7bb11afc7b14d857b42bf716adf5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 20.5
       objectReference: {fileID: 0}
     - target: {fileID: 6550115081502499876, guid: 32bb7bb11afc7b14d857b42bf716adf5, type: 3}
       propertyPath: m_Enabled
