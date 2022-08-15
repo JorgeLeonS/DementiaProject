@@ -262,8 +262,8 @@ MonoBehaviour:
   m_text: 'Let''s just say we have had this conversation. Let''s just say we have
     had this conversation '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 69878a5b0be5afa448a581ce251e2e58, type: 2}
+  m_sharedMaterial: {fileID: 5538851742789618126, guid: 69878a5b0be5afa448a581ce251e2e58, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6.65
+  m_fontSize: 6.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -474,8 +474,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: James
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 69b6f1d1de4aa4c9bb6dcef077b9632b, type: 2}
-  m_sharedMaterial: {fileID: 455556879565948577, guid: 69b6f1d1de4aa4c9bb6dcef077b9632b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 01fda8a3a6a22244887bb6dd794a78b9, type: 2}
+  m_sharedMaterial: {fileID: 5538851742789618126, guid: 01fda8a3a6a22244887bb6dd794a78b9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -717,6 +717,10 @@ PrefabInstance:
       value: Find the toothbrush.
       objectReference: {fileID: 0}
     - target: {fileID: 7376445208086161995, guid: 70d336f140325458a8320ce873aeb5b1, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c0966ab90f65fe40b2afaff5b25c977, type: 2}
+    - target: {fileID: 7376445208086161995, guid: 70d336f140325458a8320ce873aeb5b1, type: 3}
       propertyPath: m_fontColor.b
       value: 0.5471698
       objectReference: {fileID: 0}
@@ -728,6 +732,10 @@ PrefabInstance:
       propertyPath: m_fontColor.r
       value: 0.2761659
       objectReference: {fileID: 0}
+    - target: {fileID: 7376445208086161995, guid: 70d336f140325458a8320ce873aeb5b1, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 5538851742789618126, guid: 3c0966ab90f65fe40b2afaff5b25c977, type: 2}
     - target: {fileID: 7376445208086161995, guid: 70d336f140325458a8320ce873aeb5b1, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4287383110
