@@ -23,6 +23,10 @@ public class MenuController : MonoBehaviour
 
     List<Canvas> pages = new List<Canvas>();
 
+    [SerializeField] Light defectiveLamp_Light;
+    [SerializeField] AudioSource defectiveLamp_Audio;
+    [SerializeField] AudioClip bulbPop_AudioClip;
+
     private void Start()
     {
         pages.Add(aboutCanvas);
@@ -30,6 +34,11 @@ public class MenuController : MonoBehaviour
         pages.Add(chaptersCanvas);
         pages.Add(exitConfirmation);
         HideAllPages();
+
+        Lights_Manager.ChangeAmbientLightIntensity(0.1f, 0.1f);
+        Lights_Manager.ChangeEnvironmentReflectionsIntensity(0.2f, 0.1f);
+        float duration = defectiveLamp_Audio.clip.length / 2;
+        StartCoroutine(Lights_Manager.FadeInAndOutRepeatALight(defectiveLamp_Light, duration));
     }
 
     private void OnEnable()
@@ -56,6 +65,19 @@ public class MenuController : MonoBehaviour
     private void StartFirstScene()
     {
         HideAllPages();
+        defectiveLamp_Audio.Pause();
+        defectiveLamp_Audio.loop = false;
+        StopAllCoroutines();
+        StartCoroutine(BulbPop());
+    }
+
+    IEnumerator BulbPop()
+    {
+        yield return StartCoroutine(Lights_Manager.FadeInAndOutALight(defectiveLamp_Light, true));
+        defectiveLamp_Light.intensity = 0;
+        defectiveLamp_Audio.clip = bulbPop_AudioClip;
+        defectiveLamp_Audio.Play();
+        yield return new WaitForSeconds(0.5f);
         MenuControl.LoadLevel("WakeUpScene2");
     }
 
@@ -80,6 +102,7 @@ public class MenuController : MonoBehaviour
     private void GoToCredits()
     {
         HideAllPages();
+        MenuControl.LoadLevel("CreditsScene");
     }
 
     public void ExitExperience()

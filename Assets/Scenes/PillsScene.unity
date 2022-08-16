@@ -657,6 +657,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8609565318241271215}
+    - target: {fileID: 7842034249450037593, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: MainMenuTutorial
+      objectReference: {fileID: 0}
     - target: {fileID: 9061264476681501881, guid: f489efa0ff0ddbb408be8015d47cc155, type: 3}
       propertyPath: m_Name
       value: Attach Point - Pill R

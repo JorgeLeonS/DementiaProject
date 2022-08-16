@@ -11,16 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenuTutorial.unity
     guid: 3aea5b8584fd88f47b2726fea8a01839
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu2.unity
     guid: 6f3998d65ff5dd44cb97eff7ef046575
   - enabled: 1
     path: Assets/Scenes/WakeUpScene2.unity
     guid: 8cf5c3a603144104a89379e0fe34b39d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/WakeUpScene.unity
     guid: f5f29d648bde7104893685251f66d226
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Bathroom-Effect Test 2.unity
     guid: 2b2f4781aa79743f28dac9a3d4707e0d
   - enabled: 1
